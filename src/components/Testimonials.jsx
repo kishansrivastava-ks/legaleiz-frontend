@@ -4,7 +4,7 @@ import "../styles/testimonials.css";
 function Testimonials() {
   {
     const slider = function () {
-      const slides = document.querySelectorAll(".slide");
+      let slides = document.querySelectorAll(".slide");
       const btnLeft = document.querySelector(".slider__btn--left");
       const btnRight = document.querySelector(".slider__btn--right");
 
@@ -24,72 +24,56 @@ function Testimonials() {
         });
       };
 
-      const activateDot = function (slide) {
-        //remove active class from all dots
-        document
-          .querySelectorAll(".dots__dot")
-          .forEach((dot) => dot.classList.remove("dots__dot--active"));
+      // document.addEventListener("keydown", function (e) {
+      //   console.log(e);
+      //   if (e.key === "ArrowLeft") prevSlide();
+      //   else nextSlide();
+      // });
 
-        document
-          .querySelector(`.dots__dot[data-slide="${slide}"]`)
-          .classList.add("dots__dot--active");
-      };
-
-      const goToSlide = function (slide) {
-        slides.forEach(
-          (s, i) => (s.style.transform = `translateX(${100 * (i - curSlide)}%)`)
-        );
-      };
-
-      const nextSlide = function () {
-        if (curSlide === maxSlide - 1) {
-          curSlide = 0;
-        } else {
-          curSlide++;
-        }
-        goToSlide(curSlide);
-        activateDot(curSlide);
-      };
-
-      const prevSlide = function () {
-        if (curSlide === 0) {
-          curSlide = maxSlide - 1;
-        } else {
-          curSlide--;
-        }
-        goToSlide(curSlide);
-        activateDot(curSlide);
-      };
-
-      const init = function () {
-        goToSlide(0);
-        createDots();
-        activateDot(0);
-      };
-
-      init();
-
-      //EVENT HANDLERS
-      //going to next slide
-      btnRight.addEventListener("click", nextSlide);
-      btnLeft.addEventListener("click", prevSlide);
-
-      document.addEventListener("keydown", function (e) {
-        console.log(e);
-        if (e.key === "ArrowLeft") prevSlide();
-        else nextSlide();
-      });
-
-      dotContainer.addEventListener("click", function (e) {
-        if (e.target.classList.contains("dots__dot")) {
-          const { slide } = e.target.dataset;
-          goToSlide(slide);
-          activateDot(slide);
-        }
-      });
+      // dotContainer.addEventListener("click", function (e) {
+      //   if (e.target.classList.contains("dots__dot")) {
+      //     const { slide } = e.target.dataset;
+      //     goToSlide(slide);
+      //     // activateDot(slide);
+      //   }
+      // });
     };
     slider();
   }
+  let slides = document.querySelectorAll(".slide");
+  let curSlide = 0;
+  let maxSlide = slides.length; //length of nodelist
+  const goToSlide = function (slide) {
+    slides.forEach(
+      (s, i) => (s.style.transform = `translateX(${100 * (i - curSlide)}%)`)
+    );
+  };
+  const nextSlide = function () {
+    if (curSlide === maxSlide - 1) {
+      curSlide = 0;
+    } else {
+      curSlide++;
+    }
+    goToSlide(curSlide);
+    // activateDot(curSlide);
+  };
+
+  const prevSlide = function () {
+    if (curSlide === 0) {
+      curSlide = maxSlide - 1;
+    } else {
+      curSlide--;
+    }
+    goToSlide(curSlide);
+    // activateDot(curSlide);
+  };
+  const init = function () {
+    goToSlide(0);
+    // createDots();
+    // activateDot(0);
+  };
+
+  init();
 
   return (
     <section className="section" id="section--3">
@@ -160,8 +144,12 @@ function Testimonials() {
           </div>
         </div>
 
-        <button className="slider__btn slider__btn--left">&larr;</button>
-        <button className="slider__btn slider__btn--right">&rarr;</button>
+        <button className="slider__btn slider__btn--left" onClick={prevSlide}>
+          &larr;
+        </button>
+        <button className="slider__btn slider__btn--right" onClick={nextSlide}>
+          &rarr;
+        </button>
         <div className="dots"></div>
       </div>
     </section>

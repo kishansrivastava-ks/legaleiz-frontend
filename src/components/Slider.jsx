@@ -17,7 +17,7 @@ const StyledSlider = styled.div`
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
-  transition: all 0.2s;
+  transition: transform 1s;
 `;
 
 const Heading = styled.h2`
@@ -55,6 +55,8 @@ const Cards = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+  transition: transform 1s;
+
   /* set fixed width to display only 4 cards initially */
 `;
 
