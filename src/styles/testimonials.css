@@ -40,7 +40,7 @@ body {
   /* background-color: #fff; */
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
-  margin-bottom: 3rem;
+  /* margin-bottom: 3rem; */
 
   transition: transform 1s, opacity 1s;
 }

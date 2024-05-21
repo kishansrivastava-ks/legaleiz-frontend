@@ -2,79 +2,6 @@
 import "../styles/testimonials.css";
 
 function Testimonials() {
-  {
-    const slider = function () {
-      let slides = document.querySelectorAll(".slide");
-      const btnLeft = document.querySelector(".slider__btn--left");
-      const btnRight = document.querySelector(".slider__btn--right");
-
-      let curSlide = 0;
-      let maxSlide = slides.length; //length of nodelist
-      const slider = document.querySelector(".slider");
-
-      const dotContainer = document.querySelector(".dots");
-
-      //FUNCTIONS
-      const createDots = function () {
-        slides.forEach(function (_, i) {
-          dotContainer.insertAdjacentHTML(
-            "beforeend",
-            `<button class="dots__dot" data-slide="${i}"></button>`
-          );
-        });
-      };
-
-      // document.addEventListener("keydown", function (e) {
-      //   console.log(e);
-      //   if (e.key === "ArrowLeft") prevSlide();
-      //   else nextSlide();
-      // });
-
-      // dotContainer.addEventListener("click", function (e) {
-      //   if (e.target.classList.contains("dots__dot")) {
-      //     const { slide } = e.target.dataset;
-      //     goToSlide(slide);
-      //     // activateDot(slide);
-      //   }
-      // });
-    };
-    slider();
-  }
-  let slides = document.querySelectorAll(".slide");
-  let curSlide = 0;
-  let maxSlide = slides.length; //length of nodelist
-  const goToSlide = function (slide) {
-    slides.forEach(
-      (s, i) => (s.style.transform = `translateX(${100 * (i - curSlide)}%)`)
-    );
-  };
-  const nextSlide = function () {
-    if (curSlide === maxSlide - 1) {
-      curSlide = 0;
-    } else {
-      curSlide++;
-    }
-    goToSlide(curSlide);
-    // activateDot(curSlide);
-  };
-
-  const prevSlide = function () {
-    if (curSlide === 0) {
-      curSlide = maxSlide - 1;
-    } else {
-      curSlide--;
-    }
-    goToSlide(curSlide);
-    // activateDot(curSlide);
-  };
-  const init = function () {
-    goToSlide(0);
-    // createDots();
-    // activateDot(0);
-  };
-
-  init();
-
   return (
     <section className="section" id="section--3">
       <div className="section__title section__title--testimonials">
@@ -103,7 +30,7 @@ function Testimonials() {
           </div>
         </div>
 
-        <div className="slide slide--2">
+        {/* <div className="slide slide--2">
           <div className="testimonial">
             <h5 className="testimonial__header">
               The last step to becoming a complete minimalist
@@ -142,14 +69,10 @@ function Testimonials() {
               <p className="testimonial__location">Lisbon, Portugal</p>
             </address>
           </div>
-        </div>
+        </div> */}
 
-        <button className="slider__btn slider__btn--left" onClick={prevSlide}>
-          &larr;
-        </button>
-        <button className="slider__btn slider__btn--right" onClick={nextSlide}>
-          &rarr;
-        </button>
+        <button className="slider__btn slider__btn--left">&larr;</button>
+        <button className="slider__btn slider__btn--right">&rarr;</button>
         <div className="dots"></div>
       </div>
     </section>

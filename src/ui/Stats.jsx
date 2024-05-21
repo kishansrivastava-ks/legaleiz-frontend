@@ -18,6 +18,7 @@ const BoxCell = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: #fff;
 `;
 
 function Stats() {
