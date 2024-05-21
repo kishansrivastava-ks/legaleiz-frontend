@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Section1 from "../components/Section1";
 import Section2 from "../components/Section2";
+import Section3 from "../components/Section3";
 
 const LandingPage = styled.div`
   display: grid;
@@ -22,32 +23,13 @@ const Section = styled.section`
   justify-content: center;
 `;
 
-const Section3 = styled(Section)`
-  background-color: #222f3e;
-  grid-row: 4!;
-`;
-
 const App = () => {
   return (
     <LandingPage>
       <Navbar />
       <Section1 />
       <Section2 />
-      <Section3 id="section3">
-        <h2>Section 3</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet
-          nulla auctor, vestibulum magna sed, convallis ex.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet
-          nulla auctor, vestibulum magna sed, convallis ex.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet
-          nulla auctor, vestibulum magna sed, convallis ex.
-        </p>
-      </Section3>
+      <Section3 />
     </LandingPage>
   );
 };
