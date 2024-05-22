@@ -211,12 +211,12 @@ const Footer = () => {
         <p>
           <b>Disclaimer :</b>
           <i>
-            Please note that LegalKart is not a law firm and does not engage in
+            Please note that LegalEiz is not a law firm and does not engage in
             the practice of law or solicit Lawyers.
           </i>
         </p>
         <p>
-          LegalKart is an advanced, AI-powered technology platform as web and
+          LegalEiz is an advanced, AI-powered technology platform as web and
           Mobile Application designed to facilitate connections between users
           and a diverse range of legal and financial professionals. Our aim is
           to provide an accessible and convenient way for users to seek guidance
