@@ -4,7 +4,8 @@ import styled from "styled-components";
 const Container = styled.div`
   background-color: #fff;
   width: 100vw;
-  height: 100vh;
+  /* height: 100vh; */
+  height: min-content;
   padding: 5rem 15rem;
 `;
 
@@ -96,8 +97,8 @@ const ConsultBox = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
   padding: 3rem 0;
   max-width: 75%;
   margin-left: auto;
@@ -114,6 +115,25 @@ const ConsultPara = styled.div`
     color: #000;
     transition: all 0.3s;
   }
+`;
+
+const Copyright = styled.div`
+  max-width: 100%;
+  padding: 4rem 0;
+  font-size: 2.5rem;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin-top: 6rem;
+  text-align: center;
+`;
+
+const Disclaimer = styled.div`
+  width: 100%;
+  padding: 1rem 0;
+  font-size: 1.3rem;
+  text-align: left;
+  margin-top: 4rem;
+  text-align: left;
 `;
 
 const Footer = () => {
@@ -186,6 +206,27 @@ const Footer = () => {
         </ConsultPara>
         <hr />
       </ConsultBox>
+      <Copyright>2024-25 © Legal Eiz Pvt. Ltd. | All Rights Reserved</Copyright>
+      <Disclaimer>
+        <p>
+          <b>Disclaimer :</b>
+          <i>
+            Please note that LegalKart is not a law firm and does not engage in
+            the practice of law or solicit Lawyers.
+          </i>
+        </p>
+        <p>
+          LegalKart is an advanced, AI-powered technology platform as web and
+          Mobile Application designed to facilitate connections between users
+          and a diverse range of legal and financial professionals. Our aim is
+          to provide an accessible and convenient way for users to seek guidance
+          from Legal Experts and other professionals based on their specific
+          needs and demands. All interactions or consultations facilitated
+          through LegalKart are between users and independent professionals.
+          LegalKart is not responsible for any advice or services provided by
+          these independent professionals.
+        </p>
+      </Disclaimer>
     </Container>
   );
 };
