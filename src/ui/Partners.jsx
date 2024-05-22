@@ -1,7 +1,8 @@
+/* eslint-disable no-undef */
 import styled from "styled-components";
 
 const Container = styled.div`
-  /* background-color: red; */
+  background-color: #e2e1e1;
   width: 100%;
   height: min-content;
   display: flex;
@@ -36,20 +37,6 @@ const Logo = styled.img`
   &:hover {
     transform: scale(1.1);
   }
-
-  &:hover + ${CompanyName} {
-    display: block;
-  }
-`;
-
-const CompanyName = styled.p`
-  font-size: 1.2rem;
-  margin: 1rem 0;
-  /* display: none; */
-  /* position: relative; */
-  /* bottom: -2rem; */
-  /* left: 50%; */
-  /* transform: translateX(-50%); */
 `;
 
 const Partner = () => {
@@ -58,17 +45,11 @@ const Partner = () => {
       <Heading>Our Partners</Heading>
       <LogoContainer>
         <Logo src="https://picsum.photos/id/1015/300/400" alt="Company 1" />
-        <CompanyName>Company 1</CompanyName>
         <Logo src="https://picsum.photos/id/1016/300/400" alt="Company 2" />
-        <CompanyName>Company 2</CompanyName>
-        <Logo src="https://picsum.photos/id/1017/300/400" alt="Company 3" />
-        <CompanyName>Company 3</CompanyName>
+        <Logo src="https://picsum.photos/id/1015/300/400" alt="Company 3" />
         <Logo src="https://picsum.photos/id/1018/300/400" alt="Company 4" />
-        <CompanyName>Company 4</CompanyName>
         <Logo src="https://picsum.photos/id/1019/300/400" alt="Company 5" />
-        <CompanyName>Company 5</CompanyName>
         <Logo src="https://picsum.photos/id/1020/300/400" alt="Company 6" />
-        <CompanyName>Company 6</CompanyName>
       </LogoContainer>
     </Container>
   );

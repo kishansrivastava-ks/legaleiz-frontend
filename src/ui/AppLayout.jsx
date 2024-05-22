@@ -7,6 +7,7 @@ import Section2 from "../components/Section2";
 import Section3 from "../components/Section3";
 import Section4 from "../components/Section4";
 import Partners from "../ui/Partners";
+import Footer from "../components/Footer";
 
 const LandingPage = styled.div`
   display: grid;
@@ -34,6 +35,7 @@ const App = () => {
       <Section3 />
       <Section4 />
       <Partners />
+      <Footer />
     </LandingPage>
   );
 };
