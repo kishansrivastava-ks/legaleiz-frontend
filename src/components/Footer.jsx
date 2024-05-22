@@ -163,7 +163,7 @@ const Footer = () => {
             <Head>Support</Head>
             <ul>
               <LinkItem>+91 8176065235</LinkItem>
-              <LinkItem>kishansrivastava.01.ks@gmail.com</LinkItem>
+              <LinkItem>legaleiz@gmail.com</LinkItem>
               <LinkItem>Whatsapp</LinkItem>
             </ul>
           </Support>
