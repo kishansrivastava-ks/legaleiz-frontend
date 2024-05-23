@@ -5,7 +5,7 @@ import React, { useState } from "react";
 // Styled Components
 const Section = styled.section`
   background-color: ${(props) => props.bgColor};
-  padding: 2em;
+  /* padding: 2em; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,13 +26,29 @@ const Slider = styled.div`
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   transition: transform 0.5s ease-in-out;
+  height: 100%;
+  width: 100%;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const Slide = styled.div`
   flex: 0 0 100%;
   height: 100%;
   scroll-snap-align: start;
-  padding: 2em;
+  padding: 4em;
+
+  background-image: linear-gradient(
+      to right,
+      rgba(120, 120, 249, 0.5),
+      rgba(0, 0, 255, 0)
+    ),
+    url(${(props) => props.image});
+  background-size: cover;
+  background-position: center;
+  /* background-repeat: no-repeat; */
 `;
 
 const ButtonGroup = styled.div`
@@ -50,22 +66,48 @@ const PrevButton = styled.button``;
 // dummy sections for sliding effect of section 1
 const sections = [
   {
-    title: "Section 1",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    title: "Buy Property with Confidence",
+    text: "Property report start just at ₹2499",
+    image: "/sec1-img3.jpg",
   },
   {
     title: "Section 2",
     text: "Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.",
+    image: "/sec1-img2.jpg",
   },
   {
     title: "Section 3",
     text: "Cras justo odio, dapibus ac facilisis in, egestas eget quam.",
+    image: "/sec1-img1.jpg",
   },
   {
     title: "Section 4",
     text: "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+    image: "/sec1-img4.jpg",
   },
 ];
+
+const StyledH2 = styled.h2`
+  font-size: 10rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: #fff;
+  width: 60%;
+`;
+
+const StyledSpan = styled.span`
+  color: #ffba09;
+`;
+
+const StyledP = styled.p`
+  font-size: 2rem;
+  color: #fff;
+  padding: 1rem 3rem;
+  background-color: rgba(2, 95, 208, 0.5);
+
+  width: max-content;
+  border-radius: 25px;
+`;
 
 function Section1() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -86,16 +128,16 @@ function Section1() {
     <StyledSection1 id="section1">
       <Slider id="slider">
         {sections.map((section, index) => (
-          <Slide key={index}>
-            <h2>{section.title}</h2>
-            <p>{section.text}</p>
+          <Slide id="slide" key={index} image={section.image}>
+            <StyledH2>{section.title}</StyledH2>
+            <StyledP>{section.text}</StyledP>
           </Slide>
         ))}
       </Slider>
-      <ButtonGroup>
+      {/* <ButtonGroup>
         <PrevButton onClick={handlePrev}>Previous</PrevButton>
         <NextButton onClick={handleNext}>Next</NextButton>
-      </ButtonGroup>
+      </ButtonGroup> */}
     </StyledSection1>
   );
 }
