@@ -5,7 +5,9 @@ function Testimonials() {
   return (
     <section className="section" id="section--3">
       <div className="section__title section__title--testimonials">
-        <h3 className="section__header">Here is what our users have to say.</h3>
+        <h3 className="section__header">
+          Here is what our users have to say...
+        </h3>
       </div>
 
       <div className="slider">

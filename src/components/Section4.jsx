@@ -3,7 +3,7 @@ import Question from "../ui/Question";
 
 const Section = styled.section`
   width: 100vw;
-  height: 75vh;
+  height: min-content;
   display: flex;
   padding: 2rem;
   justify-content: space-between;

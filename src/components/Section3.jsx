@@ -7,6 +7,8 @@ import Testimonials from "./Testimonials";
 const Section = styled.section`
   background-color: ${(props) => props.bgColor};
   /* padding: 2em; */
+  /* width: 100vw;
+  height: 75vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +17,7 @@ const Section = styled.section`
 
 const StyledSection3 = styled(Section)`
   background-color: #f2f2f2;
-  grid-row: 4!;
+  grid-row: 4;
 `;
 
 function Section3() {

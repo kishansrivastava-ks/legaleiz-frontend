@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Box = styled.div`
   background-color: #4c50e0;
   color: white;
-  height: 25vh;
+  height: 30vh;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -25,16 +25,67 @@ function Stats() {
   return (
     <Box>
       <BoxCell>
-        <h3>Heading 1</h3>
-        <p>Sample text 1</p>
+        <h3
+          style={{
+            letterSpacing: "2px",
+            fontSize: "4.5rem",
+            fontWeight: "500",
+          }}
+        >
+          10 Million +
+        </h3>
+        <p
+          style={{
+            color: "#ccc",
+            letterSpacing: "2px",
+            fontSize: "2rem",
+            fontWeight: "500",
+          }}
+        >
+          Consulting Minutes
+        </p>
       </BoxCell>
       <BoxCell>
-        <h3>Heading 2</h3>
-        <p>Sample text 2</p>
+        <h3
+          style={{
+            letterSpacing: "2px",
+            fontSize: "4.5rem",
+            fontWeight: "500",
+          }}
+        >
+          5 Million Pages
+        </h3>
+        <p
+          style={{
+            color: "#ccc",
+            letterSpacing: "2px",
+            fontSize: "2rem",
+            fontWeight: "500",
+          }}
+        >
+          Drafted and Reviewed
+        </p>
       </BoxCell>
       <BoxCell>
-        <h3>Heading 3</h3>
-        <p>Sample text 3</p>
+        <h3
+          style={{
+            letterSpacing: "2px",
+            fontSize: "4.5rem",
+            fontWeight: "500",
+          }}
+        >
+          100,000
+        </h3>
+        <p
+          style={{
+            color: "#ccc",
+            letterSpacing: "2px",
+            fontSize: "2rem",
+            fontWeight: "500",
+          }}
+        >
+          Start-ups mentored
+        </p>
       </BoxCell>
     </Box>
   );

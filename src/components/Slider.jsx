@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import styled from "styled-components";
 
 // FOR THE SLIDER COMPONENT
 const StyledSlider = styled.div`
-  background-color: #fff;
-  min-height: 50rem;
+  /* background-color: red; */
+  height: min-content;
   width: 100%;
   display: grid;
   grid-template-rows: 50px 1fr;
@@ -13,17 +14,23 @@ const StyledSlider = styled.div`
     "heading previous next"
     "cards cards cards";
   grid-gap: 2rem;
-  padding: 1rem 20rem;
+  padding: 2rem 20rem;
   box-sizing: border-box;
   position: relative;
-  overflow: hidden;
   transition: transform 1s;
+  /* overflow-x: hidden; */
+  margin-top: 5rem;
 `;
 
 const Heading = styled.h2`
   grid-area: heading;
   justify-self: center;
   align-self: center;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 4rem;
+  letter-spacing: 4px;
+  /* margin: 10rem 0; */
 `;
 
 const PreviousButton = styled.button`
@@ -45,6 +52,7 @@ const NextButton = styled.button`
 `;
 
 const Cards = styled.div`
+  /* background-color: yellow; */
   grid-area: cards;
   display: flex;
   overflow-x: scroll;
@@ -56,6 +64,8 @@ const Cards = styled.div`
     display: none;
   }
   transition: transform 1s;
+
+  /* height: min-content; */
 
   /* set fixed width to display only 4 cards initially */
 `;
@@ -109,6 +119,11 @@ const Text = styled.p`
   font-size: 1.3rem;
 `;
 
+const CardsContainer = styled.div`
+  /* width: 100%; */
+  background-color: blue;
+`;
+
 // FOR THE SLIDER COMPONENT
 
 function Slider() {
@@ -123,9 +138,10 @@ function Slider() {
   };
   return (
     <StyledSlider>
-      <Heading>Slider Heading</Heading>
+      <Heading>Quick Buy</Heading>
       <PreviousButton onClick={handlePrevious}>&larr;</PreviousButton>
       <NextButton onClick={handleNext}>&rarr;</NextButton>
+      {/* <CardsContainer> */}
       <Cards style={{ transform: `translateX(-${currentIndex * 300}px)` }}>
         <Card>
           <Image src="https://picsum.photos/id/1015/300/400" alt="Card 1" />
@@ -194,6 +210,7 @@ function Slider() {
           </Content>
         </Card>
       </Cards>
+      {/* </CardsContainer> */}
     </StyledSlider>
   );
 }

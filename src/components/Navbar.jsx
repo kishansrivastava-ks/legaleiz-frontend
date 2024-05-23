@@ -9,46 +9,64 @@ const StyledNavbar = styled.nav`
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #333;
-  color: #fff;
-  padding: 1em;
+  background-color: #fff;
+  color: #5e5c5c;
+  padding: 0 3rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 1.6rem;
 `;
 
 const Logo = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 10%;
+  height: auto;
+  margin-right: auto;
 `;
 
 const NavItems = styled.ul`
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
 `;
 
 const NavItem = styled.li`
-  margin-right: 1em;
+  margin-right: 5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover {
+    color: #000;
+  }
 `;
 
-const LoginButton = styled(Button)`
+const Login = styled.a`
   margin-right: 1em;
+  color: #4c50e0;
+  cursor: pointer;
+  &:hover {
+    font-size: bold;
+  }
 `;
 
 function Navbar() {
   return (
     <StyledNavbar>
       <Logo src="logo.png" alt="Logo" />
-      <Button>Button Text</Button>
       <NavItems>
-        <NavItem>Nav Item 1</NavItem>
-        <NavItem>Nav Item 2</NavItem>
-        <NavItem>Nav Item 2</NavItem>
-        <NavItem>Nav Item 2</NavItem>
+        <Button style={{ marginRight: "3rem" }}>Talk to a lawyer</Button>
+        <NavItem>Property</NavItem>
+        <NavItem>Document</NavItem>
+        <NavItem>Challan Blogs</NavItem>
+        <NavItem>Ask Lawyer</NavItem>
+        <Login>Login</Login>
       </NavItems>
-      <LoginButton>Login</LoginButton>
     </StyledNavbar>
   );
 }

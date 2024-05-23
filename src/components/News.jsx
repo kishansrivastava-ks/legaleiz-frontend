@@ -20,12 +20,16 @@ const Div1 = styled.div`
 `;
 
 const Heading = styled.h2`
-  font-size: 2em;
-  margin-bottom: 1em;
+  font-size: 3em;
+  margin-bottom: 0.5em;
+  letter-spacing: 1px;
 `;
 
 const Paragraph = styled.p`
-  font-size: 1.2em;
+  font-size: 1.5em;
+  letter-spacing: 1px;
+  padding: 1rem;
+  padding-left: 0;
 `;
 
 const Div2 = styled.div`
@@ -39,7 +43,7 @@ const Div2 = styled.div`
 
 const GridCell = styled.div`
   width: 20rem;
-  height: 28rem;
+  height: min-content;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,13 +58,15 @@ const GridCell = styled.div`
     filter: grayscale(0);
     cursor: pointer;
   }
-  padding: 2rem;
+  padding: 1.5rem;
+  justify-content: flex-start;
 `;
 
 const Image = styled.img`
-  width: 80%;
-  height: 50%;
+  /* width: 80%;
+  height: 50%; */
   object-fit: cover;
+  aspect-ratio: 4/3;
   /* filter: grayscale(100%); */
 `;
 
@@ -71,58 +77,76 @@ const HeadingGrid = styled.h3`
 
 const ParagraphGrid = styled.p`
   font-size: 1em;
+  text-align: center;
+  line-height: 1.3em;
+  margin-top: 1em;
 `;
 
 function News() {
   return (
     <NewsSection>
       <Div1>
-        <Heading>Heading</Heading>
+        <Heading>LegalEiz in News</Heading>
         <Paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet
-          nulla auctor, vestibulum magna sed, convallis ex.
+          Our Success Stories in Media Headlines and Lots of Encouragement.
         </Paragraph>
       </Div1>
       <Div2>
         <GridCell>
           <Image src="https://picsum.photos/id/1015/300/400" alt="Image 1" />
           <HeadingGrid>Heading 1</HeadingGrid>
-          <ParagraphGrid>Paragraph 1</ParagraphGrid>
+          <ParagraphGrid>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </ParagraphGrid>
         </GridCell>
         <GridCell>
           <Image src="https://picsum.photos/id/1016/300/400" alt="Image 2" />
           <HeadingGrid>Heading 2</HeadingGrid>
-          <ParagraphGrid>Paragraph 2</ParagraphGrid>
+          <ParagraphGrid>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </ParagraphGrid>
         </GridCell>
         <GridCell>
           <Image src="https://picsum.photos/id/1015/300/400" alt="Image 3" />
           <HeadingGrid>Heading 3</HeadingGrid>
-          <ParagraphGrid>Paragraph 3</ParagraphGrid>
+          <ParagraphGrid>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </ParagraphGrid>
         </GridCell>
         <GridCell>
           <Image src="https://picsum.photos/id/1018/300/400" alt="Image 4" />
           <HeadingGrid>Heading 4</HeadingGrid>
-          <ParagraphGrid>Paragraph 4</ParagraphGrid>
+          <ParagraphGrid>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </ParagraphGrid>
         </GridCell>
         <GridCell>
           <Image src="https://picsum.photos/id/1018/300/400" alt="Image 5" />
           <HeadingGrid>Heading 4</HeadingGrid>
-          <ParagraphGrid>Paragraph 4</ParagraphGrid>
+          <ParagraphGrid>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </ParagraphGrid>
         </GridCell>
         <GridCell>
           <Image src="https://picsum.photos/id/1018/300/400" alt="Image 6" />
           <HeadingGrid>Heading 4</HeadingGrid>
-          <ParagraphGrid>Paragraph 4</ParagraphGrid>
+          <ParagraphGrid>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </ParagraphGrid>
         </GridCell>
         <GridCell>
           <Image src="https://picsum.photos/id/1018/300/400" alt="Image 7" />
           <HeadingGrid>Heading 4</HeadingGrid>
-          <ParagraphGrid>Paragraph 4</ParagraphGrid>
+          <ParagraphGrid>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </ParagraphGrid>
         </GridCell>
         <GridCell>
           <Image src="https://picsum.photos/id/1018/300/400" alt="Image 8" />
           <HeadingGrid>Heading 4</HeadingGrid>
-          <ParagraphGrid>Paragraph 4</ParagraphGrid>
+          <ParagraphGrid>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </ParagraphGrid>
         </GridCell>
       </Div2>
     </NewsSection>

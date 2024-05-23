@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  background-color: #e2e1e1;
+  background-color: #fdfdfd;
   width: 100%;
   height: min-content;
   display: flex;
@@ -14,10 +14,12 @@ const Container = styled.div`
 `;
 
 const Heading = styled.h2`
+  text-transform: uppercase;
+  font-weight: 500;
   font-size: 4rem;
   margin-bottom: 5rem;
   color: black;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
 `;
 
 const LogoContainer = styled.div`

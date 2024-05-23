@@ -90,6 +90,11 @@ const LinkItem = styled.li`
   color: #000;
   margin-bottom: 1rem;
   letter-spacing: 2px;
+  &:hover {
+    cursor: pointer;
+    color: blue;
+    transition: all 0.3s;
+  }
 `;
 
 const ConsultBox = styled.div`
@@ -106,13 +111,13 @@ const ConsultBox = styled.div`
 `;
 const ConsultPara = styled.div`
   font-weight: 500;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   letter-spacing: 0.8px;
   margin: 1rem;
-  color: #828080;
+  color: #000;
   cursor: pointer;
   &:hover {
-    color: #000;
+    color: blue;
     transition: all 0.3s;
   }
 `;
@@ -189,20 +194,19 @@ const Footer = () => {
       </UsefulLinks>
       <ConsultBox>
         <ConsultPara>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti
-          modi natus labore, molestias illo soluta.
+          Consult Top Divorce Lawyers Online: Expert Legal Advice for Your
+          Divorce matter.
         </ConsultPara>
         <ConsultPara>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti
-          modi natus labore, molestias illo soluta.
+          Best Property Lawyer Consultations: Get Legal Advice on Property
+          Matters Now
         </ConsultPara>
         <ConsultPara>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti
-          modi natus labore, molestias illo soluta.
+          Consult Experienced Lawyers for Expert Legal Advice on Child Custody
+          Matters
         </ConsultPara>
         <ConsultPara>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti
-          modi natus labore, molestias illo soluta.
+          Consult a property lawyer before any property transaction
         </ConsultPara>
         <hr />
       </ConsultBox>
