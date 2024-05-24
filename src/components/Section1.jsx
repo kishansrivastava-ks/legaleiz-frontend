@@ -71,18 +71,18 @@ const sections = [
     image: "/sec1-img3.jpg",
   },
   {
-    title: "Section 2",
-    text: "Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.",
+    title: "Online Legal Consulation Anytime Anywhere",
+    text: "Consult in 10 Indian Languages starting at ₹20/min.",
     image: "/sec1-img2.jpg",
   },
   {
-    title: "Section 3",
-    text: "Cras justo odio, dapibus ac facilisis in, egestas eget quam.",
+    title: "Document Drafting By Expert Lawyer",
+    text: "Document Drafting Starts At Just ₹5999.",
     image: "/sec1-img1.jpg",
   },
   {
-    title: "Section 4",
-    text: "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+    title: "Focus On Building Your Startup",
+    text: "Startup documents at just ₹10,000",
     image: "/sec1-img4.jpg",
   },
 ];
@@ -93,6 +93,7 @@ const StyledH2 = styled.h2`
   letter-spacing: 3px;
   color: #fff;
   width: 60%;
+  line-height: 12rem;
 `;
 
 const StyledSpan = styled.span`
