@@ -16,7 +16,8 @@ const Section = styled.section`
 `;
 
 const StyledSection3 = styled(Section)`
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2; */
+  background-color: #fff;
   grid-row: 4;
 `;
 

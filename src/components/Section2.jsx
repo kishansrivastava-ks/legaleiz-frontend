@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import TrustedUsers from "../ui/TrustedUsers";
 import Services from "./Services";

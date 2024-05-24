@@ -8,6 +8,7 @@ import Section3 from "../components/Section3";
 import Section4 from "../components/Section4";
 import Partners from "../ui/Partners";
 import Footer from "../components/Footer";
+import Whatsapp from "./Whatsapp";
 
 const LandingPage = styled.div`
   display: grid;
@@ -41,6 +42,7 @@ const App = () => {
       <Section4 />
       <Partners />
       <Footer />
+      <Whatsapp />
     </LandingPage>
   );
 };

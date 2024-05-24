@@ -24,7 +24,7 @@ const Grid1Cell = styled.div`
   width: 100%; /* fixed width */
   background-color: #f3f3ff;
   border-radius: 25px;
-  cursor: pointer;
+  /* cursor: pointer; */
   &:hover {
     transform: scale(1.02) translateY(-1rem);
     transition: all 0.4s ease-in-out;
@@ -68,10 +68,12 @@ const CellLink = styled.button`
   text-decoration: none;
   margin: 1rem 0;
   font-size: 1.4rem;
+  letter-spacing: 1px;
   &:hover {
     background-color: #5b5bff;
     color: #fff;
   }
+  font-weight: 550;
 `;
 
 function Services() {

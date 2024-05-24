@@ -30,7 +30,8 @@ const Heading = styled.h2`
   font-weight: 500;
   font-size: 4rem;
   letter-spacing: 4px;
-  /* margin: 10rem 0; */
+  margin: auto;
+  margin-left: 51rem;
 `;
 
 const PreviousButton = styled.button`
@@ -40,6 +41,15 @@ const PreviousButton = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
+  background-color: #fff;
+  border-radius: 50px;
+  padding: 0.8rem 1.3rem;
+  font-weight: bold;
+  &:hover {
+    transform: scale(1.02);
+    background-color: blue;
+    color: #fff;
+  }
 `;
 
 const NextButton = styled.button`
@@ -49,6 +59,18 @@ const NextButton = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
+  background-color: #fff;
+  border-radius: 50px;
+  padding: 0.8rem 1.3rem;
+  font-weight: bold;
+  &:active {
+    border: none;
+  }
+  &:hover {
+    transform: scale(1.02);
+    background-color: blue;
+    color: #fff;
+  }
 `;
 
 const Cards = styled.div`
@@ -73,9 +95,9 @@ const Cards = styled.div`
 const Card = styled.div`
   width: 30rem;
   /* min-height: 400px; */
-  height: 100%;
-  background-color: f2f2f2;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: min-content;
+  /* background-color: red; */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   display: grid;
   grid-template-rows: 70% 1fr;
   grid-template-areas:
@@ -85,13 +107,29 @@ const Card = styled.div`
   padding: 1em;
   scroll-snap-align: start;
   margin: 0 1rem;
+  border-radius: 3px;
+  &:hover {
+    transform: scale(0.98) translateY(-1rem);
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 25px 40px rgba(0, 0, 0, 0.1);
+    /* background-color: #fff; */
+    cursor: pointer;
+  }
+  &:hover > img {
+    transform: scale(0.9);
+    transition: all 0.4s ease-in-out;
+  }
+  transition: all 0.4s ease-in-out;
 `;
 
 const Image = styled.img`
+  border-radius: 2px;
   grid-area: image;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: all 0.4s ease-in-out;
+  aspect-ratio: 1/1;
 `;
 
 const Content = styled.div`
