@@ -5,6 +5,8 @@ import TrustedUsers from "../ui/TrustedUsers";
 import Services from "./Services";
 
 const Section = styled.section`
+  width: 100vw;
+  height: min-content;
   background-color: ${(props) => props.bgColor};
   padding: 2em;
   display: flex;
@@ -14,22 +16,29 @@ const Section = styled.section`
 `;
 
 const StyledSection2 = styled(Section)`
-  /* background-color: #00adb5; */
+  background-color: #00adb5;
   background-color: #fff;
+  /* border: 1rem solid red; */
   grid-row: 3;
+  align-self: stretch;
 `;
 
 const Grid = styled.div`
   margin-top: 4rem;
-  max-width: 85%;
-  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-gap: 1em;
+  width: 85%;
+  height: min-content;
+  display: flex;
+  flex-wrap: wrap;
+  /* grid-template-columns: 30% 70%; */
+  gap: 1em;
   padding: 1em;
   align-items: center;
+  flex-direction: row;
 `;
 
 const Heading = styled.h2`
+  flex: 1 1 30rem;
+  width: max-content;
   font-size: 3em;
   margin-bottom: 1em;
   margin: auto;
@@ -38,6 +47,7 @@ const Heading = styled.h2`
 `;
 
 const Paragraph = styled.p`
+  flex: 1 1 80rem;
   font-size: 1.2em;
   /* background-color: purple; */
   margin: auto;

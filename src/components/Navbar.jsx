@@ -4,11 +4,12 @@ import styled from "styled-components";
 import Button from "../ui/Button";
 
 const StyledNavbar = styled.nav`
+  grid-row: 1;
   z-index: 5;
   position: sticky;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   background-color: #fff;
   color: #5e5c5c;
   padding: 0 3rem;
@@ -62,7 +63,7 @@ function Navbar() {
       <NavItems>
         <Button style={{ marginRight: "3rem" }}>Talk to a lawyer</Button>
         <NavItem>Property</NavItem>
-        <NavItem>Document</NavItem>
+        <NavItem>Startup</NavItem>
         <NavItem>Challan Blogs</NavItem>
         <NavItem>Ask Lawyer</NavItem>
         <Login>Login</Login>

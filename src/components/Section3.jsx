@@ -7,8 +7,8 @@ import Testimonials from "./Testimonials";
 const Section = styled.section`
   background-color: ${(props) => props.bgColor};
   /* padding: 2em; */
-  /* width: 100vw;
-  height: 75vh; */
+  width: 100vw;
+  height: max-content;
   display: flex;
   flex-direction: column;
   align-items: center;

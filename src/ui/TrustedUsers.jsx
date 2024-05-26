@@ -12,6 +12,7 @@ const Heading = styled.h2`
 const LogoList = styled.ul`
   /* background-color: red; */
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -21,8 +22,10 @@ const LogoList = styled.ul`
   /* padding-bottom: 2rem; */
   border-bottom: 1px solid #ccc;
   /* margin-bottom: 5rem; */
-  width: 80%;
+  /* width: 150rem; */
   height: auto;
+
+  /* overflow-x: scroll; */
 `;
 
 const Logo = styled.img`
@@ -32,6 +35,9 @@ const Logo = styled.img`
 `;
 
 const LogoItem = styled.li`
+  align-self: center;
+  justify-self: center;
+  /* flex: 1 1 15rem; */
   width: 15%;
   height: auto;
   /* margin-right: 2rem; */

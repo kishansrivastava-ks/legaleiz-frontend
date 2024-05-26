@@ -6,19 +6,23 @@ const Container = styled.div`
   width: 100vw;
   /* height: 100vh; */
   height: min-content;
-  padding: 5rem 15rem;
+  padding: 8vh 8vw;
 `;
 
 const UsefulLinks = styled.div`
   background-color: #fff;
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 2rem;
+  /* flex-direction: row; */
   align-items: center;
   justify-content: center;
+  gap: 3rem;
 `;
 
 const FooterLogo = styled.div`
-  width: 25%;
+  /* width: 25%; */
+  flex: 1 1 30rem;
   /* background-color: red; */
   display: flex;
   flex-direction: column;
@@ -29,12 +33,14 @@ const Logo = styled.img`
   width: 50%;
   height: 50%;
   margin-bottom: 1rem;
+  align-self: flex-start;
 `;
 const FooterIcons = styled.div`
   display: flex;
   flex-direction: row;
   color: white;
   font-size: 2rem;
+  align-self: flex-start;
 `;
 const Icon = styled.p`
   margin: 0.5rem;
@@ -42,35 +48,41 @@ const Icon = styled.p`
 `;
 
 const LinksContainer = styled.div`
-  width: 75%;
+  /* width: 75%; */
+  flex: 1 1 80rem;
   /* background-color: yellow; */
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  /* flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
   padding-bottom: 5rem;
   /* border-bottom: 1px solid gray; */
 `;
 const Solutions = styled.div`
+  flex-basis: 21%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 25%;
+  /* width: 25%; */
   /* background-color: pink; */
 `;
 const Support = styled.div`
-  width: 25%;
+  /* width: 25%; */
+  flex-basis: 21%;
   /* background-color: yellow; */
   margin-bottom: auto;
   margin-left: 1rem;
 `;
 const Company = styled.div`
-  width: 25%;
+  /* width: 25%; */
+  flex-basis: 21%;
   /* background-color: green; */
   margin-left: 1rem;
 `;
 const Legal = styled.div`
-  width: 25%;
+  /* width: 25%; */
+  flex-basis: 21%;
   /* background-color: blue; */
   margin-bottom: auto;
   margin-left: 1rem;

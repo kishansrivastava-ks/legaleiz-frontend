@@ -1,12 +1,17 @@
 import styled from "styled-components";
 
 const Grid1 = styled.div`
+  justify-self: stretch;
+
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  @media (max-width: 768px) { 
+    grid-template-columns: 1fr; /
+  }
   grid-gap: 1.5em;
   padding: 1em;
   /* background-color: red; */
-  width: 90%;
+  width: 80%;
   height: 55rem;
 `;
 

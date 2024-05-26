@@ -3,14 +3,21 @@ import styled from "styled-components";
 const Box = styled.div`
   background-color: #4c50e0;
   color: white;
-  height: 30vh;
+  height: min-content;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1em;
-  padding: 1em 15rem;
+  padding: 5vh 5vw;
   box-sizing: border-box;
   /* width: 70vw; adjust width to 70% of viewport width */
+  --w: 400px;
+  --n: 3;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(max(var(--w), 100%/ (var(--n) + 1) + 0.1%), 1fr)
+  );
 `;
 
 const BoxCell = styled.div`

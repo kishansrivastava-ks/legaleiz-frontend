@@ -1,3 +1,5 @@
+// 🔴 THIS IS THE QUESTIONS SECTION
+
 import styled from "styled-components";
 import Question from "../ui/Question";
 
@@ -8,14 +10,14 @@ const Section = styled.section`
   padding: 2rem;
   justify-content: space-between;
   align-items: center;
-  background-color: #333;
+  /* background-color: #333; */
   color: #fff;
 `;
 
 const StyledSection4 = styled(Section)`
   background-color: #17172c;
   grid-row: 5;
-  padding: 5rem 15rem;
+  padding: 8vh 5vw;
 `;
 
 const StyledBox = styled.div`
@@ -23,24 +25,27 @@ const StyledBox = styled.div`
   height: 100%;
   /* background-color: red; */
   display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center; */
+  /* justify-content: center; */
 `;
 
 const Box1 = styled.div`
-  width: 35%;
-  height: 100%;
+  flex: 1 1 55rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: left;
   /* background-color: orange; */
-  margin: 0.5rem;
+  /* margin: 0.5rem; */
 `;
 const Box2 = styled.div`
-  width: 65%;
-  height: 100%;
+  /* width: 65%;
+  height: 100%; */
+  flex: 1 1 100rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
