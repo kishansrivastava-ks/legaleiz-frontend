@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
+import { NavLink } from "react-router-dom";
+
 import styled from "styled-components";
 import Button from "../ui/Button";
 
@@ -38,7 +40,7 @@ const NavItems = styled.ul`
   padding: 0;
 `;
 
-const NavItem = styled.li`
+const StyledNavLink = styled(NavLink)`
   margin-right: 5rem;
   cursor: pointer;
   transition: all 0.3s;
@@ -62,10 +64,10 @@ function Navbar() {
       <Logo src="logo.png" alt="Logo" />
       <NavItems>
         <Button style={{ marginRight: "3rem" }}>Talk to a lawyer</Button>
-        <NavItem>Property</NavItem>
-        <NavItem>Startup</NavItem>
-        <NavItem>Challan Blogs</NavItem>
-        <NavItem>Ask Lawyer</NavItem>
+        <StyledNavLink>Property</StyledNavLink>
+        <StyledNavLink to="/startup">Startup</StyledNavLink>
+        <StyledNavLink>Challan Blogs</StyledNavLink>
+        <StyledNavLink>Ask Lawyer</StyledNavLink>
         <Login>Login</Login>
       </NavItems>
     </StyledNavbar>
