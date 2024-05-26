@@ -63,7 +63,7 @@ const StyledButton = styled.button`
 
 const StyledImageBox = styled.div`
   height: 100%;
-  background-color: green;
+  /* background-color: green; */
   flex: 1 1 30rem;
   flex-basis: 40%;
 `;
