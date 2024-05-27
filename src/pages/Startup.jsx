@@ -34,7 +34,7 @@ const Main = styled.div`
   font-size: 2rem;
   /* background-color: rgb(243, 152, 152); */
   background-color: #f7f5f5;
-  padding: 2vw;
+  /* padding: 2vw; */
   margin: 0;
   /* border: 0.8rem solid red; */
 
@@ -45,7 +45,7 @@ const Main = styled.div`
 
   & > * {
     width: 100%;
-    margin: 2rem 0;
+    margin: 0;
   }
 `;
 

@@ -4,7 +4,7 @@ const StyledInfoSection = styled.div`
   display: flex;
   flex-direction: row;
   gap: 2rem;
-  width: 95vw;
+  /* width: 95vw; */
   height: 40rem;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -20,8 +20,9 @@ const InfoContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
-  min-width: 100%;
+  min-width: 97%;
   position: relative;
+  margin: 2rem;
 `;
 
 const InfoContent = styled.div`

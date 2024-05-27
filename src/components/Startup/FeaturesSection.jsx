@@ -5,11 +5,13 @@ const StyledFeaturesSection = styled.div`
   grid-template-rows: min-content min-content;
   grid-template-columns: 1fr 1fr;
 
-  width: 95vw;
-  height: 50rem;
+  width: 100vw;
+  height: min-content;
   padding: 2rem;
   gap: 1rem;
-  /* background-color: yellow; */
+  background-color: #fff;
+  margin-top: 1.5rem;
+  /* border: 1rem solid red; */
 `;
 
 const Heading1 = styled.div`
@@ -20,21 +22,22 @@ const Heading1 = styled.div`
   letter-spacing: 2px;
   grid-column: 1/-1;
   height: min-content;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 `;
 const FeatureBox = styled.div`
   font-size: 3rem;
   font-weight: 500;
   letter-spacing: 2px;
+  height: min-content;
 
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 1rem;
 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   & > * {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 600;
   }
 `;
@@ -42,11 +45,19 @@ const FeatureBox = styled.div`
 const FeatureList = styled.ul`
   margin-top: 2rem;
   list-style: none;
+  align-self: center;
 `;
 const ListItem = styled.li`
   text-transform: uppercase;
   /* font-size: 2rem; */
   margin: 2rem 0;
+  margin-bottom: 3.5rem;
+`;
+
+const Image = styled.img`
+  width: 60%;
+  height: 100%;
+  align-self: center;
 `;
 
 function FeaturesSection() {
@@ -55,12 +66,18 @@ function FeaturesSection() {
       <Heading1>
         Take correct business decisions with the <br /> right legal support
       </Heading1>
-      <FeatureBox>
+      <FeatureBox
+        style={{
+          borderRight: "1px solid gray",
+          // paddingRight: "3rem"
+        }}
+      >
         <h6
           style={{
             margin: "1rem 0",
             fontSize: "1.5rem",
             textTransform: "uppercase",
+            alignSelf: "center",
           }}
         >
           Features
@@ -68,6 +85,7 @@ function FeaturesSection() {
         <p
           style={{
             fontSize: "1.3rem",
+            alignSelf: "center",
           }}
         >
           LegalEiz startup service offers the following fetaures
@@ -90,8 +108,13 @@ function FeaturesSection() {
           </ListItem>
         </FeatureList>
       </FeatureBox>
-      <FeatureBox>
-        Take correct business decisions with the right legal support
+      <FeatureBox
+        style={{
+          height: "40.5rem",
+          width: "72rem",
+        }}
+      >
+        <Image src="images/img-4.jpg" />
       </FeatureBox>
     </StyledFeaturesSection>
   );
