@@ -17,8 +17,11 @@ const GlobalStyles = createGlobalStyle`
 /* Colors adapted from https://tailwindcss.com/docs/customizing-colors */
 
 :root {
+  --color-main: #4c50e0;
   /* Grey */
   &, &.light-mode {
+
+
   --color-grey-0: #fff;
   --color-grey-50: #f9fafb;
   --color-grey-100: #f3f4f6;
