@@ -5,6 +5,8 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../ui/Button";
 
+// import "./Navbar.css";
+
 const StyledNavbar = styled.nav`
   grid-row: 1;
   z-index: 5;
@@ -22,6 +24,8 @@ const StyledNavbar = styled.nav`
   font-weight: 600;
   letter-spacing: 1px;
   font-size: 1.6rem;
+
+  height: 4.3vmax;
 `;
 
 const Logo = styled.img`
@@ -40,13 +44,57 @@ const NavItems = styled.ul`
   padding: 0;
 `;
 
+// Drop Down Menu on Startup lin;
+const DropdownMenu = styled.div`
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  flex-direction: column;
+`;
+
+const NestedDropDown = styled.div`
+  display: none;
+  position: absolute;
+  top: 10%;
+  left: 100%;
+  background-color: #fff;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  flex-direction: column;
+  padding: 1rem 2rem;
+  width: max-content;
+`;
+
 const StyledNavLink = styled(NavLink)`
   margin-right: 5rem;
   cursor: pointer;
   transition: all 0.3s;
   &:hover {
     color: #000;
+    & ${DropdownMenu} {
+      display: flex;
+    }
   }
+  padding: 1rem 0;
+  position: relative;
+`;
+
+const NestedNavLink = styled(NavLink)`
+  cursor: pointer;
+  width: 15vmax;
+  font-size: 1vmax;
+  &:hover {
+    color: #000;
+    & ${NestedDropDown} {
+      display: flex;
+    }
+  }
+  padding: 1rem 1rem;
+  font-weight: 550;
 `;
 
 const Login = styled.a`
@@ -61,11 +109,34 @@ const Login = styled.a`
 function Navbar() {
   return (
     <StyledNavbar>
-      <Logo src="logo.png" alt="Logo" />
+      <Logo src="/logo.png" alt="Logo" />
       <NavItems>
         <Button style={{ marginRight: "3rem" }}>Talk to a lawyer</Button>
         <StyledNavLink>Property</StyledNavLink>
-        <StyledNavLink to="/startup">Startup</StyledNavLink>
+        <StyledNavLink to="/startup">
+          Startup
+          <DropdownMenu>
+            <NestedNavLink>
+              Company Formation
+              <NestedDropDown>
+                <StyledNavLink to="/startup/company-formation/partnership-firm">
+                  Partnership Firm
+                </StyledNavLink>
+                <StyledNavLink to="/startup/company-formation/partnership-firm">
+                  Privated Limited Company
+                </StyledNavLink>
+                <StyledNavLink to="/startup/company-formation/partnership-firm">
+                  One Person Company
+                </StyledNavLink>
+                <StyledNavLink to="/startup/company-formation/partnership-firm">
+                  Limited Liability Partnership
+                </StyledNavLink>
+              </NestedDropDown>
+            </NestedNavLink>
+            <NestedNavLink>Intellectual Property</NestedNavLink>
+            <NestedNavLink>Registrations and Licenses</NestedNavLink>
+          </DropdownMenu>
+        </StyledNavLink>
         <StyledNavLink>Challan Blogs</StyledNavLink>
         <StyledNavLink>Ask Lawyer</StyledNavLink>
         <Login>Login</Login>
