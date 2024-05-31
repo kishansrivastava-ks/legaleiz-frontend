@@ -3,6 +3,8 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Whatsapp from "../../ui/Whatsapp";
 import Info from "../../components/StartupPages/Info";
+import Container from "../../components/StartupPages/Container";
+import RecommendedProds from "../../components/StartupPages/RecommendedProds";
 
 const LandingPage = styled.div`
   display: grid;
@@ -29,7 +31,7 @@ const Main = styled.div`
   background-color: #f7f5f5;
   /* padding: 2vw; */
   margin: 0;
-  border: 0.5rem solid red;
+  /* border: 0.5rem solid red; */
 `;
 
 function PartnershipFirm() {
@@ -41,6 +43,8 @@ function PartnershipFirm() {
           heading="Do you want to start business with somebody whom you trust?"
           caption="Form a PARTNERSHIP FIRM and get started"
         />
+        <Container />
+        <RecommendedProds />
       </Main>
       <Footer />
       <Whatsapp />
