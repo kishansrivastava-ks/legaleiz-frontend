@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useEffect, useRef } from "react";
+import Clients from "./Clients";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -18,6 +19,7 @@ const LeftBox = styled.div`
   overflow-y: auto;
 
   & > div {
+    width: 100%;
     padding: 5rem 20px;
     border-bottom: 1px solid #ccc;
   }
@@ -85,7 +87,9 @@ function Container() {
         <div>Component 3</div>
         <div>Component 3</div>
         <div>Component 3</div>
-        <div>Component 3</div>
+        <div>
+          <Clients />
+        </div>
       </LeftBox>
       <RightBox>
         <div>Right component</div>

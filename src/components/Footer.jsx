@@ -158,7 +158,7 @@ const Footer = () => {
     <Container>
       <UsefulLinks>
         <FooterLogo>
-          <Logo src="logo.png" alt="logo" />
+          <Logo src="/logo.png" alt="logo" />
           <FooterIcons>
             <Icon>facebook</Icon>
             <Icon>twitter</Icon>
