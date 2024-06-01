@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { useEffect, useRef } from "react";
 import Clients from "./Clients";
+import QuestionsContainer from "./QuestionsContainer";
+import Chat from "./Chat";
+import RegistrationProcess from "./RegistrationProcess";
+import HowItWorks from "./HowItWorks";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -9,7 +13,7 @@ const StyledContainer = styled.div`
   /* margin-top: 50px; Height of the navbar */
   overflow: hidden;
   position: relative;
-  /* background-color: yellow; */
+  background-color: #fff;
   padding: 2vmax 5vmax;
 `;
 const LeftBox = styled.div`
@@ -20,7 +24,7 @@ const LeftBox = styled.div`
 
   & > div {
     width: 100%;
-    padding: 5rem 20px;
+    padding: 2rem 20px;
     border-bottom: 1px solid #ccc;
   }
 `;
@@ -36,6 +40,37 @@ const RightBox = styled.div`
     height: 100%;
   }
 `;
+
+const steps = [
+  { no: 1, step: "Submit all the required documents" },
+  {
+    no: 2,
+    step: "Drafting a Partnership Deed",
+  },
+  {
+    no: 3,
+    step: "Payment of Stamp Duty on Deed",
+  },
+  {
+    no: 4,
+    step: "Notarisation of Partnership Deed",
+  },
+  {
+    no: 5,
+    step: "Apply for PAN and TAN of the Firm",
+  },
+  {
+    no: 6,
+    step: "Certificate of Registration from RoF",
+  },
+  {
+    no: 7,
+    step: "Open a Current Bank account on the Firm’s name",
+  },
+];
+const heading =
+  "The Ministry of Corporate Affairs governs the company registration process. The below registration process is basis the governing laws of MCA:";
+// this heading is meant to be passed a the heading of the regustration process component
 
 function Container() {
   const containerRef = useRef(null);
@@ -82,10 +117,18 @@ function Container() {
         <div>Component 2</div>
         <div>Component 3</div>
         <div>Component 3</div>
-        <div>Component 3</div>
-        <div>Component 3</div>
-        <div>Component 3</div>
-        <div>Component 3</div>
+        <div>
+          <HowItWorks />
+        </div>
+        <div>
+          <RegistrationProcess heading={heading} steps={steps} />
+        </div>
+        <div>
+          <Chat />
+        </div>
+        <div>
+          <QuestionsContainer />
+        </div>
         <div>Component 3</div>
         <div>
           <Clients />
