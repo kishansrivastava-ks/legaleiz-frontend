@@ -5,14 +5,16 @@ import { FaCheck } from "react-icons/fa";
 const RegProcess = styled.div`
   width: 100%;
   height: max-content;
-  /* padding: 1vmax; */
+  padding: 1vmax;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: last baseline;
   text-align: left;
   & > h2 {
     width: 100%;
-    margin: 2rem 0;
+    margin-bottom: 2rem;
     letter-spacing: 2px;
   }
 `;

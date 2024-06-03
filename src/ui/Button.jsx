@@ -6,7 +6,8 @@ const Button = styled.button`
   border: none;
   padding: 1rem 2rem;
   font-size: 16px;
-  font-weight: bold;
+  /* font-weight: bold; */
+  font-weight: 500;
   border-radius: 30px; /* capsule shape */
   cursor: pointer;
   transition: background-color 0.3s ease-out;
