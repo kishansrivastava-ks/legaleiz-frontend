@@ -142,7 +142,7 @@ function Copyright() {
           steps={steps}
           stats={stats}
           definition={definition}
-          title="One Person Company"
+          title="Copyright"
           benefits={benefits}
           heading={heading}
           questions={questions}
