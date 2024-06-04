@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -85,14 +86,9 @@ const RegisterButton = styled.button`
     background-color: #0056b3;
   }
 `;
-function Register() {
+function Register({ registrationItems, category }) {
   const [selectedItems, setSelectedItems] = useState([]);
-  const items = [
-    { id: 1, title: "Partnership Firm", price: 9999 },
-    { id: 2, title: "GST Registration", price: 3499 },
-    { id: 3, title: "Startup India Registration", price: 3999 },
-    { id: 4, title: "MSME Registration", price: 1999 },
-  ];
+
   const logos = [
     "https://img.icons8.com/?size=100&id=11079&format=png&color=FA5252",
     "https://img.icons8.com/?size=100&id=11079&format=png&color=FA5252",
@@ -110,17 +106,17 @@ function Register() {
     );
   };
   const calculateTotal = () => {
-    return items
+    return registrationItems
       .filter((item) => selectedItems.includes(item.id))
       .reduce((total, item) => total + item.price, 0);
   };
 
   return (
     <Container>
-      <Heading>Company Formation</Heading>
+      <Heading>{category}</Heading>
 
       <ItemList>
-        {items.map((item) => (
+        {registrationItems.map((item) => (
           <Item key={item.id}>
             <label>
               <StyledCheckbox

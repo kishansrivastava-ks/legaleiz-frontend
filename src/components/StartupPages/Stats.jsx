@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import ReactStars from "react-rating-stars-component";
 
@@ -87,12 +88,6 @@ const Purchased = styled.div`
   }
 `;
 
-const stats = {
-  rating: 4.5,
-  reviews: 123,
-  purchased: 256,
-};
-
 const starsOptions = {
   edit: false,
   // color: #ffa500,
@@ -101,7 +96,7 @@ const starsOptions = {
   isHalf: true,
 };
 
-function Stats() {
+function Stats({ stats, title }) {
   return (
     <StyledStats>
       <RatingBox>
@@ -112,7 +107,7 @@ function Stats() {
         <p>{`(${stats.reviews} reviews)`}</p>
       </RatingBox>
       <Box>
-        <Heading>Partnership Firm</Heading>
+        <Heading>{title}</Heading>
         <Para>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
           nulla dolores cupiditate error pariatur debitis, repellendus tempora,

@@ -122,19 +122,48 @@ function Navbar() {
                 <StyledNavLink to="/startup/company-formation/partnership-firm">
                   Partnership Firm
                 </StyledNavLink>
-                <StyledNavLink to="/startup/company-formation/partnership-firm">
+                <StyledNavLink to="/startup/company-formation/private-limited-company">
                   Privated Limited Company
                 </StyledNavLink>
-                <StyledNavLink to="/startup/company-formation/partnership-firm">
+                <StyledNavLink to="/startup/company-formation/one-person-company">
                   One Person Company
                 </StyledNavLink>
-                <StyledNavLink to="/startup/company-formation/partnership-firm">
+                <StyledNavLink to="/startup/company-formation/limited-liability-partnership">
                   Limited Liability Partnership
                 </StyledNavLink>
               </NestedDropDown>
             </NestedNavLink>
-            <NestedNavLink>Intellectual Property</NestedNavLink>
-            <NestedNavLink>Registrations and Licenses</NestedNavLink>
+            <NestedNavLink>
+              Intellectual Property
+              <NestedDropDown>
+                <StyledNavLink to="/startup/intellectual-property/copyright">
+                  Copyright
+                </StyledNavLink>
+                <StyledNavLink to="/startup/intellectual-property/respond-to-tm-objections">
+                  Respond to TM Objections
+                </StyledNavLink>
+                <StyledNavLink to="/startup/intellectual-property/patent">
+                  Patent
+                </StyledNavLink>
+                <StyledNavLink to="/startup/intellectual-property/trademark">
+                  Trademark
+                </StyledNavLink>
+              </NestedDropDown>
+            </NestedNavLink>
+            <NestedNavLink>
+              Registrations & Licenses
+              <NestedDropDown>
+                <StyledNavLink to="/startup/registrations-and-licenses/gst-registration">
+                  GST Registration
+                </StyledNavLink>
+                <StyledNavLink to="/startup/registrations-and-licenses/export-import-code">
+                  Export Import Code
+                </StyledNavLink>
+                <StyledNavLink to="/startup/registrations-and-licenses/annual-gst-return-filing">
+                  Annual GST Return Filing
+                </StyledNavLink>
+              </NestedDropDown>
+            </NestedNavLink>
           </DropdownMenu>
         </StyledNavLink>
         <StyledNavLink>Challan Blogs</StyledNavLink>

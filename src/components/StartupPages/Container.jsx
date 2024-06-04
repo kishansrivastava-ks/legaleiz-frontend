@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import { useEffect, useRef } from "react";
 import Clients from "./Clients";
@@ -63,74 +64,18 @@ const RightBox = styled.div`
   margin-left: 1rem;
 `;
 
-const steps = [
-  { no: 1, step: "Submit all the required documents" },
-  {
-    no: 2,
-    step: "Drafting a Partnership Deed",
-  },
-  {
-    no: 3,
-    step: "Payment of Stamp Duty on Deed",
-  },
-  {
-    no: 4,
-    step: "Notarisation of Partnership Deed",
-  },
-  {
-    no: 5,
-    step: "Apply for PAN and TAN of the Firm",
-  },
-  {
-    no: 6,
-    step: "Certificate of Registration from RoF",
-  },
-  {
-    no: 7,
-    step: "Open a Current Bank account on the Firm’s name",
-  },
-];
-const heading =
-  "The Ministry of Corporate Affairs governs the company registration process. The below registration process is basis the governing laws of MCA:";
-// this heading is meant to be passed a the heading of the regustration process component
-
-const definition = {
-  question: "Partnership Firm",
-  answer:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem suscipit exercitationem reprehenderit labore! Perferendis debitis est corporis soluta beatae blanditiis ex dolores labore dolorum quom.",
-};
-
-const benefits = [
-  {
-    id: 1,
-    point: "Easy to start",
-  },
-  {
-    id: 2,
-    point: "Minimal Regulatory Compliance",
-  },
-  {
-    id: 3,
-    point: "Operating Flexibility for Partners",
-  },
-  {
-    id: 4,
-    point: "Various Financial Returns for the Partners",
-  },
-];
-
-const requirements = [
-  {
-    id: 1,
-    point: "Minimum 2 Partners",
-  },
-  {
-    id: 2,
-    point: "No Capital Requirement",
-  },
-];
-
-function Container() {
+function Container({
+  title,
+  steps,
+  heading,
+  definition,
+  benefits,
+  requirements,
+  stats,
+  questions,
+  registrationItems,
+  category,
+}) {
   const containerRef = useRef(null);
   const leftRef = useRef(null);
 
@@ -172,7 +117,7 @@ function Container() {
     <StyledContainer ref={containerRef}>
       <LeftBox ref={leftRef}>
         <div>
-          <Stats />
+          <Stats stats={stats} title={title} />
         </div>
         <div>
           <HowItWorks />
@@ -183,20 +128,29 @@ function Container() {
             answer={definition.answer}
           />
         </div>
-        <div>
-          <Benefits title="Partnership Firm" benefits={benefits} />
-        </div>
-        <div>
-          <Requirements title="Partnership Firm" requirements={requirements} />
-        </div>
-        <div>
-          <RegistrationProcess heading={heading} steps={steps} />
-        </div>
+        {benefits && (
+          <div>
+            <Benefits title={title} benefits={benefits} />
+          </div>
+        )}
+        {requirements && (
+          <div>
+            <Requirements
+              title="Partnership Firm"
+              requirements={requirements}
+            />
+          </div>
+        )}
+        {steps && (
+          <div>
+            <RegistrationProcess heading={heading} steps={steps} />
+          </div>
+        )}
         <div>
           <Chat />
         </div>
         <div>
-          <QuestionsContainer />
+          <QuestionsContainer questions={questions} />
         </div>
         <div>Component 3</div>
         <div>
@@ -204,7 +158,7 @@ function Container() {
         </div>
       </LeftBox>
       <RightBox>
-        <Register />
+        <Register registrationItems={registrationItems} category={category} />
       </RightBox>
     </StyledContainer>
   );
