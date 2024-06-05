@@ -44,7 +44,7 @@ function GSTRegistration() {
         heading={heading}
         questions={questions}
         registrationItems={registrationItems}
-        category="Company Formation"
+        category="Registrations and Licenses"
       />
       <RecommendedProds />
     </>
