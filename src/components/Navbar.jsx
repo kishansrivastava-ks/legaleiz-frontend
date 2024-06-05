@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import styled from "styled-components";
@@ -42,6 +42,11 @@ const NavItems = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
+
+  /* &:first-child {
+    margin-right: "3rem";
+    font-size: 5rem;
+  } */
 `;
 
 // Drop Down Menu on Startup lin;
@@ -106,12 +111,116 @@ const Login = styled.a`
   }
 `;
 
+const TTLDropDown = styled.div`
+  position: absolute;
+  top: 100%; /* Position it below the nav link */
+  left: -300%;
+  width: 80vw; /* Full width of the screen */
+  height: max-content;
+  background-color: white;
+  color: black;
+  display: none; /* Initially hidden */
+  z-index: 1000; /* Ensure it appears above other elements */
+  padding: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+`;
+
+const TalkToLawyer = styled.div`
+  background-color: blue;
+  padding: 1rem 2rem;
+  color: #fff;
+  border-radius: 25px;
+  margin-right: 3rem;
+  position: relative;
+  &:hover ${TTLDropDown} {
+    display: flex; /* Show on hover */
+  }
+`;
+const DropdownRow = styled.div`
+  font-weight: 500;
+  & > h3 {
+    margin-bottom: 1rem;
+  }
+  margin-bottom: 10px;
+  & > div {
+    width: 30rem;
+    margin-right: auto;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    &:hover {
+      color: blue;
+      transition: all 0.1s;
+    }
+    transition: all 0.1s;
+  }
+`;
+
+const ShowMoreButton = styled.div`
+  margin-top: 10px;
+  cursor: pointer;
+  color: blue;
+  text-decoration: none;
+`;
+
 function Navbar() {
+  const [showMoreL, setShowMoreL] = useState(false);
+  const [showMoreR, setShowMoreR] = useState(false);
+  const handleShowMoreL = () => {
+    setShowMoreL(!showMoreL);
+  };
+  const handleShowMoreR = () => {
+    setShowMoreR(!showMoreR);
+  };
+
   return (
     <StyledNavbar>
       <Logo src="/logo.png" alt="Logo" />
       <NavItems>
-        <Button style={{ marginRight: "3rem" }}>Talk to a lawyer</Button>
+        <TalkToLawyer>
+          Talk to a lawyer
+          <TTLDropDown>
+            <DropdownRow>
+              <h3>Personal</h3>
+              <div>Family and Matrimony</div>
+              <div>Divorce</div>
+              <div>Property</div>
+              <div>Will</div>
+              {showMoreL && (
+                <>
+                  <div>Labour and Employment</div>
+                  <div>Consumer Protection</div>
+                  <div>Cyber Crime</div>
+                  <div>Cheque Bounce</div>
+                </>
+              )}
+              <ShowMoreButton onClick={handleShowMoreL}>
+                {showMoreL ? "Show Less" : "Show More"}
+              </ShowMoreButton>
+            </DropdownRow>
+
+            <DropdownRow>
+              <h3>Business</h3>
+              <div>Company Matters</div>
+              <div>HR & Labour Compliance</div>
+              <div>Trademark & Copyrights</div>
+              <div>Investment & Fundraise</div>
+
+              {showMoreR && (
+                <>
+                  <div>Direct Tax</div>
+                  <div>GST</div>
+                  <div>Company (ROC) Compliance</div>
+                  <div>Debt Recovery</div>
+                  <div>NCLT matter</div>
+                  <div>Any other business legal matter</div>
+                </>
+              )}
+              <ShowMoreButton onClick={handleShowMoreR}>
+                {showMoreR ? "Show Less" : "Show More"}
+              </ShowMoreButton>
+            </DropdownRow>
+          </TTLDropDown>
+        </TalkToLawyer>
         <StyledNavLink>Property</StyledNavLink>
         <StyledNavLink to="/startup">
           Startup

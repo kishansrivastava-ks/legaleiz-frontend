@@ -11,6 +11,7 @@ import Definition from "./Definition";
 import Benefits from "./Benefits";
 import Requirements from "./Requirements";
 import Register from "./Register";
+import SliderTest from "../SliderTest";
 
 const StyledContainer = styled.div`
   display: flex;
@@ -63,6 +64,24 @@ const RightBox = styled.div`
   border-radius: 10px;
   margin-left: 1rem;
 `;
+
+const testimonials = [
+  {
+    review: "This product is amazing! It has changed my life.",
+    photo: "https://via.placeholder.com/50",
+    name: "John Doe",
+  },
+  {
+    review: "I can't believe how much easier my work has become.",
+    photo: "https://via.placeholder.com/50",
+    name: "Jane Smith",
+  },
+  {
+    review: "Fantastic! Highly recommend to everyone.",
+    photo: "https://via.placeholder.com/50",
+    name: "Bob Johnson",
+  },
+];
 
 function Container({
   title,
@@ -152,7 +171,9 @@ function Container({
         <div>
           <QuestionsContainer questions={questions} />
         </div>
-        <div>Component 3</div>
+        <div>
+          <SliderTest testimonials={testimonials} />
+        </div>
         <div>
           <Clients />
         </div>
