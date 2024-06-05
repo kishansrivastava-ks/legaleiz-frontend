@@ -7,10 +7,11 @@ import "slick-carousel/slick/slick-theme.css";
 import { useState } from "react";
 
 const TestimonialsWrapper = styled.div`
-  width: 50rem;
-  padding: 15px;
-  height: max-content;
-  background-color: #f9f9f9;
+  width: 100%;
+  padding: 15px 4rem;
+  height: 35rem;
+  /* background-color: yellow; */
+  /* border: 1px solid gray; */
   text-align: center;
 `;
 const Heading = styled.h2`
@@ -22,11 +23,14 @@ const TestimonialCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  background: #fff;
+  justify-content: center;
+  padding: 4rem;
+  /* background: blue; */
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  border: 1px solid lightgray;
   transition: all 0.5s;
+  height: 20rem;
 `;
 const Review = styled.p`
   font-style: italic;
@@ -50,6 +54,7 @@ const Review = styled.p`
 `;
 const UserWrapper = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
 `;
 const UserPhoto = styled.img`
@@ -77,7 +82,7 @@ const Dot = styled.div`
 `;
 const ArrowButton = styled.button`
   background: transparent;
-  background-color: red;
+  /* background-color: red; */
   font-size: 24px;
   cursor: pointer;
   color: #333;
@@ -90,11 +95,16 @@ const SampleNextArrow = (props) => {
   return (
     <ArrowButton
       className={className}
-      style={{ ...style, right: "-25px" }}
+      style={{
+        ...style,
+        right: "-30px",
+        backgroundColor: "black",
+        borderRadius: "50%",
+        paddingTop: "1.5px",
+        paddingLeft: "0.4px",
+      }}
       onClick={onClick}
-    >
-      &gt;
-    </ArrowButton>
+    />
   );
 };
 const SamplePrevArrow = (props) => {
@@ -102,11 +112,16 @@ const SamplePrevArrow = (props) => {
   return (
     <ArrowButton
       className={className}
-      style={{ ...style, left: "-25px" }}
+      style={{
+        ...style,
+        left: "-30px",
+        backgroundColor: "black",
+        borderRadius: "50%",
+        paddingTop: "1.5px",
+        paddingLeft: "0.4px",
+      }}
       onClick={onClick}
-    >
-      &lt;
-    </ArrowButton>
+    />
   );
 };
 function SliderTest({ testimonials }) {
@@ -114,7 +129,7 @@ function SliderTest({ testimonials }) {
 
   const settings = {
     dots: true,
-    // infinite: true,
+    infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
