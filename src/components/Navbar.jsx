@@ -126,26 +126,25 @@ const TTLDropDown = styled.div`
 `;
 
 const TalkToLawyer = styled.div`
-  background-color: blue;
+  /* background-color: blue; */
   padding: 1rem 2rem;
-  color: #fff;
+  /* color: #fff; */
   border-radius: 25px;
   margin-right: 3rem;
   position: relative;
+  cursor: pointer;
   &:hover ${TTLDropDown} {
     display: flex; /* Show on hover */
   }
 `;
 const DropdownRow = styled.div`
   font-weight: 500;
-  & > h3 {
-    margin-bottom: 1rem;
-  }
   margin-bottom: 10px;
   & > div {
     width: 30rem;
     margin-right: auto;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
     cursor: pointer;
     &:hover {
       color: blue;
@@ -160,6 +159,12 @@ const ShowMoreButton = styled.div`
   cursor: pointer;
   color: blue;
   text-decoration: none;
+`;
+
+const Link = styled(NavLink)`
+  font-weight: bold;
+  font-size: 2rem;
+  padding: 2rem 0;
 `;
 
 function Navbar() {
@@ -180,7 +185,7 @@ function Navbar() {
           Talk to a lawyer
           <TTLDropDown>
             <DropdownRow>
-              <h3>Personal</h3>
+              <Link to="/legal-consultation">Personal</Link>
               <div>Family and Matrimony</div>
               <div>Divorce</div>
               <div>Property</div>

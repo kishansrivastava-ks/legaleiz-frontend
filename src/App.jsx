@@ -4,19 +4,8 @@ import GlobalStyles from "./styles/GlobalStyles";
 import AppLayout from "./ui/AppLayout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import WebFont from "webfontloader";
-/*
-import PartnershipFirm from "./pages/Startup/PartnershipFirm";
-import PrivateLimitedCompany from "./pages/Startup/PrivateLimitedCompany.jsx";
-import OnePersonCompany from "./pages/Startup/OnePersonCompany.jsx";
-import LimitedLiabilityPartnership from "./pages/Startup/LimitedLiabilityPartnership.jsx";
-import Copyright from "./pages/Startup/Copyright.jsx";
-import RespondToTmObjections from "./pages/Startup/RespondToTmObjections.jsx";
-import Patent from "./pages/Startup/Patent.jsx";
-import Trademark from "./pages/Startup/Trademark.jsx";
-import GSTRegistration from "./pages/Startup/GSTRegistration.jsx";
-import ExportImportCode from "./pages/Startup/ExportImportCode.jsx";
-import AnnualGSTReturnFiling from "./pages/Startup/AnnualGSTReturnFiling.jsx";
-*/
+
+import LegalConsultation from "./pages/TalkToLawyer/LegalConsultation";
 
 import StartupLayout from "./pages/Startup/StartupLayout";
 
@@ -55,6 +44,7 @@ function App() {
               element={<RegistrationsAndLicensesRoutes />}
             />
           </Route>
+          <Route path="/legal-consultation" element={<LegalConsultation />} />
         </Routes>
       </BrowserRouter>
     </>
