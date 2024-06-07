@@ -2,7 +2,8 @@ import styled from "styled-components";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import Whatsapp from "../../ui/Whatsapp";
-import LegalConsultationOnline from "../../components/TalkToLawyer/LegalConsultationOnline";
+import LegalConsultationOnline from "../../components/TalkToLawyer/LegalConsultation/LegalConsultationOnline";
+import ConcernedArea from "../../components/TalkToLawyer/LegalConsultation/ConcernedArea";
 
 const LandingPage = styled.div`
   display: grid;
@@ -21,13 +22,9 @@ const LandingPage = styled.div`
 const Main = styled.div`
   grid-row: 2;
   height: max-content;
-  /* width: 100vw; */
   font-size: 2rem;
-  /* background-color: blue; */
   background-color: #fff;
-  padding: 2vw 8vw;
   margin: 0;
-  /* border: 3px solid red; */
   text-align: justify;
 `;
 
@@ -37,6 +34,7 @@ function LegalConsultation() {
       <Navbar />
       <Main>
         <LegalConsultationOnline />
+        <ConcernedArea />
       </Main>
       <Footer />
       <Whatsapp />

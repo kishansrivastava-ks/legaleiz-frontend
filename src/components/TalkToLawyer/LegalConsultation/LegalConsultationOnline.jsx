@@ -1,11 +1,16 @@
 import { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import styled from "styled-components";
+import ReactStars from "react-rating-stars-component";
 
 const Container = styled.div`
   /* background-color: blue; */
   display: flex;
   gap: 4rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid lightgray;
+  width: 100%;
+  padding: 2vmax 8vmax;
 `;
 const LeftContainer = styled.div`
   /* background-color: yellow; */
@@ -196,6 +201,65 @@ const Submit = styled.button`
   margin-top: 3rem;
 `;
 
+const GoogleReviews = styled.div`
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  & > h2 {
+    font-weight: 500;
+  }
+
+  & > img {
+    height: 4rem;
+    margin-right: 1rem;
+  }
+  & > div > p {
+    font-size: 1.5rem;
+    line-height: 1;
+    margin-top: 0.5rem;
+  }
+`;
+const starsOptions = {
+  edit: false,
+  value: 4.5,
+  size: 20,
+  isHalf: true,
+};
+const ConsultLawyerBtn = styled.button`
+  width: 100%;
+  background: none;
+  border: none;
+  background-color: blue;
+  color: #fff;
+  border-radius: 25px;
+  padding: 1rem 2rem;
+  letter-spacing: 2px;
+  &:hover {
+    background-color: #0000c5;
+  }
+`;
+const Features = styled.div`
+  margin-top: 3vmax;
+  display: flex;
+  padding-top: 2vmax;
+  border-top: 1px solid lightgray;
+  & > div {
+    display: flex;
+    margin-right: 3rem;
+    align-items: center;
+    line-height: 1;
+    & > img {
+      height: 4rem;
+      margin-right: 10px;
+    }
+    & > p {
+      width: 20rem;
+      font-size: 1.3vmax;
+    }
+  }
+`;
+
 function LegalConsultationOnline() {
   return (
     <Container>
@@ -284,6 +348,45 @@ function LegalConsultationOnline() {
             <p>Senior Lawyers practising in Hight Courts and Supreme Courts</p>
           </ListItem>
         </List>
+        <GoogleReviews>
+          <img
+            src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000"
+            alt="google"
+          />
+          <div>
+            <h4>Google Reviews</h4>
+            <p>
+              <span>
+                <ReactStars {...starsOptions} />
+              </span>
+              <span>4 / 5 | 250+ Reviews</span>
+            </p>
+          </div>
+        </GoogleReviews>
+        <ConsultLawyerBtn>Consult a Lawyer &rarr;</ConsultLawyerBtn>
+        <Features>
+          <div>
+            <img
+              src="https://img.icons8.com/?size=100&id=ZdthOWHeUPYa&format=png&color=000000"
+              alt="shield icon"
+            />
+            <p>100% Confidential & Secure</p>
+          </div>
+          <div>
+            <img
+              src="https://img.icons8.com/?size=100&id=82767&format=png&color=000000"
+              alt="clock icon"
+            />
+            <p>24x7 Available</p>
+          </div>
+          <div>
+            <img
+              src="https://img.icons8.com/?size=100&id=3685&format=png&color=000000"
+              alt="globe icon"
+            />
+            <p>Supports 8 Indian Languages</p>
+          </div>
+        </Features>
       </LeftContainer>
       <RightContainer>
         <FormHeading>Consult with an Expert</FormHeading>
