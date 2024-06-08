@@ -30,8 +30,8 @@ const Symbol = styled.div`
   transition: transform 0.5s ease-in-out;
   transform: ${({ expanded }) => (expanded ? "rotate(45deg)" : "rotate(0deg)")};
   padding: 0 8.7px;
-  color: #fff;
-  background-color: black;
+  color: #000;
+  /* background-color: black; */
   border-radius: 50%;
 `;
 

@@ -72,42 +72,41 @@ const QuestionContainer = styled.div`
   padding: 2vmax 8vmax;
 `;
 const intro = [
-  "Getting the right legal advice is important because it helps you know your rights and gives you a better chance for a positive outcome.",
+  "Getting the right legal advice is important because it helps you make the right decisions in your business. Consult a Business Legal Expert for matters related to Law, Regulation and Compliance.",
 
   "No Appointment, No Waiting. Consult a Lawyer instantly and get the RIGHT Legal Advice.",
 ];
 
 const process = [
-  "Gain a legal edge from the comfort of your home with our Online Legal Consultation Service, expertly designed to offer comprehensive legal advice tailored to your needs",
+  "Ensure your business’s legal health with our specialized Business Consultation service. We equip you with the right legal strategies tailored to your business needs",
 
-  "Enjoy focused discussion with our experienced lawyers, ensuring your legal queries are answered with utmost professionalism and clarity",
+  "Our team of seasoned legal experts will provide insightful advice and pragmatic solutions, helping you navigate through complex business laws and regulations with ease",
 
-  "Our consultations are scheduled with your convenience in mind, allowing you to choose a suitable time and eliminating the hassle of commuting to a lawyer’s office",
+  "We strive to understand your business goals and challenges thoroughly to provide the most relevant and effective legal guidance. Our solutions are not just legal, they are business-oriented",
 
-  "Access top-notch legal counsel without stretching your budget – Our Online Legal Consultation Service is competitively priced, offering great value without compromising on quality.",
+  "Get top-tier legal expertise without breaking the bank.",
 ];
 
 const concernedOptions = [
-  "Divorce & Child Custody",
-  "Family and Matrimonial",
-  "Property",
-  "Will",
-  "Criminal",
-  "Consumer Protection",
-  "Cheque Bounce",
-  "Cyber Crime",
-  "Business Legal Consultation",
-  "Other Legal Problem",
-  "Legal Notice",
-  "Labour & Employment",
+  "Company Matters",
+  "Company ROC Compliance",
+  "Salary-Gratuity-PF",
+  "Trademark & Copyrights",
+  "Investment & Fundraise",
+  "Direct Tax",
+  "GST",
+  "Debt Recovery",
+  "HR & Labour Compliance",
+  "NCLT Matter",
+  "Another Business Legal Matter",
 ];
-function LegalConsultation() {
+function BusinessConsultation() {
   return (
     <LandingPage>
       <Navbar />
       <Main>
         <LegalConsultationOnline
-          title="Legal Consultation Online"
+          title="Business Legal Consultation"
           intro={intro}
           process={process}
         />
@@ -127,4 +126,4 @@ function LegalConsultation() {
   );
 }
 
-export default LegalConsultation;
+export default BusinessConsultation;

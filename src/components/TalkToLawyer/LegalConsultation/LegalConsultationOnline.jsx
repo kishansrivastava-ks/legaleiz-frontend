@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import styled from "styled-components";
@@ -260,11 +261,11 @@ const Features = styled.div`
   }
 `;
 
-function LegalConsultationOnline() {
+function LegalConsultationOnline({ title, intro, process }) {
   return (
     <Container>
       <LeftContainer>
-        <Heading>Legal Consultation Online</Heading>
+        <Heading>{title}</Heading>
         <Stats>
           <Stat bgColor="#fee1ac">
             <img
@@ -282,57 +283,18 @@ function LegalConsultationOnline() {
           </Stat>
         </Stats>
         <Intro>
-          <p>
-            Getting the right legal advice is important because it helps you
-            know your rights and gives you a better chance for a positive
-            outcome.
-          </p>
-          <p>
-            No Appointment, No Waiting. Consult a Lawyer instantly and get the
-            RIGHT Legal Advice.
-          </p>
+          <p>{intro[0]}</p>
+          <p>{intro[1]}</p>
         </Intro>
         <List>
-          <ListItem>
-            <div>
-              <FaCheckCircle size={15} color="#0de40d" />
-            </div>
-            <p>
-              Gain a legal edge from the comfort of your home with our Online
-              Legal Consultation Service, expertly designed to offer
-              comprehensive legal advice tailored to your needs
-            </p>
-          </ListItem>
-          <ListItem>
-            <div>
-              <FaCheckCircle size={15} color="#0de40d" />
-            </div>
-            <p>
-              Enjoy focused discussion with our experienced lawyers, ensuring
-              your legal queries are answered with utmost professionalism and
-              clarity
-            </p>
-          </ListItem>
-          <ListItem>
-            <div>
-              <FaCheckCircle size={15} color="#0de40d" />
-            </div>
-            <p>
-              Our consultations are scheduled with your convenience in mind,
-              allowing you to choose a suitable time and eliminating the hassle
-              of commuting to a lawyer’s office
-            </p>
-          </ListItem>
-          <ListItem>
-            <div>
-              <FaCheckCircle size={15} color="#0de40d" />
-            </div>
-            <p>
-              Access top-notch legal counsel without stretching your budget –
-              Our Online Legal Consultation Service is competitively priced,
-              offering great value without compromising on quality.
-            </p>
-          </ListItem>
+          {process.map((point, index) => (
+            <ListItem key={index}>
+              <div>
+                <FaCheckCircle size={15} color="#0de40d" />
+              </div>
+              <p>{point}</p>
+            </ListItem>
+          ))}
         </List>
         <List>
           <ListItem>

@@ -23,6 +23,7 @@ const LeftBox = styled.div`
     margin-bottom: 2rem;
     text-align: left;
     width: 100%;
+    letter-spacing: 2px;
   }
 `;
 const ConcernedAreaBox = styled.div`
@@ -202,7 +203,7 @@ const Stamp = styled.div`
   }
 `;
 
-function ConcernedArea() {
+function ConcernedArea({ concernedOptions }) {
   const [talkTime, setTalkTime] = useState(15);
 
   const handleChange = (e) => {
@@ -219,18 +220,9 @@ function ConcernedArea() {
         <ConcernedAreaBox>
           <h3>Select Concerned Area to Proceed</h3>
           <AreaOptionsBox>
-            <AreaOption>Divorce & Child Custody</AreaOption>
-            <AreaOption>Family and Matrimonial</AreaOption>
-            <AreaOption>Property</AreaOption>
-            <AreaOption>Will</AreaOption>
-            <AreaOption>Criminal</AreaOption>
-            <AreaOption>Consumer Protection</AreaOption>
-            <AreaOption>Cheque Bounce</AreaOption>
-            <AreaOption>Cyber Crime</AreaOption>
-            <AreaOption>Labour & Employment</AreaOption>
-            <AreaOption>Legal Notice</AreaOption>
-            <AreaOption>Other Legal Problem</AreaOption>
-            <AreaOption>Business Legal Consultation</AreaOption>
+            {concernedOptions.map((option, index) => (
+              <AreaOption key={index}>{option}</AreaOption>
+            ))}
           </AreaOptionsBox>
         </ConcernedAreaBox>
         <TalkTimeContainer>

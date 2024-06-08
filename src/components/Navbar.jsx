@@ -49,7 +49,7 @@ const NavItems = styled.ul`
   } */
 `;
 
-// Drop Down Menu on Startup lin;
+// Drop Down Menu on Startup link;
 const DropdownMenu = styled.div`
   display: none;
   position: absolute;
@@ -114,8 +114,8 @@ const Login = styled.a`
 const TTLDropDown = styled.div`
   position: absolute;
   top: 100%; /* Position it below the nav link */
-  left: -300%;
-  width: 80vw; /* Full width of the screen */
+  left: 0;
+  width: 40vw; /* Full width of the screen */
   height: max-content;
   background-color: white;
   color: black;
@@ -140,6 +140,10 @@ const TalkToLawyer = styled.div`
 const DropdownRow = styled.div`
   font-weight: 500;
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
   & > div {
     width: 30rem;
     margin-right: auto;
@@ -162,9 +166,11 @@ const ShowMoreButton = styled.div`
 `;
 
 const Link = styled(NavLink)`
-  font-weight: bold;
-  font-size: 2rem;
-  padding: 2rem 0;
+  &:hover {
+    color: blue;
+    transition: all 0.1s;
+  }
+  transition: all 0.1s;
 `;
 
 function Navbar() {
@@ -185,10 +191,19 @@ function Navbar() {
           Talk to a lawyer
           <TTLDropDown>
             <DropdownRow>
-              <Link to="/legal-consultation">Personal</Link>
+              <Link
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "2rem",
+                  padding: "2rem 0",
+                }}
+                to="/legal-consultation"
+              >
+                Personal
+              </Link>
               <div>Family and Matrimony</div>
-              <div>Divorce</div>
-              <div>Property</div>
+              <Link to="/divorce-consultation">Divorce</Link>
+              <Link to="/property-consultation">Property</Link>
               <div>Will</div>
               {showMoreL && (
                 <>
@@ -204,8 +219,17 @@ function Navbar() {
             </DropdownRow>
 
             <DropdownRow>
-              <h3>Business</h3>
-              <div>Company Matters</div>
+              <Link
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "2rem",
+                  padding: "2rem 0",
+                }}
+                to="/business-consultation"
+              >
+                Business
+              </Link>
+              <Link to="/test">Company Matters</Link>
               <div>HR & Labour Compliance</div>
               <div>Trademark & Copyrights</div>
               <div>Investment & Fundraise</div>

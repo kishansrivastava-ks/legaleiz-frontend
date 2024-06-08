@@ -5,8 +5,6 @@ import AppLayout from "./ui/AppLayout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import WebFont from "webfontloader";
 
-import LegalConsultation from "./pages/TalkToLawyer/LegalConsultation";
-
 import StartupLayout from "./pages/Startup/StartupLayout";
 
 import {
@@ -14,6 +12,12 @@ import {
   IntellectualPropertyRoutes,
   RegistrationsAndLicensesRoutes,
 } from "./routes/startupRoutes";
+
+import LegalConsultation from "./pages/TalkToLawyer/LegalConsultation";
+import DivorceConsultation from "./pages/TalkToLawyer/DivorceConsultation.jsx";
+import PropertyLegalConsultation from "./pages/TalkToLawyer/PropertyLegalConsultation.jsx";
+import BusinessConsultation from "./pages/TalkToLawyer/BusinessConsultation.jsx";
+import ConsultLawyer from "./pages/TalkToLawyer/ConsultLawyer.jsx";
 
 function App() {
   React.useEffect(() => {
@@ -45,6 +49,19 @@ function App() {
             />
           </Route>
           <Route path="/legal-consultation" element={<LegalConsultation />} />
+          <Route
+            path="/divorce-consultation"
+            element={<DivorceConsultation />}
+          />
+          <Route
+            path="/property-consultation"
+            element={<PropertyLegalConsultation />}
+          />
+          <Route
+            path="/business-consultation"
+            element={<BusinessConsultation />}
+          />
+          <Route path="/test" element={<ConsultLawyer />} />
         </Routes>
       </BrowserRouter>
     </>
