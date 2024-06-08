@@ -115,7 +115,8 @@ const TTLDropDown = styled.div`
   position: absolute;
   top: 100%; /* Position it below the nav link */
   left: 0;
-  width: 40vw; /* Full width of the screen */
+  /* width: 40vw; */
+  width: max-content;
   height: max-content;
   background-color: white;
   color: black;
