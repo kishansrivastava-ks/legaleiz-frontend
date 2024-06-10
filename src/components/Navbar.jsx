@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 
 import styled from "styled-components";
 import Button from "../ui/Button";
+import CustomNavLink from "./CustomNavLink";
 
 // import "./Navbar.css";
 
@@ -202,16 +203,28 @@ function Navbar() {
               >
                 Personal
               </Link>
-              <div>Family and Matrimony</div>
+              <CustomNavLink to="/legal-consultation/consult">
+                Family & Matrimonial
+              </CustomNavLink>
               <Link to="/divorce-consultation">Divorce</Link>
               <Link to="/property-consultation">Property</Link>
-              <div>Will</div>
+              <CustomNavLink to="/legal-consultation/consult">
+                Will
+              </CustomNavLink>
               {showMoreL && (
                 <>
-                  <div>Labour and Employment</div>
-                  <div>Consumer Protection</div>
-                  <div>Cyber Crime</div>
-                  <div>Cheque Bounce</div>
+                  <CustomNavLink to="/legal-consultation/consult">
+                    Labour & Employment
+                  </CustomNavLink>
+                  <CustomNavLink to="/legal-consultation/consult">
+                    Consumer Protection
+                  </CustomNavLink>
+                  <CustomNavLink to="/legal-consultation/consult">
+                    Cyber Crime
+                  </CustomNavLink>
+                  <CustomNavLink to="/legal-consultation/consult">
+                    Cheque Bounce
+                  </CustomNavLink>
                 </>
               )}
               <ShowMoreButton onClick={handleShowMoreL}>
@@ -230,19 +243,40 @@ function Navbar() {
               >
                 Business
               </Link>
-              <Link to="/test">Company Matters</Link>
-              <div>HR & Labour Compliance</div>
-              <div>Trademark & Copyrights</div>
-              <div>Investment & Fundraise</div>
+              {/* <Link to="/business-consultation/consult">Company Matters</Link> */}
+              <CustomNavLink to="/business-consultation/consult">
+                Company Matters
+              </CustomNavLink>
+              <CustomNavLink to="/business-consultation/consult">
+                HR & Labour Compliance
+              </CustomNavLink>
+              <CustomNavLink to="/business-consultation/consult">
+                Trademark & Copyrights
+              </CustomNavLink>
+              <CustomNavLink to="/business-consultation/consult">
+                Investment & Fundraise
+              </CustomNavLink>
 
               {showMoreR && (
                 <>
-                  <div>Direct Tax</div>
-                  <div>GST</div>
-                  <div>Company (ROC) Compliance</div>
-                  <div>Debt Recovery</div>
-                  <div>NCLT matter</div>
-                  <div>Any other business legal matter</div>
+                  <CustomNavLink to="/business-consultation/consult">
+                    Direct Tax
+                  </CustomNavLink>
+                  <CustomNavLink to="/business-consultation/consult">
+                    GST
+                  </CustomNavLink>
+                  <CustomNavLink to="/business-consultation/consult">
+                    Company (ROC) Compliance
+                  </CustomNavLink>
+                  <CustomNavLink to="/business-consultation/consult">
+                    Debt Recovery
+                  </CustomNavLink>
+                  <CustomNavLink to="/business-consultation/consult">
+                    NCLT Matter
+                  </CustomNavLink>
+                  <CustomNavLink to="/business-consultation/consult">
+                    Another Business Legal Matter
+                  </CustomNavLink>
                 </>
               )}
               <ShowMoreButton onClick={handleShowMoreR}>

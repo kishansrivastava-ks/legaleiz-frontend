@@ -1,6 +1,11 @@
+/* eslint-disable no-unused-vars */
 import styled from "styled-components";
 import ConcernedArea from "../../components/TalkToLawyer/LegalConsultation/ConcernedArea";
 import { useNavigate } from "react-router-dom";
+import { useSearchParams, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
+import { slideInFromBottom } from "../../utils/animations.js";
 
 const Container = styled.div`
   height: 100vh;
@@ -8,6 +13,7 @@ const Container = styled.div`
   padding: 2vmax 3vmax;
   /* border: 2px solid red; */
   background-color: #fff;
+  animation: ${slideInFromBottom} 0.5s ease-out forwards;
 `;
 
 const BackBtn = styled.button`
@@ -36,25 +42,85 @@ const GoBackButton = () => {
   return <BackBtn onClick={goBack}>&larr; Back</BackBtn>;
 };
 
-const concernedOptions = [
-  "Company Matters",
-  "Company ROC Compliance",
-  "Salary-Gratuity-PF",
-  "Trademark & Copyrights",
-  "Investment & Fundraise",
-  "Direct Tax",
-  "GST",
-  "Debt Recovery",
-  "HR & Labour Compliance",
-  "NCLT Matter",
-  "Another Business Legal Matter",
-];
+// const businessConcernedOptions = [
+//   "Company Matters",
+//   "Company ROC Compliance",
+//   "Salary-Gratuity-PF",
+//   "Trademark & Copyrights",
+//   "Investment & Fundraise",
+//   "Direct Tax",
+//   "GST",
+//   "Debt Recovery",
+//   "HR & Labour Compliance",
+//   "NCLT Matter",
+//   "Another Business Legal Matter",
+// ];
+// const legalConcernedOptions = [
+//   "Divorce & Child Custody",
+//   "Family & Matrimonial",
+//   "Property",
+//   "Will",
+//   "Criminal",
+//   "Consumer Protection",
+//   "Cheque Bouce",
+//   "Cyber Crime",
+//   "Labour & Employment",
+//   "Legal Notice",
+//   "Other Legal Problem",
+//   "Business Legal Consultation",
+// ];
+let concernedOptions = [];
 
 function ConsultLawyer() {
+  const [searchParams] = useSearchParams();
+  const concernedArea = searchParams.get("concernedArea");
+
+  const location = useLocation();
+  useEffect(() => {
+    const pathParts = location.pathname.split("/");
+    const section = pathParts[1]; // Assuming the structure is /business-consultation/consult
+
+    if (section.includes("business")) {
+      console.log("Business section detected");
+      concernedOptions = [
+        "Company Matters",
+        "Company (ROC) Compliance",
+        "Salary-Gratuity-PF",
+        "Trademark & Copyrights",
+        "Investment & Fundraise",
+        "Direct Tax",
+        "GST",
+        "Debt Recovery",
+        "HR & Labour Compliance",
+        "NCLT Matter",
+        "Another Business Legal Matter",
+      ];
+    } else if (section.includes("legal")) {
+      console.log("Legal section detected");
+      concernedOptions = [
+        "Divorce & Child Custody",
+        "Family & Matrimonial",
+        "Property",
+        "Will",
+        "Criminal",
+        "Consumer Protection",
+        "Cheque Bounce",
+        "Cyber Crime",
+        "Labour & Employment",
+        "Legal Notice",
+        "Other Legal Problem",
+        "Business Legal Consultation",
+      ];
+    }
+  }, [location]);
+
   return (
     <Container>
       <GoBackButton />
-      <ConcernedArea concernedOptions={concernedOptions} />
+      <ConcernedArea
+        concernedArea={concernedArea}
+        concernedOptions={concernedOptions}
+      />
     </Container>
   );
 }

@@ -61,7 +61,14 @@ function App() {
             path="/business-consultation"
             element={<BusinessConsultation />}
           />
-          <Route path="/test" element={<ConsultLawyer />} />
+          <Route
+            path="/business-consultation/consult"
+            element={<ConsultLawyer />}
+          />
+          <Route
+            path="/legal-consultation/consult"
+            element={<ConsultLawyer />}
+          />
         </Routes>
       </BrowserRouter>
     </>

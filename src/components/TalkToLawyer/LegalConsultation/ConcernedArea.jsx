@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import styled from "styled-components";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const Container = styled.div`
   /* background-color: blue; */
@@ -48,6 +49,8 @@ const AreaOption = styled.button`
     transition: all 0.3s ease-in-out;
   }
   transition: all 0.2s ease-in-out;
+  background-color: ${(props) => (props.active == true ? "blue" : "white")};
+  color: ${(props) => (props.active == true ? "white" : "black")};
 `;
 const TalkTimeContainer = styled.div`
   width: 100%;
@@ -203,7 +206,7 @@ const Stamp = styled.div`
   }
 `;
 
-function ConcernedArea({ concernedOptions }) {
+function ConcernedArea({ concernedOptions, concernedArea }) {
   const [talkTime, setTalkTime] = useState(15);
 
   const handleChange = (e) => {
@@ -213,6 +216,13 @@ function ConcernedArea({ concernedOptions }) {
   const rate = ratePerMinute[talkTime];
   const total = talkTime * rate;
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  function handleClick(value) {
+    searchParams.set("concernedArea", value);
+    setSearchParams(searchParams);
+  }
+
   return (
     <Container>
       <LeftBox>
@@ -221,7 +231,13 @@ function ConcernedArea({ concernedOptions }) {
           <h3>Select Concerned Area to Proceed</h3>
           <AreaOptionsBox>
             {concernedOptions.map((option, index) => (
-              <AreaOption key={index}>{option}</AreaOption>
+              <AreaOption
+                active={option === concernedArea ? true : false}
+                onClick={(e) => handleClick(e.target.textContent)}
+                key={index}
+              >
+                {option}
+              </AreaOption>
             ))}
           </AreaOptionsBox>
         </ConcernedAreaBox>
