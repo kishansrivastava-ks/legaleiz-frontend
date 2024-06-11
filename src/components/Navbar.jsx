@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../ui/Button";
 import CustomNavLink from "./CustomNavLink";
-import DocumentationDropdown from "./Dropdowns/DocumentationDropDown";
+import DocumentationDropdown from "./Dropdowns/DocumentationDropdown.jsx";
 
 // import "./Navbar.css";
 
