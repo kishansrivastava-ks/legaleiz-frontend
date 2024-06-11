@@ -7,6 +7,7 @@ import WebFont from "webfontloader";
 
 import StartupLayout from "./pages/Startup/StartupLayout";
 
+// STARTUP ROUTES
 import {
   CompanyFormationRoutes,
   IntellectualPropertyRoutes,
@@ -18,6 +19,10 @@ import DivorceConsultation from "./pages/TalkToLawyer/DivorceConsultation.jsx";
 import PropertyLegalConsultation from "./pages/TalkToLawyer/PropertyLegalConsultation.jsx";
 import BusinessConsultation from "./pages/TalkToLawyer/BusinessConsultation.jsx";
 import ConsultLawyer from "./pages/TalkToLawyer/ConsultLawyer.jsx";
+import DocumentationLayout from "./pages/Documentation/DocumentationLayout.jsx";
+
+// DOCUMENTATION ROUTES
+import { BusinessContractsRoutes } from "./routes/documentationRoutes.jsx";
 
 function App() {
   React.useEffect(() => {
@@ -69,6 +74,12 @@ function App() {
             path="/legal-consultation/consult"
             element={<ConsultLawyer />}
           />
+          <Route path="/documentation" element={<DocumentationLayout />}>
+            <Route
+              path="business-contracts/*"
+              element={<BusinessContractsRoutes />}
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
@@ -76,50 +87,3 @@ function App() {
 }
 
 export default App;
-
-{
-  /* <Route
-            path="/startup/company-formation/partnership-firm"
-            element={<PartnershipFirm />}
-          />
-          <Route
-            path="/startup/company-formation/private-limited-company"
-            element={<PrivateLimitedCompany />}
-          />
-          <Route
-            path="/startup/company-formation/one-person-company"
-            element={<OnePersonCompany />}
-          />
-          <Route
-            path="/startup/company-formation/limited-liability-partnership"
-            element={<LimitedLiabilityPartnership />}
-          />
-          <Route
-            path="/startup/intellectual-property/copyright"
-            element={<Copyright />}
-          />
-          <Route
-            path="/startup/intellectual-property/respond-to-tm-objections"
-            element={<RespondToTmObjections />}
-          />
-          <Route
-            path="/startup/intellectual-property/patent"
-            element={<Patent />}
-          />
-          <Route
-            path="/startup/intellectual-property/trademark"
-            element={<Trademark />}
-          />
-          <Route
-            path="/startup/registrations-and-licenses/gst-registration"
-            element={<GSTRegistration />}
-          />
-          <Route
-            path="/startup/registrations-and-licenses/export-import-code"
-            element={<ExportImportCode />}
-          />
-          <Route
-            path="/startup/registrations-and-licenses/annual-gst-return-filing"
-            element={<AnnualGSTReturnFiling />}
-          /> */
-}

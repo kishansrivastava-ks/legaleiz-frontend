@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";

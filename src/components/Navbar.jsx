@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../ui/Button";
 import CustomNavLink from "./CustomNavLink";
+import DocumentationDropdown from "./Dropdowns/DocumentationDropDown";
 
 // import "./Navbar.css";
 
@@ -79,6 +80,8 @@ const StyledNavLink = styled(NavLink)`
   margin-right: 5rem;
   cursor: pointer;
   transition: all 0.3s;
+  height: 100%;
+  /* background-color: pink; */
   &:hover {
     color: #000;
     & ${DropdownMenu} {
@@ -339,7 +342,10 @@ function Navbar() {
             </NestedNavLink>
           </DropdownMenu>
         </StyledNavLink>
-        <StyledNavLink>Challan Blogs</StyledNavLink>
+        <StyledNavLink>
+          <DocumentationDropdown />
+        </StyledNavLink>
+
         <StyledNavLink>Ask Lawyer</StyledNavLink>
         <Login>Login</Login>
       </NavItems>
