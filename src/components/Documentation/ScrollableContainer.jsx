@@ -137,7 +137,8 @@ const ScrollableContainer = ({ sections }) => {
         {sections.map((section, index) => (
           <Section key={index} ref={(el) => (sectionRefs.current[index] = el)}>
             <h2>{section.heading}</h2>
-            <p>{section.content}</p>
+            {/* <p>{section.content}</p> */}
+            {section.component}
           </Section>
         ))}
       </RightColumn>

@@ -111,7 +111,7 @@ const DocumentationDropdown = () => {
       icon: "https://img.icons8.com/?size=100&id=42415&format=png&color=000000",
     },
     {
-      label: "Personal & Family",
+      label: "Personal And Family",
       icon: "https://img.icons8.com/?size=100&id=6884&format=png&color=000000",
     },
     {
@@ -134,7 +134,7 @@ const DocumentationDropdown = () => {
       "Shareholders Agreement",
       "Master Service Agreement",
       "Franchise Agreement",
-      "Service Level Agreement",
+      "Service Legal Agreement",
       "Succession Certificate",
       "Memorandum of Understanding",
       "Consultancy Agreement",
@@ -149,7 +149,7 @@ const DocumentationDropdown = () => {
       "GDPR",
       "Finance Agreement",
     ],
-    "Personal & Family": [
+    "Personal And Family": [
       "Will Registration",
       "Probate of Will",
       "Power of Attorneys",
@@ -194,7 +194,10 @@ const DocumentationDropdown = () => {
                 <br />
                 {menuItems[activeLabel].map((item) => (
                   <MenuItem
-                    to="/documentation/business-contracts/non-disclosure-agreement-nda"
+                    to={`/documentation/${activeLabel
+                      .toLowerCase()
+                      .split(" ")
+                      .join("-")}/${item.toLowerCase().split(" ").join("-")}`}
                     key={item}
                   >
                     {item}

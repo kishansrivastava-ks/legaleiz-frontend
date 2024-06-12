@@ -7,6 +7,15 @@ import WebFont from "webfontloader";
 
 import StartupLayout from "./pages/Startup/StartupLayout";
 
+// DOCUMENTATION ROUTES
+import {
+  BusinessContractsRoutes,
+  HrPoliciesRoutes,
+  NoticesRoutes,
+  PersonalAndFamilyRoutes,
+  RealEstateRoutes,
+} from "./routes/documentationRoutes.jsx";
+
 // STARTUP ROUTES
 import {
   CompanyFormationRoutes,
@@ -20,9 +29,6 @@ import PropertyLegalConsultation from "./pages/TalkToLawyer/PropertyLegalConsult
 import BusinessConsultation from "./pages/TalkToLawyer/BusinessConsultation.jsx";
 import ConsultLawyer from "./pages/TalkToLawyer/ConsultLawyer.jsx";
 import DocumentationLayout from "./pages/Documentation/DocumentationLayout.jsx";
-
-// DOCUMENTATION ROUTES
-import { BusinessContractsRoutes } from "./routes/documentationRoutes.jsx";
 
 function App() {
   React.useEffect(() => {
@@ -79,6 +85,13 @@ function App() {
               path="business-contracts/*"
               element={<BusinessContractsRoutes />}
             />
+            <Route
+              path="personal-and-family/*"
+              element={<PersonalAndFamilyRoutes />}
+            />
+            <Route path="real-estate/*" element={<RealEstateRoutes />} />
+            <Route path="notices/*" element={<NoticesRoutes />} />
+            <Route path="hr-policies/*" element={<HrPoliciesRoutes />} />
           </Route>
         </Routes>
       </BrowserRouter>
