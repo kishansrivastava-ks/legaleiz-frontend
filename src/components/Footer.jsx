@@ -239,7 +239,7 @@ const Footer = () => {
           from Legal Experts and other professionals based on their specific
           needs and demands. All interactions or consultations facilitated
           through LegalEiz are between users and independent professionals.
-          LegalKart is not responsible for any advice or services provided by
+          LegalEiz is not responsible for any advice or services provided by
           these independent professionals.
         </p>
       </Disclaimer>
