@@ -66,8 +66,8 @@ const PrevButton = styled.button``;
 // dummy sections for sliding effect of section 1
 const sections = [
   {
-    title: "Buy Property with Confidence",
-    text: "Property report start just at ₹2499",
+    title: "Your One-Click Solution for Legal and Professional Needs",
+    text: "start just at ₹499",
     image: "/sec1-img3.jpg",
   },
   {
