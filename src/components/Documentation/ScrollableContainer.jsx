@@ -76,10 +76,21 @@ const Heading = styled.div`
   padding: 1rem 1rem;
   border-radius: 3px;
   margin: 0.5rem 0;
+  /* width: 100%;
+  background-color: lightgray; */
 `;
 
 const Section = styled.div`
-  margin-bottom: 20px;
+  /* border-bottom: 1px solid lightgray; */
+  & > h2 {
+    width: 100%;
+    font-size: 1.5vmax;
+    margin-bottom: 1rem;
+    /* background-color: lightgray; */
+  }
+  margin: 2rem;
+  margin-bottom: 5rem;
+  /* padding: 0 2rem; */
 `;
 
 // Component

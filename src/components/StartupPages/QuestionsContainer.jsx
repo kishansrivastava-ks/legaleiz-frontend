@@ -14,7 +14,7 @@ const Container = styled.div`
   }
 `;
 
-const QuestionsContainer = ({ questions }) => {
+const QuestionsContainer = ({ heading = true, questions }) => {
   const [openIndex, setOpenIndex] = useState(null);
 
   const handleQuestionClick = (index) => {
@@ -23,7 +23,7 @@ const QuestionsContainer = ({ questions }) => {
 
   return (
     <Container>
-      <h2>Frequently Asked Questions...</h2>
+      {heading ? <h2>Frequently Asked Questions...</h2> : <></>}
       {questions.map((q, index) => (
         <Question
           key={index}
