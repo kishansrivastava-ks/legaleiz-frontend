@@ -238,7 +238,7 @@ const Footer = () => {
           to provide an accessible and convenient way for users to seek guidance
           from Legal Experts and other professionals based on their specific
           needs and demands. All interactions or consultations facilitated
-          through LegalKart are between users and independent professionals.
+          through LegalEiz are between users and independent professionals.
           LegalKart is not responsible for any advice or services provided by
           these independent professionals.
         </p>
