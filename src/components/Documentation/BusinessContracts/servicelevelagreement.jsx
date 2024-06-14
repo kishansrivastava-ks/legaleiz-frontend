@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
-import styled from "styled-components";
-import OverviewTemplate from "../OverviewTemplate";
-import List from "../List";
 import QuestionsContainer from "../../StartupPages/QuestionsContainer";
+import List from "../List";
+import OverviewTemplate from "../OverviewTemplate";
 
 export const Overview = () => {
   const list = [
