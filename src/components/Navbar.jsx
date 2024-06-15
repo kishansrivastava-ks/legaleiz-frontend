@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Button from "../ui/Button";
 import CustomNavLink from "./CustomNavLink";
 import DocumentationDropdown from "./Dropdowns/DocumentationDropdown.jsx";
+import { FaChevronDown } from "react-icons/fa";
 
 // import "./Navbar.css";
 
@@ -193,7 +194,10 @@ function Navbar() {
       <Logo src="/logo.png" alt="Logo" />
       <NavItems>
         <TalkToLawyer>
-          Talk to a lawyer
+          <div style={{ display: "flex", alignItems: "center" }}>
+            Talk to a lawyer&nbsp;&nbsp;
+            <FaChevronDown />
+          </div>
           <TTLDropDown>
             <DropdownRow>
               <Link
@@ -290,7 +294,10 @@ function Navbar() {
         </TalkToLawyer>
         <StyledNavLink>Property</StyledNavLink>
         <StyledNavLink to="/startup">
-          Startup
+          <div style={{ display: "flex", alignItems: "center" }}>
+            Startup&nbsp;&nbsp;
+            <FaChevronDown />
+          </div>
           <DropdownMenu>
             <NestedNavLink>
               Company Formation
@@ -346,7 +353,7 @@ function Navbar() {
           <DocumentationDropdown />
         </StyledNavLink>
 
-        <StyledNavLink>Ask Lawyer</StyledNavLink>
+        <StyledNavLink to="/partner-with-us">Partner With Us</StyledNavLink>
         <Login>Login</Login>
       </NavItems>
     </StyledNavbar>

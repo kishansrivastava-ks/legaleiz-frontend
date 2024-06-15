@@ -30,6 +30,8 @@ import BusinessConsultation from "./pages/TalkToLawyer/BusinessConsultation.jsx"
 import ConsultLawyer from "./pages/TalkToLawyer/ConsultLawyer.jsx";
 import DocumentationLayout from "./pages/Documentation/DocumentationLayout.jsx";
 
+import PartnerWithUs from "./pages/PartnerWithUs/PartnerWithUs.jsx";
+
 function App() {
   React.useEffect(() => {
     WebFont.load({
@@ -93,6 +95,7 @@ function App() {
             <Route path="notices/*" element={<NoticesRoutes />} />
             <Route path="hr-policies/*" element={<HrPoliciesRoutes />} />
           </Route>
+          <Route path="/partner-with-us" element={<PartnerWithUs />} />
         </Routes>
       </BrowserRouter>
     </>

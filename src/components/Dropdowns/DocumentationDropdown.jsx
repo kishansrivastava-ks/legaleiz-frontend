@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { FaChevronDown } from "react-icons/fa";
 
 // Styles
 
@@ -172,7 +173,12 @@ const DocumentationDropdown = () => {
 
   return (
     <DropdownContainer>
-      <NavLinkStyled>Documentation</NavLinkStyled>
+      <NavLinkStyled>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          Documentation&nbsp;&nbsp;
+          <FaChevronDown />
+        </div>
+      </NavLinkStyled>
       <MenuContainer>
         <Columns>
           <Column>
