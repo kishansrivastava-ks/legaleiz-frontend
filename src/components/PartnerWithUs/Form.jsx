@@ -7,7 +7,7 @@ const SlideForm = styled.div`
   top: 50%;
   transform: translateY(-45%);
   right: ${(props) => (props.isOpen ? "0" : "-350px")};
-  width: 350px;
+  max-width: 350px;
   /* height: 60%;  */
   height: max-content;
   background: #fff;
