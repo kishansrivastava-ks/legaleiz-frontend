@@ -6,8 +6,6 @@ import Navbar from "../../components/Navbar";
 import Whatsapp from "../../ui/Whatsapp";
 import { FaChevronRight, FaChevronDown } from "react-icons/fa";
 import { useState } from "react";
-import PartnerContainer from "../../components/PartnerWithUs/PartnerContainer";
-import SideForm from "../../components/PartnerWithUs/SideForm";
 
 const LandingPage = styled.div`
   display: grid;
@@ -261,7 +259,6 @@ function PartnerWithUs() {
     <LandingPage>
       <Navbar />
       <Main>
-        <SideForm />
         <Info>
           <div>
             <Heading1>
@@ -275,8 +272,7 @@ function PartnerWithUs() {
         </Info>
         <PartnersContainer>
           <h2>Few of our great partners are</h2>
-          {/* <AccordionContainer /> */}
-          <PartnerContainer />
+          <AccordionContainer />
         </PartnersContainer>
         <Experience>
           <h2>Our partners have experienced</h2>
