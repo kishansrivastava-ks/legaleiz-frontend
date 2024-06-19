@@ -194,6 +194,67 @@ const SignOutButton = styled.button`
     color: #000;
   }
 `;
+const ProfileContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: yellow; */
+  cursor: pointer;
+`;
+const ProfileDropDown = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 80%;
+  /* right: 0; */
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 1rem 2rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+
+  ${ProfileContainer}:hover & {
+    opacity: 1;
+    visibility: visible;
+  }
+  transition: all 0.3s ease;
+`;
+const ProfileDropdownItem = styled(NavLink)`
+  /* width: 100%; */
+  padding: 0.5rem 1rem;
+  color: black;
+  text-decoration: none;
+  &:hover {
+    background-color: #f1f1f1;
+  }
+`;
+const SignOutContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const Tooltip = styled.span`
+  visibility: hidden;
+  width: max-content;
+  background-color: gray;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 10;
+  top: 100%;
+  margin-left: -30px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-weight: 500;
+
+  ${SignOutContainer}:hover & {
+    visibility: visible;
+    opacity: 1;
+  }
+`;
 
 function Navbar() {
   const { userLoggedIn, currentUser } = useAuth();
@@ -216,34 +277,41 @@ function Navbar() {
   };
 
   const navigate = useNavigate();
+  /*
+  Check for user authentication on component mount
+  const auth = initializeFirebase();
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        setUser(authUser); // User is signed in
+      } else {
+        setUser(null); // User is signed out
+      }
+    });
 
-  // Check for user authentication on component mount
-  // const auth = initializeFirebase();
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((authUser) => {
-  //     if (authUser) {
-  //       setUser(authUser); // User is signed in
-  //     } else {
-  //       setUser(null); // User is signed out
-  //     }
-  //   });
+    // Cleanup the listener when the component unmounts
+    return () => unsubscribe();
+  }, [auth]);
 
-  //   // Cleanup the listener when the component unmounts
-  //   return () => unsubscribe();
-  // }, [auth]);
+  const handleSignOut = () => {
+    auth
+      .signOut()
+      .then(() => {
+        navigate("/"); // Redirect to home page
+        alert("Signed out successfully");
+      })
+      .catch((error) => {
+        console.error("Error signing out:", error);
+        alert("Error signing out");
+      });
+  };*/
 
-  // const handleSignOut = () => {
-  //   auth
-  //     .signOut()
-  //     .then(() => {
-  //       navigate("/"); // Redirect to home page
-  //       alert("Signed out successfully");
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error signing out:", error);
-  //       alert("Error signing out");
-  //     });
-  // };
+  // for the hover effect on profile
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!isDropdownOpen);
+  };
 
   return (
     <StyledNavbar>
@@ -412,22 +480,38 @@ function Navbar() {
         <StyledNavLink to="/partner-with-us">Partner With Us</StyledNavLink>
         {userLoggedIn && currentUser ? (
           <div style={{ display: "flex", alignItems: "center" }}>
-            <img
-              src={currentUser.photoURL}
-              alt="User"
-              style={{
-                width: "40px",
-                borderRadius: "50%",
-                marginRight: "10px",
-              }}
-            />
-            <p>{currentUser.displayName.split(" ")[0]}</p>
-            <SignOutButton
-              onClick={handleSignOut}
-              style={{ marginLeft: "10px" }}
+            <ProfileContainer
+              onMouseEnter={toggleDropdown}
+              onMouseLeave={toggleDropdown}
             >
-              <HiArrowRightOnRectangle />
-            </SignOutButton>
+              <img
+                src={currentUser.photoURL}
+                alt="User"
+                style={{
+                  width: "40px",
+                  borderRadius: "50%",
+                  marginRight: "10px",
+                }}
+              />
+              {isDropdownOpen && (
+                <ProfileDropDown>
+                  <ProfileDropdownItem to="/dashboard">
+                    My Account
+                  </ProfileDropdownItem>
+                </ProfileDropDown>
+              )}
+              <p>{currentUser.displayName.split(" ")[0]}</p>
+            </ProfileContainer>
+
+            <SignOutContainer>
+              <SignOutButton
+                onClick={handleSignOut}
+                style={{ marginLeft: "10px" }}
+              >
+                <HiArrowRightOnRectangle />
+              </SignOutButton>
+              <Tooltip>Sign out</Tooltip>
+            </SignOutContainer>
             {/* You can add more user info or navigation links here */}
           </div>
         ) : (
