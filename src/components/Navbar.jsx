@@ -215,9 +215,7 @@ function Navbar() {
     setShowMoreR(!showMoreR);
   };
 
-  // user authentication
-  // const [user, setUser] = useState(null);
-  const navigate = useNavigate(); // Get routing function
+  const navigate = useNavigate();
 
   // Check for user authentication on component mount
   // const auth = initializeFirebase();
