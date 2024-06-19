@@ -21,7 +21,7 @@ export const doSignInWithGoogle = async () => {
     const result = await signInWithPopup(auth, provider);
     console.log(result);
     // Navigate to the home page
-    window.location.href = "/dashboard"; // Adjust the path to your home page as needed
+    window.location.href = "/"; // Adjust the path to your home page as needed
     alert("Signed in successfully");
     return result;
   } catch (error) {
