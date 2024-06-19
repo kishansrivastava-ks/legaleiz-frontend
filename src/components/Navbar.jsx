@@ -1,14 +1,17 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import styled from "styled-components";
-import Button from "../ui/Button";
 import CustomNavLink from "./CustomNavLink";
 import DocumentationDropdown from "./Dropdowns/DocumentationDropdown.jsx";
 import { FaChevronDown } from "react-icons/fa";
 
-// import "./Navbar.css";
+import { useNavigate } from "react-router-dom"; // Import for routing
+
+import { useAuth } from "../contexts/authContext/authContext.jsx";
+import { doSignOut } from "../firebase/auth.js";
+import { HiArrowRightOnRectangle } from "react-icons/hi2";
 
 const StyledNavbar = styled.nav`
   grid-row: 1;
@@ -179,7 +182,30 @@ const Link = styled(NavLink)`
   transition: all 0.1s;
 `;
 
+const SignOutButton = styled.button`
+  background: none;
+  border: none;
+  background-color: #fff;
+  font-size: 3rem;
+  padding: 5px;
+  border-radius: 50%;
+  &:hover {
+    background-color: lightgray;
+    color: #000;
+  }
+`;
+
 function Navbar() {
+  const { userLoggedIn, currentUser } = useAuth();
+
+  const handleSignOut = async () => {
+    try {
+      await doSignOut();
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
   const [showMoreL, setShowMoreL] = useState(false);
   const [showMoreR, setShowMoreR] = useState(false);
   const handleShowMoreL = () => {
@@ -188,6 +214,38 @@ function Navbar() {
   const handleShowMoreR = () => {
     setShowMoreR(!showMoreR);
   };
+
+  // user authentication
+  // const [user, setUser] = useState(null);
+  const navigate = useNavigate(); // Get routing function
+
+  // Check for user authentication on component mount
+  // const auth = initializeFirebase();
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged((authUser) => {
+  //     if (authUser) {
+  //       setUser(authUser); // User is signed in
+  //     } else {
+  //       setUser(null); // User is signed out
+  //     }
+  //   });
+
+  //   // Cleanup the listener when the component unmounts
+  //   return () => unsubscribe();
+  // }, [auth]);
+
+  // const handleSignOut = () => {
+  //   auth
+  //     .signOut()
+  //     .then(() => {
+  //       navigate("/"); // Redirect to home page
+  //       alert("Signed out successfully");
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error signing out:", error);
+  //       alert("Error signing out");
+  //     });
+  // };
 
   return (
     <StyledNavbar>
@@ -292,7 +350,7 @@ function Navbar() {
             </DropdownRow>
           </TTLDropDown>
         </TalkToLawyer>
-        <StyledNavLink>Property</StyledNavLink>
+
         <StyledNavLink to="/startup">
           <div style={{ display: "flex", alignItems: "center" }}>
             Startup&nbsp;&nbsp;
@@ -354,7 +412,41 @@ function Navbar() {
         </StyledNavLink>
 
         <StyledNavLink to="/partner-with-us">Partner With Us</StyledNavLink>
-        <Login>Login</Login>
+        {userLoggedIn && currentUser ? (
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <img
+              src={currentUser.photoURL}
+              alt="User"
+              style={{
+                width: "40px",
+                borderRadius: "50%",
+                marginRight: "10px",
+              }}
+            />
+            <p>{currentUser.displayName.split(" ")[0]}</p>
+            <SignOutButton
+              onClick={handleSignOut}
+              style={{ marginLeft: "10px" }}
+            >
+              <HiArrowRightOnRectangle />
+            </SignOutButton>
+            {/* You can add more user info or navigation links here */}
+          </div>
+        ) : (
+          <StyledNavLink style={{ color: "blue" }} to="/signin">
+            Sign in
+          </StyledNavLink>
+        )}
+        {/* <StyledNavLink>
+          {user ? (
+            <>
+              <span>Welcome, {user.displayName}!</span>
+              <button onClick={handleSignOut}>Sign Out</button>
+            </>
+          ) : (
+            <a href="/signin">Sign In</a>
+          )}
+        </StyledNavLink> */}
       </NavItems>
     </StyledNavbar>
   );

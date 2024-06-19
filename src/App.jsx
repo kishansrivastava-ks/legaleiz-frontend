@@ -31,6 +31,10 @@ import ConsultLawyer from "./pages/TalkToLawyer/ConsultLawyer.jsx";
 import DocumentationLayout from "./pages/Documentation/DocumentationLayout.jsx";
 
 import PartnerWithUs from "./pages/PartnerWithUs/PartnerWithUs.jsx";
+import LoginPage from "./pages/Login/LoginPage.jsx";
+import SignUpPage from "./pages/Login/SignUpPage.jsx";
+
+import Dashboard from "./pages/Dashboard.jsx";
 
 function App() {
   React.useEffect(() => {
@@ -96,6 +100,9 @@ function App() {
             <Route path="hr-policies/*" element={<HrPoliciesRoutes />} />
           </Route>
           <Route path="/partner-with-us" element={<PartnerWithUs />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/signin" element={<LoginPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
     </>
