@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom"; // Import for routing
 import { useAuth } from "../contexts/authContext/authContext.jsx";
 import { doSignOut } from "../firebase/auth.js";
 import { HiArrowRightOnRectangle } from "react-icons/hi2";
+import SpinnerMini from "../ui/SpinnerMini.jsx";
 
 const StyledNavbar = styled.nav`
   grid-row: 1;
@@ -259,11 +260,16 @@ const Tooltip = styled.span`
 function Navbar() {
   const { userLoggedIn, currentUser } = useAuth();
 
+  // handling the signout
+  const [isSigningOut, setIsSigningOut] = useState(false);
+
   const handleSignOut = async () => {
+    setIsSigningOut(true);
     try {
       await doSignOut();
     } catch (error) {
       console.error("Error signing out:", error);
+      setIsSigningOut(false);
     }
   };
 
@@ -503,15 +509,19 @@ function Navbar() {
               <p>{currentUser.displayName.split(" ")[0]}</p>
             </ProfileContainer>
 
-            <SignOutContainer>
-              <SignOutButton
-                onClick={handleSignOut}
-                style={{ marginLeft: "10px" }}
-              >
-                <HiArrowRightOnRectangle />
-              </SignOutButton>
-              <Tooltip>Sign out</Tooltip>
-            </SignOutContainer>
+            {isSigningOut ? (
+              <SpinnerMini />
+            ) : (
+              <SignOutContainer>
+                <SignOutButton
+                  onClick={handleSignOut}
+                  style={{ marginLeft: "10px" }}
+                >
+                  <HiArrowRightOnRectangle />
+                </SignOutButton>
+                <Tooltip>Sign out</Tooltip>
+              </SignOutContainer>
+            )}
             {/* You can add more user info or navigation links here */}
           </div>
         ) : (

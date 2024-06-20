@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Section1 from "../components/Section1";
@@ -9,6 +9,8 @@ import Section4 from "../components/Section4";
 import Partners from "../ui/Partners";
 import Footer from "../components/Footer";
 import Whatsapp from "./Whatsapp";
+// import { useNotification } from "../contexts/notificationContext/NotificationContext";
+import { toast } from "react-hot-toast";
 
 const LandingPage = styled.div`
   display: grid;
@@ -36,6 +38,14 @@ const Section = styled.section`
 `;
 
 const App = () => {
+  useEffect(() => {
+    const signedIn = localStorage.getItem("signedIn");
+    if (signedIn) {
+      toast.success("Signed in successfully");
+      localStorage.removeItem("signedIn"); // Remove the flag after showing the toast
+    }
+  }, []);
+
   return (
     <LandingPage>
       <Navbar />

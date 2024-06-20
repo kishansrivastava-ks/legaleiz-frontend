@@ -19,13 +19,16 @@ export const doSignInWithGoogle = async () => {
   const provider = new GoogleAuthProvider();
   try {
     const result = await signInWithPopup(auth, provider);
-    console.log(result);
-    // Navigate to the home page
-    window.location.href = "/"; // Adjust the path to your home page as needed
-    alert("Signed in successfully");
+    // console.log(result);
+
+    // Set flag in local storage
+    localStorage.setItem("signedIn", "true");
+    window.location.href = "/";
+
     return result;
   } catch (error) {
     console.error("Error signing in with Google:", error);
+    throw error;
   }
 };
 

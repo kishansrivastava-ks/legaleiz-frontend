@@ -10,6 +10,8 @@ import axios from "axios";
 
 import { doSignInWithGoogle } from "../../firebase/auth";
 import { useAuth } from "../../contexts/authContext/authContext";
+// import { useNotification } from "../../contexts/notificationContext/NotificationContext";
+import toast from "react-hot-toast";
 
 const LandingPage = styled.div`
   display: grid;
@@ -177,13 +179,16 @@ const LoginForm = () => {
   `;
   // google signin
   const [isSigningIn, setIsSigningIn] = useState(false);
-  const onGoogleSignIn = (e) => {
+
+  const onGoogleSignIn = async (e) => {
     e.preventDefault();
     if (!isSigningIn) {
       setIsSigningIn(true);
-      doSignInWithGoogle().catch((err) => {
+      try {
+        await doSignInWithGoogle();
+      } catch (err) {
         setIsSigningIn(false);
-      });
+      }
     }
   };
   return (
