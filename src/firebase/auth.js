@@ -19,11 +19,11 @@ export const doSignInWithGoogle = async () => {
   const provider = new GoogleAuthProvider();
   try {
     const result = await signInWithPopup(auth, provider);
-    // console.log(result);
 
     // Set flag in local storage
     localStorage.setItem("signedIn", "true");
     window.location.href = "/";
+    // console.log(result);
 
     return result;
   } catch (error) {
