@@ -525,7 +525,15 @@ function Navbar() {
             {/* You can add more user info or navigation links here */}
           </div>
         ) : (
-          <StyledNavLink style={{ color: "blue" }} to="/signin">
+          <StyledNavLink
+            style={{
+              color: "#fff",
+              backgroundColor: "blue",
+              padding: "1rem 2rem",
+              borderRadius: "25px",
+            }}
+            to="/signin"
+          >
             Sign in
           </StyledNavLink>
         )}

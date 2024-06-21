@@ -35,7 +35,7 @@ export const doSignInWithGoogle = async () => {
         checkUserResponse.data.data.user
       ) {
         console.log("User already exists:", checkUserResponse.data.data.user);
-        window.location.href = "/";
+        window.location.href = "/dashboard";
         return result;
       }
     } catch (checkError) {
@@ -46,7 +46,7 @@ export const doSignInWithGoogle = async () => {
           { name, email }
         );
         console.log("New user created:", newUserResponse.data.data.user);
-        window.location.href = "/";
+        window.location.href = "/dashboard";
         return result;
       } else {
         console.error("Error checking user existence:", checkError);

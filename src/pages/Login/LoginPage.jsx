@@ -12,6 +12,7 @@ import { doSignInWithGoogle } from "../../firebase/auth";
 import { useAuth } from "../../contexts/authContext/authContext";
 // import { useNotification } from "../../contexts/notificationContext/NotificationContext";
 import toast from "react-hot-toast";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 const LandingPage = styled.div`
   display: grid;
@@ -214,7 +215,7 @@ const LoginForm = () => {
           }}
         >
           {isSigningIn ? (
-            "Signing in..."
+            <SpinnerMini />
           ) : (
             <>
               <img
