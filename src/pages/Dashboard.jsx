@@ -9,6 +9,9 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 import axios from "axios";
+import SpinnerMini from "../ui/SpinnerMini";
+import { fetchUserData } from "../utils/library";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = styled.div`
   display: grid;
@@ -190,6 +193,7 @@ const ResponseContainer = styled.div`
 const RoleForm = () => {
   const { currentUser } = useAuth();
   const [role, setRole] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -197,6 +201,10 @@ const RoleForm = () => {
       toast.error("Please select a role");
       return;
     }
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+
     try {
       const email = currentUser.email;
       const response = await axios.patch(
@@ -263,32 +271,28 @@ const RoleForm = () => {
 function Dashboard() {
   const { userLoggedIn, currentUser } = useAuth();
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUserDetails = async () => {
+    const loadUserData = async () => {
       if (currentUser && currentUser.email) {
-        try {
-          const response = await axios.get(
-            `http://127.0.0.1:8000/api/v1/user/${encodeURIComponent(
-              currentUser.email
-            )}`
-          );
-          if (response.data.status == "success") {
-            setUser(response.data.data.user);
-          } else {
-            setUser(null);
-          }
-        } catch (error) {
-          console.error("Error fetching user details", error);
-          setUser(null);
-        }
+        const userData = await fetchUserData(currentUser.email);
+        setUser(userData);
       } else {
         setUser(null);
       }
+      setLoading(false);
     };
-    fetchUserDetails();
+    loadUserData();
   }, [currentUser]);
-
+  console.log(user);
+  if (loading) {
+    return (
+      <Main>
+        <SpinnerMini />
+      </Main>
+    );
+  }
   return (
     <LandingPage>
       <Navbar />
