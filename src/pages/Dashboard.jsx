@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Whatsapp from "../ui/Whatsapp";
 
 import { useAuth } from "../contexts/authContext/authContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 import axios from "axios";
@@ -187,11 +188,33 @@ const ResponseContainer = styled.div`
   }
 `;
 const RoleForm = () => {
+  const { currentUser } = useAuth();
   const [role, setRole] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    toast.success("Role updated successfully");
+    if (!role) {
+      toast.error("Please select a role");
+      return;
+    }
+    try {
+      const email = currentUser.email;
+      const response = await axios.patch(
+        `http://127.0.0.1:8000/api/v1/user/${encodeURIComponent(email)}`,
+        {
+          role: role,
+        }
+      );
+      if (response.status === 200) {
+        toast.success("Role Updated Successfully!");
+        setRole(""); // Reset the form
+      } else {
+        toast.error("Failed to update role");
+      }
+    } catch (error) {
+      console.error("Error updating role:", error);
+      toast.error("Error updating role");
+    }
   };
 
   return (
@@ -237,71 +260,34 @@ const RoleForm = () => {
   );
 };
 
-const ContactForm = () => {
-  const [formData, setFormData] = useState({ name: "", email: "" });
-  const [response, setResponse] = useState(null);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post(
-        "http://127.0.0.1:8000/api/v1/user",
-        formData
-      );
-      toast.success("user creates successfully");
-      setResponse(res.data.data.user);
-    } catch (error) {
-      console.error("Error submitting the form", error);
-    }
-  };
-
-  return (
-    <ContactFormContainer onSubmit={handleSubmit}>
-      <Title>Contact Us</Title>
-      <InputContainer>
-        <Label htmlFor="name">Name</Label>
-        <Input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-      </InputContainer>
-      <InputContainer>
-        <Label htmlFor="email">Email</Label>
-        <Input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-      </InputContainer>
-      <SubmitButton type="submit">Submit</SubmitButton>
-      {response && (
-        <ResponseContainer>
-          <p>
-            <strong>Name:</strong> {response.name}
-          </p>
-          <p>
-            <strong>Email:</strong> {response.email}
-          </p>
-        </ResponseContainer>
-      )}
-    </ContactFormContainer>
-  );
-};
-
 function Dashboard() {
   const { userLoggedIn, currentUser } = useAuth();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      if (currentUser && currentUser.email) {
+        try {
+          const response = await axios.get(
+            `http://127.0.0.1:8000/api/v1/user/${encodeURIComponent(
+              currentUser.email
+            )}`
+          );
+          if (response.data.status == "success") {
+            setUser(response.data.data.user);
+          } else {
+            setUser(null);
+          }
+        } catch (error) {
+          console.error("Error fetching user details", error);
+          setUser(null);
+        }
+      } else {
+        setUser(null);
+      }
+    };
+    fetchUserDetails();
+  }, [currentUser]);
 
   return (
     <LandingPage>
@@ -309,9 +295,12 @@ function Dashboard() {
       <Main>
         {userLoggedIn && currentUser ? (
           <UseContainer>
-            <div>{`Welcome ${currentUser.displayName.split(" ")[0]}`}</div>
+            <div>
+              {`Welcome ${currentUser.displayName.split(" ")[0]}`}&nbsp;
+              <span style={{ fontSize: "1.5vmax" }}>({user.role})</span>
+            </div>
             <RoleForm />
-            <ContactForm />
+            {/* <ContactForm /> */}
           </UseContainer>
         ) : (
           <div>Sign in to view dashboard</div>
