@@ -10,10 +10,10 @@ const Box = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
   grid-gap: 1em;
-  padding: 5vh 5vw;
+  padding: 5vh 7vw;
   box-sizing: border-box;
-  /* --w: 400px;
-  --n: 3; */
+  --w: 400px;
+  --n: 3;
   display: grid;
   grid-template-columns: repeat(
     auto-fit,
