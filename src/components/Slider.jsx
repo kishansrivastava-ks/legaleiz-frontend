@@ -5,7 +5,7 @@ import styled from "styled-components";
 // FOR THE SLIDER COMPONENT
 const StyledSlider = styled.div`
   /* background-color: blueviolet; */
-  border: 0.5rem solid yellow;
+  /* border: 0.5rem solid yellow; */
 
   height: max-content;
   width: 100%;
@@ -21,6 +21,9 @@ const StyledSlider = styled.div`
   position: relative;
   transition: transform 1s;
   margin-top: 5rem;
+  @media (width <= 600px) {
+    padding: 2vmax 5vmax;
+  }
 `;
 
 const Heading = styled.h2`
@@ -33,7 +36,10 @@ const Heading = styled.h2`
   font-size: 4rem;
   letter-spacing: 4px;
   @media (width <= 600px) {
-    font-size: 3rem;
+    font-size: 2.5rem;
+  }
+  @media (width <= 350px) {
+    font-size: 2rem;
   }
 `;
 
@@ -42,7 +48,7 @@ const PreviousButton = styled.button`
   justify-self: center;
   align-self: center;
   background-color: transparent;
-  border: none;
+  border: 1px solid blue;
   cursor: pointer;
   background-color: #fff;
   border-radius: 50px;
@@ -53,6 +59,9 @@ const PreviousButton = styled.button`
     background-color: blue;
     color: #fff;
   }
+  @media (width <= 600px) {
+    padding: 0.4rem 0.8rem;
+  }
 `;
 
 const NextButton = styled.button`
@@ -60,7 +69,7 @@ const NextButton = styled.button`
   justify-self: center;
   align-self: center;
   background-color: transparent;
-  border: none;
+  border: 1px solid blue;
   cursor: pointer;
   background-color: #fff;
   border-radius: 50px;
@@ -74,6 +83,9 @@ const NextButton = styled.button`
     background-color: blue;
     color: #fff;
   }
+  @media (width <= 600px) {
+    padding: 0.4rem 0.8rem;
+  }
 `;
 
 const Cards = styled.div`
@@ -85,7 +97,7 @@ const Cards = styled.div`
   scroll-padding: 1em;
   scroll-behavior: smooth;
   width: 400%;
-  margin-left: -7rem;
+  margin-left: -2rem;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -93,7 +105,7 @@ const Cards = styled.div`
 `;
 
 const Card = styled.div`
-  min-width: 30rem;
+  width: 30rem;
   height: min-content;
   display: grid;
   grid-template-rows: 70% 1fr;

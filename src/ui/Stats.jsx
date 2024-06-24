@@ -2,17 +2,18 @@ import styled from "styled-components";
 
 const Box = styled.div`
   background-color: #4c50e0;
+  /* border: 0.5rem solid red; */
   color: white;
-  height: min-content;
+  height: max-content;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
   grid-gap: 1em;
   padding: 5vh 5vw;
   box-sizing: border-box;
-  /* width: 70vw; adjust width to 70% of viewport width */
-  --w: 400px;
-  --n: 3;
+  /* --w: 400px;
+  --n: 3; */
   display: grid;
   grid-template-columns: repeat(
     auto-fit,
@@ -26,21 +27,22 @@ const BoxCell = styled.div`
   align-items: center;
   justify-content: center;
   color: #fff;
+  text-align: center;
+  & > h3 {
+    letter-spacing: 2px;
+    font-size: 4.5rem;
+    font-weight: 500;
+    @media (width <= 600px) {
+      font-size: 3rem;
+    }
+  }
 `;
 
 function Stats() {
   return (
     <Box>
       <BoxCell>
-        <h3
-          style={{
-            letterSpacing: "2px",
-            fontSize: "4.5rem",
-            fontWeight: "500",
-          }}
-        >
-          10 Million +
-        </h3>
+        <h3>10 Million +</h3>
         <p
           style={{
             color: "#ccc",
@@ -53,15 +55,7 @@ function Stats() {
         </p>
       </BoxCell>
       <BoxCell>
-        <h3
-          style={{
-            letterSpacing: "2px",
-            fontSize: "4.5rem",
-            fontWeight: "500",
-          }}
-        >
-          5 Million Pages
-        </h3>
+        <h3>5 Million Pages</h3>
         <p
           style={{
             color: "#ccc",
@@ -74,15 +68,7 @@ function Stats() {
         </p>
       </BoxCell>
       <BoxCell>
-        <h3
-          style={{
-            letterSpacing: "2px",
-            fontSize: "4.5rem",
-            fontWeight: "500",
-          }}
-        >
-          100,000
-        </h3>
+        <h3>100,000</h3>
         <p
           style={{
             color: "#ccc",
