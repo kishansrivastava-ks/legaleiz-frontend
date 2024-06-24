@@ -19,6 +19,9 @@ const Box = styled.div`
     auto-fit,
     minmax(max(var(--w), 100%/ (var(--n) + 1) + 0.1%), 1fr)
   );
+  @media (width <= 600px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const BoxCell = styled.div`
