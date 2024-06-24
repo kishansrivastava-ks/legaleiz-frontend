@@ -22,38 +22,31 @@ const StyledNavbar = styled.nav`
   left: 0;
   width: 100vw;
   background-color: #fff;
-  color: #5e5c5c;
   padding: 0 3rem;
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-weight: 600;
   letter-spacing: 1px;
   font-size: 1.6rem;
-
   height: 4.3vmax;
+  height: max-content;
 `;
 
 const Logo = styled.img`
   width: 10%;
+  width: 14rem;
   height: auto;
   margin-right: auto;
 `;
 
 const NavItems = styled.ul`
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  /* &:first-child {
-    margin-right: "3rem";
-    font-size: 5rem;
-  } */
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 // Drop Down Menu on Startup link;
@@ -86,7 +79,6 @@ const StyledNavLink = styled(NavLink)`
   cursor: pointer;
   transition: all 0.3s;
   height: 100%;
-  /* background-color: pink; */
   &:hover {
     color: #000;
     & ${DropdownMenu} {
@@ -257,7 +249,101 @@ const Tooltip = styled.span`
   }
 `;
 
+// responsiveness
+const HamburgerIcon = styled.div`
+  /* cursor: pointer;
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
+
+  div {
+    width: 25px;
+    height: 3px;
+    background-color: #000;
+    margin: 4px 0;
+    transition: all 0.3s ease;
+  } */
+  display: none;
+  z-index: 10;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  position: relative;
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
+
+  div {
+    width: 100%;
+    height: 3px;
+    background-color: #000;
+    margin: 1% 0;
+    transition: all 0.3s ease;
+    position: absolute;
+  }
+
+  /* Top bar */
+  div:nth-child(1) {
+    top: ${({ isOpen }) => (isOpen ? "50%" : "0")};
+    transform: ${({ isOpen }) => (isOpen ? "rotate(45deg)" : "rotate(0)")};
+  }
+
+  /* Middle bar */
+  div:nth-child(2) {
+    top: 50%;
+    opacity: ${({ isOpen }) => (isOpen ? "0" : "1")};
+  }
+
+  /* Bottom bar */
+  div:nth-child(3) {
+    top: ${({ isOpen }) => (isOpen ? "50%" : "100%")};
+    transform: ${({ isOpen }) => (isOpen ? "rotate(-45deg)" : "rotate(0)")};
+  }
+`;
+const SlideMenu = styled.div`
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 250px;
+  background-color: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem;
+
+  ${({ isOpen }) =>
+    isOpen &&
+    `
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  `}
+`;
+const CloseButton = styled.div`
+  align-self: flex-end;
+  cursor: pointer;
+  font-size: 3rem;
+  padding: 1rem;
+`;
 function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   const { userLoggedIn, currentUser } = useAuth();
 
   // handling the signout
@@ -548,6 +634,26 @@ function Navbar() {
           )}
         </StyledNavLink> */}
       </NavItems>
+      <HamburgerIcon onClick={toggleMenu} isOpen={menuOpen}>
+        <div />
+        <div />
+        <div />
+      </HamburgerIcon>
+      <SlideMenu isOpen={menuOpen}>
+        {/* <CloseButton onClick={toggleMenu}>×</CloseButton> */}
+        <StyledNavLink to="/" onClick={toggleMenu}>
+          Home
+        </StyledNavLink>
+        <StyledNavLink to="/about" onClick={toggleMenu}>
+          About
+        </StyledNavLink>
+        <StyledNavLink to="/services" onClick={toggleMenu}>
+          Services
+        </StyledNavLink>
+        <StyledNavLink to="/contact" onClick={toggleMenu}>
+          Contact
+        </StyledNavLink>
+      </SlideMenu>
     </StyledNavbar>
   );
 }
