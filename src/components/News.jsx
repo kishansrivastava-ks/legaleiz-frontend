@@ -32,6 +32,7 @@ const Heading = styled.h2`
   @media (width <= 1200px) {
     text-align: center;
     margin-bottom: 0;
+    font-size: 3rem;
   }
 `;
 
@@ -42,6 +43,9 @@ const Paragraph = styled.p`
   padding-left: 0;
   @media (width <= 1200px) {
     text-align: center;
+  }
+  @media (width <= 400px) {
+    font-size: 1.5rem;
   }
 `;
 

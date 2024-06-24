@@ -4,21 +4,22 @@ import styled from "styled-components";
 
 // FOR THE SLIDER COMPONENT
 const StyledSlider = styled.div`
-  /* background-color: red; */
-  height: min-content;
+  /* background-color: blueviolet; */
+  border: 0.5rem solid yellow;
+
+  height: max-content;
   width: 100%;
   display: grid;
   grid-template-rows: 50px 1fr;
-  grid-template-columns: 1fr 50px;
+  grid-template-columns: 1fr 50px 50px;
   grid-template-areas:
     "heading previous next"
     "cards cards cards";
-  grid-gap: 2rem;
-  padding: 2rem 20rem;
+  grid-gap: 1.5vmax;
+  padding: 2vmax 10vmax;
   box-sizing: border-box;
   position: relative;
   transition: transform 1s;
-  /* overflow-x: hidden; */
   margin-top: 5rem;
 `;
 
@@ -27,11 +28,13 @@ const Heading = styled.h2`
   justify-self: center;
   align-self: center;
   text-transform: uppercase;
-  font-weight: 500;
+  text-align: center;
+  font-weight: 600;
   font-size: 4rem;
   letter-spacing: 4px;
-  margin: auto;
-  margin-left: 51rem;
+  @media (width <= 600px) {
+    font-size: 3rem;
+  }
 `;
 
 const PreviousButton = styled.button`
@@ -77,27 +80,21 @@ const Cards = styled.div`
   /* background-color: yellow; */
   grid-area: cards;
   display: flex;
-  overflow-x: scroll;
+  overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-padding: 1em;
   scroll-behavior: smooth;
   width: 400%;
+  margin-left: -7rem;
   &::-webkit-scrollbar {
     display: none;
   }
   transition: transform 1s;
-
-  /* height: min-content; */
-
-  /* set fixed width to display only 4 cards initially */
 `;
 
 const Card = styled.div`
-  width: 30rem;
-  /* min-height: 400px; */
+  min-width: 30rem;
   height: min-content;
-  /* background-color: red; */
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   display: grid;
   grid-template-rows: 70% 1fr;
   grid-template-areas:
