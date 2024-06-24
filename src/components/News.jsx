@@ -1,14 +1,20 @@
 import styled from "styled-components";
 
 const NewsSection = styled.section`
-  width: 90%;
-  height: 40%;
+  width: 100%;
+  height: max-content;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  padding: 2em;
+  padding: 4vmax;
   margin-top: 5rem;
+  /* test */
+  /* background-color: yellow; */
+  /* border: 0.5rem solid violet; */
+  @media (width <= 1200px) {
+    flex-direction: column;
+  }
 `;
 
 const Div1 = styled.div`
@@ -20,9 +26,13 @@ const Div1 = styled.div`
 `;
 
 const Heading = styled.h2`
-  font-size: 3em;
+  font-size: 4rem;
   margin-bottom: 0.5em;
   letter-spacing: 1px;
+  @media (width <= 1200px) {
+    text-align: center;
+    margin-bottom: 0;
+  }
 `;
 
 const Paragraph = styled.p`
@@ -30,15 +40,27 @@ const Paragraph = styled.p`
   letter-spacing: 1px;
   padding: 1rem;
   padding-left: 0;
+  @media (width <= 1200px) {
+    text-align: center;
+  }
 `;
 
 const Div2 = styled.div`
   flex: 1;
   display: grid;
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: repeat(auto, 1fr);
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 2rem;
+  grid-gap: 2vmax;
   margin-bottom: auto;
+  @media (width <= 1200px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (width <= 650px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (width <= 400px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 const GridCell = styled.div`
@@ -60,6 +82,10 @@ const GridCell = styled.div`
   }
   padding: 1.5rem;
   justify-content: flex-start;
+  @media (width <= 400px) {
+    width: 30rem;
+    padding: 1rem;
+  }
 `;
 
 const Image = styled.img`
@@ -73,6 +99,10 @@ const Image = styled.img`
 const HeadingGrid = styled.h3`
   font-size: 1.2em;
   margin-top: 1em;
+  @media (width <= 400px) {
+    margin-top: 1rem;
+    font-size: 1em;
+  }
 `;
 
 const ParagraphGrid = styled.p`
@@ -80,6 +110,11 @@ const ParagraphGrid = styled.p`
   text-align: center;
   line-height: 1.3em;
   margin-top: 1em;
+  @media (width <= 400px) {
+    margin-top: 0.5rem;
+    font-size: 0.9em;
+    line-height: 1em;
+  }
 `;
 
 function News() {

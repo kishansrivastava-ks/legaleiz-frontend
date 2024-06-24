@@ -1,35 +1,31 @@
 import styled from "styled-components";
 
 const Grid1 = styled.div`
-  justify-self: stretch;
+  /* justify-self: stretch; */
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  @media (max-width: 768px) { 
-    grid-template-columns: 1fr; /
-  }
-  grid-gap: 1.5em;
+
+  grid-gap: 1.5vmax;
   padding: 1em;
-  /* background-color: red; */
-  width: 80%;
-  height: 55rem;
+  width: 85%;
+  height: max-content;
+  @media (width <= 768px) {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
 `;
 
 const Grid1Cell = styled.div`
   display: grid;
-
-  /* grid-template-rows: 1fr 1fr min-content 1fr 1fr; */
   grid-template-rows: repeat(auto-fill, 1fr);
-  grid-row-gap: 1rem;
-
+  grid-row-gap: 1vmax;
   background-color: ${(props) => props.bgColor};
-  color: white;
-  padding: 1.5em;
-  height: 100%; /* fixed height */
-  width: 100%; /* fixed width */
+  padding: 1.5vmax;
+  height: 100%;
+  min-width: 30%; // 🔴
   background-color: #f3f3ff;
-  border-radius: 25px;
-  /* cursor: pointer; */
+  border-radius: 10px;
   &:hover {
     transform: scale(1.02) translateY(-1rem);
     transition: all 0.4s ease-in-out;
@@ -37,11 +33,33 @@ const Grid1Cell = styled.div`
     background-color: #fff;
   }
   transition: all 0.4s ease-in-out;
+  @media (width <= 768px) {
+    grid-template-rows: none; // Reset grid-template-rows
+    display: flex;
+    flex-direction: column;
+    gap: 1vmax;
+
+    & > :nth-child(1),
+    & > :nth-child(2) {
+      display: flex;
+      flex: 1;
+      flex-basis: 50%;
+      gap: 2rem;
+    }
+
+    & > :nth-child(1) {
+      order: 0;
+    }
+
+    & > :nth-child(2) {
+      order: 0; // Keep both in the first row
+    }
+  }
 `;
 
 const StyledIcon = styled.img`
   height: 7rem;
-  width: auto;
+  width: 7rem;
   aspect-ratio: 1/1;
 `;
 
@@ -85,10 +103,10 @@ function Services() {
   return (
     <Grid1>
       <Grid1Cell>
-        <StyledIcon src="https://img.icons8.com/?size=100&id=IGYpYRyLkRLI&format=png&color=C850F2" />
-        <CellHeading>
-          Online Consultation <br /> with a Lawyer
-        </CellHeading>
+        <div>
+          <StyledIcon src="https://img.icons8.com/?size=100&id=IGYpYRyLkRLI&format=png&color=C850F2" />
+          <CellHeading>Online Consultation with a Lawyer</CellHeading>
+        </div>
         <CellPara>
           Now consult a lawyer or get your legal documents reviewed anytime from
           the convenience of your home. With secure calls and verified Lawyers
@@ -99,12 +117,10 @@ function Services() {
         </div>
       </Grid1Cell>
       <Grid1Cell>
-        <StyledIcon src="https://img.icons8.com/?size=100&id=4DqMzI0F7ksp&format=png&color=F25081" />
-        <CellHeading>
-          Documentation by
-          <br />
-          Expert Professionals
-        </CellHeading>
+        <div>
+          <StyledIcon src="https://img.icons8.com/?size=100&id=4DqMzI0F7ksp&format=png&color=F25081" />
+          <CellHeading>Documentation by Expert Professionals</CellHeading>
+        </div>
         <CellPara>
           Corporate, HR, professional or personal, Get any legal document
           drafted and customised to your business or personal needs in the most
@@ -116,12 +132,10 @@ function Services() {
         </div>
       </Grid1Cell>
       <Grid1Cell>
-        <StyledIcon src="https://img.icons8.com/?size=100&id=12684&format=png&color=22C3E6" />
-        <CellHeading>
-          Check your challan
-          <br />
-          status
-        </CellHeading>
+        <div>
+          <StyledIcon src="https://img.icons8.com/?size=100&id=12684&format=png&color=22C3E6" />
+          <CellHeading>Check your challan status</CellHeading>
+        </div>
         <CellPara>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos sint
           omnis atque ipsam, tempora blanditiis vero libero reiciendis fugit ea

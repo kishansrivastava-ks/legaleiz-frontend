@@ -6,9 +6,10 @@ import Services from "./Services";
 
 const Section = styled.section`
   width: 100vw;
-  height: min-content;
+  height: max-content;
   background-color: ${(props) => props.bgColor};
-  padding: 2em;
+  /* padding: 2em; */
+  padding: 2vmax;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,7 +17,7 @@ const Section = styled.section`
 `;
 
 const StyledSection2 = styled(Section)`
-  background-color: #00adb5;
+  /* background-color: #00adb5; */
   background-color: #fff;
   /* border: 1rem solid red; */
   grid-row: 3;
@@ -26,12 +27,12 @@ const StyledSection2 = styled(Section)`
 const Grid = styled.div`
   margin-top: 4rem;
   width: 85%;
-  height: min-content;
+  height: max-content;
   display: flex;
   flex-wrap: wrap;
   /* grid-template-columns: 30% 70%; */
   gap: 1em;
-  padding: 1em;
+  /* padding: 1em; */
   align-items: center;
   flex-direction: row;
 `;
