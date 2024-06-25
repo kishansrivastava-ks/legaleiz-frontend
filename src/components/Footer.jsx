@@ -4,9 +4,12 @@ import styled from "styled-components";
 const Container = styled.div`
   background-color: #fff;
   width: 100vw;
-  /* height: 100vh; */
-  height: min-content;
+  height: max-content;
   padding: 8vh 8vw;
+  /* border: 0.5rem solid red; */
+  @media (max-width: 768px) {
+    padding: 4vh 6vw;
+  }
 `;
 
 const UsefulLinks = styled.div`
@@ -14,19 +17,23 @@ const UsefulLinks = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 2rem;
-  /* flex-direction: row; */
   align-items: center;
   justify-content: center;
   gap: 3rem;
+  @media (max-width: 768px) {
+    padding: 0;
+  }
 `;
 
 const FooterLogo = styled.div`
-  /* width: 25%; */
   flex: 1 1 30rem;
-  /* background-color: red; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @media (max-width: 768px) {
+    align-items: center;
+    margin-bottom: -2rem;
+  }
 `;
 
 const Logo = styled.img`
@@ -34,6 +41,11 @@ const Logo = styled.img`
   height: 50%;
   margin-bottom: 1rem;
   align-self: flex-start;
+  @media (max-width: 768px) {
+    width: 30%;
+    height: 30%;
+    align-self: center;
+  }
 `;
 const FooterIcons = styled.div`
   display: flex;
@@ -41,59 +53,75 @@ const FooterIcons = styled.div`
   color: white;
   font-size: 2rem;
   align-self: flex-start;
+  @media (max-width: 768px) {
+    align-self: center;
+  }
 `;
 const Icon = styled.p`
   margin: 0.5rem;
   color: #000;
+  & > img {
+    width: 3rem;
+  }
 `;
 
 const LinksContainer = styled.div`
-  /* width: 75%; */
   flex: 1 1 80rem;
-  /* background-color: yellow; */
   display: flex;
   flex-wrap: wrap;
-  /* flex-direction: row;
-  align-items: center;
-  justify-content: center; */
   padding-bottom: 5rem;
-  /* border-bottom: 1px solid gray; */
+  border-bottom: 1px solid gray;
+  & > div {
+    @media (max-width: 768px) {
+      min-width: 45%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    & > ul {
+      @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        line-height: 1;
+      }
+    }
+  }
 `;
 const Solutions = styled.div`
   flex-basis: 21%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* width: 25%; */
-  /* background-color: pink; */
 `;
 const Support = styled.div`
-  /* width: 25%; */
   flex-basis: 21%;
-  /* background-color: yellow; */
   margin-bottom: auto;
   margin-left: 1rem;
 `;
 const Company = styled.div`
-  /* width: 25%; */
   flex-basis: 21%;
-  /* background-color: green; */
   margin-left: 1rem;
 `;
 const Legal = styled.div`
-  /* width: 25%; */
   flex-basis: 21%;
-  /* background-color: blue; */
   margin-bottom: auto;
   margin-left: 1rem;
 `;
 
 const Head = styled.h3`
-  color: #a9a5a5;
+  color: #868686;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 1.5rem;
   margin-bottom: 3rem;
+  @media (max-width: 768px) {
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+  }
 `;
 
 const LinkItem = styled.li`
@@ -107,19 +135,32 @@ const LinkItem = styled.li`
     color: blue;
     transition: all 0.3s;
   }
+  @media (max-width: 768px) {
+    letter-spacing: 0px;
+  }
 `;
 
 const ConsultBox = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
+  flex-wrap: wrap;
   padding: 3rem 0;
   max-width: 75%;
   margin-left: auto;
   margin-top: 3rem;
+  /* border: 2px solid red; */
+  @media (max-width: 768px) {
+    padding: 0;
+    margin-top: 1rem;
+    margin: 0;
+    min-width: 100%;
+    height: max-content;
+    text-align: center;
+    border: none;
+  }
 `;
 const ConsultPara = styled.div`
   font-weight: 500;
@@ -131,6 +172,11 @@ const ConsultPara = styled.div`
   &:hover {
     color: blue;
     transition: all 0.3s;
+  }
+  @media (max-width: 768px) {
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 1rem;
+    margin-top: 0.5rem;
   }
 `;
 
@@ -160,9 +206,24 @@ const Footer = () => {
         <FooterLogo>
           <Logo src="/logo.png" alt="logo" />
           <FooterIcons>
-            <Icon>facebook</Icon>
-            <Icon>twitter</Icon>
-            <Icon>linkedin</Icon>
+            <Icon>
+              <img
+                src="https://img.icons8.com/?size=100&id=118497&format=png&color=000000"
+                alt="facebook"
+              />
+            </Icon>
+            <Icon>
+              <img
+                src="https://img.icons8.com/?size=100&id=phOKFKYpe00C&format=png&color=000000"
+                alt="twitter"
+              />
+            </Icon>
+            <Icon>
+              <img
+                src="https://img.icons8.com/?size=100&id=13930&format=png&color=000000"
+                alt="linkedin"
+              />
+            </Icon>
           </FooterIcons>
         </FooterLogo>
         <LinksContainer>
