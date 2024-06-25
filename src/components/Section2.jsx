@@ -44,7 +44,10 @@ const Heading = styled.h2`
   margin-bottom: 1em;
   margin: auto;
   margin-top: 0;
-  /* background-color: orangered; */
+  @media (max-width: 768px) {
+    font-size: 2em;
+    margin-bottom: 0;
+  }
 `;
 
 const Paragraph = styled.p`
@@ -56,6 +59,12 @@ const Paragraph = styled.p`
   line-height: 2.8rem;
   text-align: justify;
   margin-bottom: 5rem;
+  @media (max-width: 768px) {
+    line-height: 1.5;
+    font-size: 1.3rem;
+    letter-spacing: 0;
+    text-align: justify;
+  }
 `;
 
 function Section2() {

@@ -57,6 +57,9 @@ const Box2 = styled.div`
 const QHead = styled.h2`
   color: white;
   font-size: 4rem;
+  @media (max-width: 768px) {
+    font-size: 3rem;
+  }
 `;
 
 const QText = styled.p`
@@ -64,6 +67,10 @@ const QText = styled.p`
   color: #d7d7d7;
   font-size: 2.5rem;
   margin-top: 2rem;
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    margin-top: 1rem;
+  }
 `;
 
 const QIcons = styled.div`

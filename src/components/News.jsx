@@ -14,6 +14,7 @@ const NewsSection = styled.section`
   /* border: 0.5rem solid violet; */
   @media (width <= 1200px) {
     flex-direction: column;
+    margin-top: 1rem;
   }
 `;
 

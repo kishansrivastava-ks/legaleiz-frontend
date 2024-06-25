@@ -70,6 +70,9 @@ const CellHeading = styled.div`
   text-align: left;
   margin-bottom: 1rem;
   letter-spacing: 1px;
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 const CellPara = styled.p`

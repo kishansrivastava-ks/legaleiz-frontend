@@ -102,13 +102,17 @@ const Cards = styled.div`
     display: none;
   }
   transition: transform 1s;
+  /* border: 2px solid red; */
+  min-height: max-content;
 `;
 
 const Card = styled.div`
   width: 30rem;
-  height: min-content;
+  min-width: 20rem;
+
   display: grid;
   grid-template-rows: 70% 1fr;
+  grid-template-rows: 2fr 1fr;
   grid-template-areas:
     "image"
     "content";
@@ -129,6 +133,7 @@ const Card = styled.div`
     transition: all 0.4s ease-in-out;
   }
   transition: all 0.4s ease-in-out;
+  /* border: 2px solid blue; */
 `;
 
 const Image = styled.img`
@@ -145,6 +150,8 @@ const Content = styled.div`
   grid-area: content;
   display: flex;
   flex-direction: column;
+  height: max-content;
+  /* border: 2px solid red; */
 `;
 
 const HeadingCard = styled.h3`

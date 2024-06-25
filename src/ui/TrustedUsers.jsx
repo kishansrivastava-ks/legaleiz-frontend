@@ -7,6 +7,7 @@ const Heading = styled.h2`
   font-weight: 600;
   letter-spacing: 1.5px;
   color: #5e5c5c;
+  text-align: center;
 `;
 
 const LogoList = styled.ul`

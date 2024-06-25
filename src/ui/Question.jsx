@@ -18,6 +18,9 @@ const QuestionText = styled.h3`
   justify-content: space-between;
   font-size: 2rem;
   margin: 0;
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const AnswerText = styled.p`
@@ -27,6 +30,9 @@ const AnswerText = styled.p`
   overflow: hidden;
   transition: height 0.5s ease-in-out;
   color: #fff;
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+  }
 `;
 
 const Question = ({ question, answer }) => {

@@ -19,6 +19,7 @@ const GlobalStyles = createGlobalStyle`
 * {
     -webkit-tap-highlight-color: transparent;
   }
+ 
 
 :root {
   --color-main: #4c50e0;
