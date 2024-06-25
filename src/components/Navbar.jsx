@@ -32,6 +32,10 @@ const StyledNavbar = styled.nav`
   font-size: 1.6rem;
   height: 4.3vmax;
   height: max-content;
+  @media (max-width: 768px) {
+    padding-left: 0;
+    padding-right: 2rem;
+  }
 `;
 
 const Logo = styled.img`

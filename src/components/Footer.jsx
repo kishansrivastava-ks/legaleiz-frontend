@@ -142,17 +142,19 @@ const LinkItem = styled.li`
 
 const ConsultBox = styled.div`
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
-  flex-wrap: wrap;
+
   padding: 3rem 0;
   max-width: 75%;
   margin-left: auto;
   margin-top: 3rem;
   /* border: 2px solid red; */
   @media (max-width: 768px) {
+    flex-wrap: wrap;
     padding: 0;
     margin-top: 1rem;
     margin: 0;
@@ -175,8 +177,7 @@ const ConsultPara = styled.div`
   }
   @media (max-width: 768px) {
     border-bottom: 1px solid lightgray;
-    padding-bottom: 1rem;
-    margin-top: 0.5rem;
+    padding: 1rem 0;
   }
 `;
 

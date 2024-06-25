@@ -5,28 +5,30 @@ import React, { useState } from "react";
 // Styled Components
 const Section = styled.section`
   background-color: ${(props) => props.bgColor};
-  /* padding: 2em; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100vw;
 `;
 
 const StyledSection1 = styled(Section)`
   height: calc(100vh - 64px);
-  background-color: #f9ca24;
+  /* height: 90vh; */
+
   grid-row: 2;
   overflow-x: hidden;
   position: relative;
 `;
 
 const Slider = styled.div`
+  background-color: red;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   transition: transform 0.5s ease-in-out;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
 
   &::-webkit-scrollbar {
@@ -36,10 +38,12 @@ const Slider = styled.div`
 
 const Slide = styled.div`
   flex: 0 0 100%;
-  height: 100%;
+  /* border: 0.5rem solid yellow; */
+  /* height: max-content; */
   scroll-snap-align: start;
   padding: 4em;
-
+  /* align-self: stretch; */
+  justify-content: stretch;
   background-image: linear-gradient(
       to right,
       rgba(120, 120, 249, 0.5),
@@ -48,7 +52,10 @@ const Slide = styled.div`
     url(${(props) => props.image});
   background-size: cover;
   background-position: center;
-  /* background-repeat: no-repeat; */
+  @media (max-width: 768px) {
+    padding: 2em;
+    width: 100vw;
+  }
 `;
 
 const ButtonGroup = styled.div`
@@ -88,12 +95,16 @@ const sections = [
 ];
 
 const StyledH2 = styled.h2`
-  font-size: 10rem;
+  font-size: 5vmax;
   font-weight: 600;
   letter-spacing: 3px;
   color: #fff;
   width: 60%;
-  line-height: 12rem;
+  line-height: 8vmax;
+  @media (max-width: 768px) {
+    min-width: 100%;
+    margin-bottom: 2rem;
+  }
 `;
 
 const StyledSpan = styled.span`
@@ -108,6 +119,11 @@ const StyledP = styled.p`
 
   width: max-content;
   border-radius: 25px;
+  @media (max-width: 768px) {
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+    max-width: 100%;
+  }
 `;
 
 function Section1() {

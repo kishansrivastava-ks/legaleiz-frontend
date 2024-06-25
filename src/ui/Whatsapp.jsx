@@ -11,6 +11,10 @@ const Box = styled.div`
   /* padding: 10rem; */
   background-color: #fff;
   border-radius: 50%;
+  @media (max-width: 768px) {
+    height: 6rem;
+    width: 6rem;
+  }
 `;
 
 const Image = styled.img`
