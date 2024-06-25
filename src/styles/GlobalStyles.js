@@ -16,6 +16,10 @@ const GlobalStyles = createGlobalStyle`
 
 /* Colors adapted from https://tailwindcss.com/docs/customizing-colors */
 
+* {
+    -webkit-tap-highlight-color: transparent;
+  }
+
 :root {
   --color-main: #4c50e0;
   /* Grey */

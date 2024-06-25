@@ -22,7 +22,7 @@ const StyledSection1 = styled(Section)`
 `;
 
 const Slider = styled.div`
-  background-color: red;
+  /* background-color: red; */
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
