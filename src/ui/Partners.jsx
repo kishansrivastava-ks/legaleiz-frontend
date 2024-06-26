@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import styled from "styled-components";
+import { useEffect, useRef } from "react";
 
 const Container = styled.div`
   background-color: #fdfdfd;
@@ -31,14 +32,14 @@ const Heading = styled.h2`
 
 const LogoContainer = styled.div`
   display: flex;
-  /* border: 2px solid red; */
   justify-content: space-around;
-  /* flex-wrap: wrap; */
   @media (max-width: 768px) {
     flex-wrap: nowrap;
     overflow-x: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
-  .scrollable::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
   }
 `;
@@ -64,10 +65,32 @@ const Logo = styled.img`
 `;
 
 const Partner = () => {
+  const logoContainerRef = useRef(null);
+
+  useEffect(() => {
+    const logoContainer = logoContainerRef.current;
+
+    const scroll = () => {
+      if (logoContainer) {
+        if (
+          logoContainer.scrollWidth - logoContainer.scrollLeft <=
+          logoContainer.clientWidth
+        ) {
+          logoContainer.scrollLeft = 0;
+        } else {
+          logoContainer.scrollLeft += 1;
+        }
+      }
+    };
+
+    const interval = setInterval(scroll, 20);
+
+    return () => clearInterval(interval);
+  }, []);
   return (
     <Container>
       <Heading>Our Partners</Heading>
-      <LogoContainer>
+      <LogoContainer ref={logoContainerRef}>
         <Logo src="https://picsum.photos/id/1015/300/400" alt="Company 1" />
         <Logo src="https://picsum.photos/id/1016/300/400" alt="Company 2" />
         <Logo src="https://picsum.photos/id/1015/300/400" alt="Company 3" />

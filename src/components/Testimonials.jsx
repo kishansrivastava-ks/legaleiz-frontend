@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import "../styles/testimonials.css";
+// import "../styles/testimonials.css";
 import SliderTest from "./SliderTest";
 
 const testimonials = [
@@ -22,11 +22,7 @@ const testimonials = [
 ];
 
 function Testimonials() {
-  return (
-    <section className="section" id="section--3">
-      <SliderTest testimonials={testimonials} />
-    </section>
-  );
+  return <SliderTest testimonials={testimonials} />;
 }
 
 export default Testimonials;

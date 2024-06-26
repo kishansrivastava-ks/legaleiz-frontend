@@ -8,16 +8,24 @@ import { useState } from "react";
 
 const TestimonialsWrapper = styled.div`
   width: 100%;
-  padding: 15px 4rem;
-  height: 35rem;
-  /* background-color: yellow; */
-  /* border: 1px solid gray; */
+  height: max-content;
   text-align: center;
+  padding: 5vmax 10vmax;
+  /* background-color: yellow; */
+  /* border: 0.5rem solid red; */
+  padding-top: 2vmax;
+  @media (max-width: 768px) {
+    padding: 5vmax 6vmax;
+  }
 `;
 const Heading = styled.h2`
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 4rem;
+  margin-bottom: 3rem;
+  letter-spacing: 2px;
   color: #333;
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 const TestimonialCard = styled.div`
   display: flex;
@@ -25,12 +33,26 @@ const TestimonialCard = styled.div`
   align-items: center;
   justify-content: center;
   padding: 4rem;
-  /* background: blue; */
-  border-radius: 10px;
-  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-  border: 1px solid lightgray;
+  background: #1b1baf;
+  border-radius: 5px;
+  color: #fff;
   transition: all 0.5s;
   height: 20rem;
+  max-width: 50rem;
+  transform: skew(-10deg);
+  overflow: hidden;
+  outline: 2px solid #fff;
+  outline-offset: -10px;
+  & > * {
+    transform: skew(10deg);
+  }
+
+  @media (max-width: 768px) {
+    transform: skew(0deg);
+    & > * {
+      transform: skew(0deg);
+    }
+  }
 `;
 const Review = styled.p`
   font-style: italic;
@@ -65,12 +87,16 @@ const UserPhoto = styled.img`
 `;
 const UserName = styled.span`
   font-size: 16px;
-  color: #333;
+  color: #fff;
+  letter-spacing: 2px;
 `;
 const DotsWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 1vmax 0;
+  @media (max-width: 768px) {
+    /* margin-bottom: 2vmax; */
+  }
 `;
 const Dot = styled.div`
   width: 10px;
@@ -129,7 +155,7 @@ function SliderTest({ testimonials }) {
 
   const settings = {
     dots: true,
-    // infinite: true,
+    infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
