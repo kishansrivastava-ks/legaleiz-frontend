@@ -15,7 +15,7 @@ const TestimonialsWrapper = styled.div`
   /* border: 0.5rem solid red; */
   padding-top: 2vmax;
   @media (max-width: 768px) {
-    /* padding: 5vmax 6vmax; */
+    padding: 5vmax 6vmax;
   }
 `;
 const Heading = styled.h2`
@@ -34,7 +34,7 @@ const TestimonialCard = styled.div`
   justify-content: center;
   padding: 4rem;
   background: #1b1baf;
-  border-radius: 5px;
+  /* background: #4c50e0; */
   color: #fff;
   transition: all 0.5s;
   height: 20rem;
@@ -48,6 +48,7 @@ const TestimonialCard = styled.div`
   }
 
   @media (max-width: 768px) {
+    outline-offset: -7px;
     transform: skew(0deg);
     & > * {
       transform: skew(0deg);

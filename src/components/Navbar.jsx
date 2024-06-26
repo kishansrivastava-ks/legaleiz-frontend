@@ -13,6 +13,7 @@ import { useAuth } from "../contexts/authContext/authContext.jsx";
 import { doSignOut } from "../firebase/auth.js";
 import { HiArrowRightOnRectangle } from "react-icons/hi2";
 import SpinnerMini from "../ui/SpinnerMini.jsx";
+import SlideOutNavbar from "./SlideoutNavbar.jsx";
 
 const StyledNavbar = styled.nav`
   grid-row: 1;
@@ -313,20 +314,24 @@ const HamburgerIcon = styled.div`
 `;
 const SlideMenu = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* justify-content: center; */
   position: fixed;
-  top: 0;
+  top: 65px;
   right: 0;
   height: 100%;
-  width: 250px;
+  height: max-content;
+  width: 300px;
   background-color: #fff;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   opacity: 0;
   pointer-events: none;
-  flex-direction: column;
-  align-items: flex-start;
+
   padding: 1rem;
+  /* padding-top: 7rem; */
 
   ${({ isOpen }) =>
     isOpen &&
@@ -342,6 +347,9 @@ const CloseButton = styled.div`
   font-size: 3rem;
   padding: 1rem;
 `;
+
+// FOR THE SLIDEOUT NAVBAR
+
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => {
@@ -645,18 +653,8 @@ function Navbar() {
       </HamburgerIcon>
       <SlideMenu isOpen={menuOpen}>
         {/* <CloseButton onClick={toggleMenu}>×</CloseButton> */}
-        <StyledNavLink to="/" onClick={toggleMenu}>
-          Home
-        </StyledNavLink>
-        <StyledNavLink to="/about" onClick={toggleMenu}>
-          About
-        </StyledNavLink>
-        <StyledNavLink to="/services" onClick={toggleMenu}>
-          Services
-        </StyledNavLink>
-        <StyledNavLink to="/contact" onClick={toggleMenu}>
-          Contact
-        </StyledNavLink>
+
+        <SlideOutNavbar />
       </SlideMenu>
     </StyledNavbar>
   );
