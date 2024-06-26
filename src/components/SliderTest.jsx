@@ -15,7 +15,7 @@ const TestimonialsWrapper = styled.div`
   /* border: 0.5rem solid red; */
   padding-top: 2vmax;
   @media (max-width: 768px) {
-    padding: 5vmax 6vmax;
+    /* padding: 5vmax 6vmax; */
   }
 `;
 const Heading = styled.h2`
