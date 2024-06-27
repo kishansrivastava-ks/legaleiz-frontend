@@ -136,7 +136,7 @@ export const AddressForm = () => (
       </FormGroup>
     </FormContainer>
     <ButtonContainer>
-      <UpdateButton type="submit">Update KYC</UpdateButton>
+      <UpdateButton type="submit">Update Address</UpdateButton>
     </ButtonContainer>
   </StyledForm>
 );
