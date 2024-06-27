@@ -36,6 +36,14 @@ import LoginPage from "./pages/Login/LoginPage.jsx";
 import SignUpPage from "./pages/Login/SignUpPage.jsx";
 
 import Dashboard from "./pages/Dashboard.jsx";
+import Home from "./components/Dashboard/Home/Home.jsx";
+import MyServices from "./components/Dashboard/MyServices/MyServices.jsx";
+import Compliances from "./components/Dashboard/Compliances/Compliances.jsx";
+import Profile from "./components/Dashboard/Profile/Profile.jsx";
+import Ongoing from "./components/Dashboard/MyServices/Ongoing.jsx";
+import Renewal from "./components/Dashboard/MyServices/Renewal.jsx";
+import Completed from "./components/Dashboard/MyServices/Completed.jsx";
+import Closed from "./components/Dashboard/MyServices/Closed.jsx";
 
 function App() {
   React.useEffect(() => {
@@ -103,7 +111,18 @@ function App() {
           <Route path="/partner-with-us" element={<PartnerWithUs />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/signin" element={<LoginPage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />}>
+            <Route path="home" element={<Home />} />
+            <Route path="my-services" element={<MyServices />}>
+              <Route path="" element={<Ongoing />} />
+              <Route path="ongoing" element={<Ongoing />} />
+              <Route path="renewal" element={<Renewal />} />
+              <Route path="completed" element={<Completed />} />
+              <Route path="closed" element={<Closed />} />
+            </Route>
+            <Route path="compliances" element={<Compliances />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
         </Routes>
       </BrowserRouter>
       <Toaster

@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import Sidebar from "../components/Dashboard/Sidebar";
 import Header from "../components/Dashboard/Header";
-import Main from "../components/Dashboard/Main";
+// import Main from "../components/Dashboard/Main";
+import { Outlet } from "react-router-dom";
 
 const DashboardContainer = styled.div`
   display: grid;
@@ -24,12 +25,15 @@ const HeaderContainer = styled.div`
   grid-column: 2 / 3;
   background-color: #f2f2f2;
   background-color: #e1e1e1;
+  background-color: #efff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 `;
 
 const MainBodyContainer = styled.div`
   grid-row: 2 / 3;
   grid-column: 2 / 3;
   background-color: #f0f0f0; /* Light Gray */
+  padding: 2vmax;
 `;
 
 const Dashboard = () => {
@@ -42,7 +46,7 @@ const Dashboard = () => {
         <Header />
       </HeaderContainer>
       <MainBodyContainer>
-        <Main />
+        <Outlet />
       </MainBodyContainer>
     </DashboardContainer>
   );

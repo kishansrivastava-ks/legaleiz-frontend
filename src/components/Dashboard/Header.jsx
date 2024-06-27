@@ -38,7 +38,7 @@ const Header = () => {
             src={currentUser.photoURL}
             alt="user photo"
             style={{
-              width: "40px",
+              width: "50px",
               borderRadius: "50%",
               marginRight: "10px",
               fontSize: "1rem",

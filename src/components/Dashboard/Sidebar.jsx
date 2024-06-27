@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import styled from "styled-components";
 import {
@@ -9,6 +10,7 @@ import {
 } from "react-icons/fa";
 import { doSignOut } from "../../firebase/auth";
 import SpinnerMini from "../../ui/SpinnerMini";
+import { NavLink } from "react-router-dom";
 
 const SidebarContainer = styled.div`
   display: flex;
@@ -49,7 +51,9 @@ const Nav = styled.nav`
   padding-left: 1rem;
 `;
 
-const NavItem = styled.div`
+const NavItem = styled(NavLink).attrs({
+  activeClassName: "active",
+})`
   display: flex;
   align-items: center;
   padding: 1.5rem;
@@ -58,13 +62,15 @@ const NavItem = styled.div`
   letter-spacing: 2px;
   transition: background-color 0.3s;
   border-radius: 3px;
+  text-decoration: none; /* Ensure the text is not underlined */
+  margin-bottom: 0.7rem;
 
   &:hover {
-    background-color: #2e2e74;
+    background-color: #1e1e5a;
   }
 
   &.active {
-    background-color: #555;
+    background-color: #1e1e5a; /* Your desired active background color */
   }
 `;
 
@@ -98,15 +104,15 @@ const SignOutButton = styled.button`
 `;
 
 const Sidebar = () => {
-  const [dropdowns, setDropdowns] = useState({
-    myServices: false,
-    compliances: false,
-    profile: false,
-  });
+  // const [dropdowns, setDropdowns] = useState({
+  //   myServices: false,
+  //   compliances: false,
+  //   profile: false,
+  // });
 
-  const toggleDropdown = (dropdown) => {
-    setDropdowns((prev) => ({ ...prev, [dropdown]: !prev[dropdown] }));
-  };
+  // const toggleDropdown = (dropdown) => {
+  //   setDropdowns((prev) => ({ ...prev, [dropdown]: !prev[dropdown] }));
+  // };
 
   const [isSigningOut, setIsSigningOut] = useState(false);
   const handleSignOut = async () => {
@@ -122,46 +128,49 @@ const Sidebar = () => {
   return (
     <SidebarContainer>
       <Logo>
-        <img src="logo-clipped.png" alt="logo" />
+        <img src="/logo-clipped.png" alt="logo" />
         <p>Simplifying Law, Empowering You</p>
       </Logo>
       <Nav>
-        <NavItem>
+        <NavItem to="/dashboard/home">
           <NavIcon>
             <FaHome />
           </NavIcon>
           Home
         </NavItem>
-        <NavItem onClick={() => toggleDropdown("myServices")}>
+        {/* <NavItem onClick={() => toggleDropdown("myServices")}> */}
+        <NavItem to="/dashboard/my-services">
           <NavIcon>
             <FaBriefcase />
           </NavIcon>
           My Services
         </NavItem>
-        <NavDropdown isOpen={dropdowns.myServices}>
+        {/* <NavDropdown isOpen={dropdowns.myServices}>
           <div>Service 1</div>
           <div>Service 2</div>
-        </NavDropdown>
-        <NavItem onClick={() => toggleDropdown("compliances")}>
+        </NavDropdown> */}
+        {/* <NavItem onClick={() => toggleDropdown("compliances")}> */}
+        <NavItem to="/dashboard/compliances">
           <NavIcon>
             <FaClipboardList />
           </NavIcon>
           Compliances
         </NavItem>
-        <NavDropdown isOpen={dropdowns.compliances}>
+        {/* <NavDropdown isOpen={dropdowns.compliances}>
           <div>Compliance 1</div>
           <div>Compliance 2</div>
-        </NavDropdown>
-        <NavItem onClick={() => toggleDropdown("profile")}>
+        </NavDropdown> */}
+        {/* <NavItem onClick={() => toggleDropdown("profile")}> */}
+        <NavItem to="/dashboard/profile">
           <NavIcon>
             <FaUser />
           </NavIcon>
           Profile
         </NavItem>
-        <NavDropdown isOpen={dropdowns.profile}>
+        {/* <NavDropdown isOpen={dropdowns.profile}>
           <div>Profile Info</div>
           <div>Settings</div>
-        </NavDropdown>
+        </NavDropdown> */}
       </Nav>
       <SignOutButton onClick={handleSignOut}>
         {isSigningOut ? (
