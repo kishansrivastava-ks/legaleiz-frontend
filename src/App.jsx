@@ -111,7 +111,10 @@ function App() {
           <Route path="/partner-with-us" element={<PartnerWithUs />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/signin" element={<LoginPage />} />
+
+          {/* DASHBOARD ROUTES */}
           <Route path="/dashboard" element={<Dashboard />}>
+            <Route path="" element={<Home />} />
             <Route path="home" element={<Home />} />
             <Route path="my-services" element={<MyServices />}>
               <Route path="" element={<Ongoing />} />
