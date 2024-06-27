@@ -23,9 +23,7 @@ const SidebarContainer = styled.div`
 const HeaderContainer = styled.div`
   grid-row: 1 / 2;
   grid-column: 2 / 3;
-  background-color: #f2f2f2;
-  background-color: #e1e1e1;
-  background-color: #efff;
+  background-color: #fff;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 `;
 
@@ -34,6 +32,7 @@ const MainBodyContainer = styled.div`
   grid-column: 2 / 3;
   background-color: #f0f0f0; /* Light Gray */
   padding: 2vmax;
+  /* background-color: yellow; */
 `;
 
 const Dashboard = () => {

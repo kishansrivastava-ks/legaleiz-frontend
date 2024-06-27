@@ -31,6 +31,7 @@ const NavItem = styled(NavLink).attrs({
 })`
   /* color: #fff; */
   background-color: lightgray;
+  background-color: #fff;
   text-align: center;
   width: 100%;
   text-decoration: none;
