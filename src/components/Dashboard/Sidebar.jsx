@@ -7,6 +7,8 @@ import {
   FaUser,
   FaSignOutAlt,
 } from "react-icons/fa";
+import { doSignOut } from "../../firebase/auth";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 const SidebarContainer = styled.div`
   display: flex;
@@ -76,12 +78,12 @@ const NavDropdown = styled.div`
   padding-left: 2rem;
 `;
 
-const SignOutButton = styled.div`
+const SignOutButton = styled.button`
+  border: none;
   display: flex;
-  /* align-items: center; */
+  align-items: center;
   justify-content: center;
-  padding: 1rem;
-  padding-top: 1.5rem;
+  padding: 1.5rem;
   cursor: pointer;
   background-color: #2e2e74;
   border-radius: 3px;
@@ -104,6 +106,17 @@ const Sidebar = () => {
 
   const toggleDropdown = (dropdown) => {
     setDropdowns((prev) => ({ ...prev, [dropdown]: !prev[dropdown] }));
+  };
+
+  const [isSigningOut, setIsSigningOut] = useState(false);
+  const handleSignOut = async () => {
+    setIsSigningOut(true);
+    try {
+      await doSignOut();
+    } catch (error) {
+      console.error("Error signing out:", error);
+      setIsSigningOut(false);
+    }
   };
 
   return (
@@ -150,11 +163,17 @@ const Sidebar = () => {
           <div>Settings</div>
         </NavDropdown>
       </Nav>
-      <SignOutButton>
-        <NavIcon>
-          <FaSignOutAlt />
-        </NavIcon>
-        Sign Out
+      <SignOutButton onClick={handleSignOut}>
+        {isSigningOut ? (
+          <SpinnerMini />
+        ) : (
+          <>
+            <NavIcon>
+              <FaSignOutAlt />
+            </NavIcon>
+            Sign Out
+          </>
+        )}
       </SignOutButton>
     </SidebarContainer>
   );

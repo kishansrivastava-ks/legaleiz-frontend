@@ -26,11 +26,11 @@ const Header = () => {
   return (
     <HeaderContainer>
       {userLoggedIn && currentUser ? (
-        <WelcomeText>Welcome</WelcomeText>
-      ) : (
         <WelcomeText>
           Welcome, {currentUser.displayName.split(" ")[0]}
         </WelcomeText>
+      ) : (
+        <WelcomeText>Welcome</WelcomeText>
       )}
       <UserProfileIcon>
         {userLoggedIn && currentUser ? (
