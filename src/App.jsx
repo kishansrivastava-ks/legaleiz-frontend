@@ -44,6 +44,7 @@ import Ongoing from "./components/Dashboard/MyServices/Ongoing.jsx";
 import Renewal from "./components/Dashboard/MyServices/Renewal.jsx";
 import Completed from "./components/Dashboard/MyServices/Completed.jsx";
 import Closed from "./components/Dashboard/MyServices/Closed.jsx";
+import ExploreServices from "./components/Dashboard/Home/ExploreServices.jsx";
 
 function App() {
   React.useEffect(() => {
@@ -116,6 +117,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />}>
             <Route path="" element={<Home />} />
             <Route path="home" element={<Home />} />
+            <Route path="home/explore-services" element={<ExploreServices />} />
             <Route path="my-services" element={<MyServices />}>
               <Route path="" element={<Ongoing />} />
               <Route path="ongoing" element={<Ongoing />} />

@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { AddressForm, KYCForm, PersonalDetailsForm } from "./ProfileForms";
 import { FaUser, FaHome, FaCreditCard } from "react-icons/fa";
+import { useAuth } from "../../../contexts/authContext/authContext";
 
 const GlobalStyle = createGlobalStyle`
   *:focus {
@@ -57,11 +58,12 @@ const Body = styled.div`
 
 function Profile() {
   const [activeTab, setActiveTab] = useState("personalDetails");
+  const { currentUser } = useAuth();
 
   const renderForm = () => {
     switch (activeTab) {
       case "personalDetails":
-        return <PersonalDetailsForm />;
+        return <PersonalDetailsForm currentUser={currentUser} />;
       case "address":
         return <AddressForm />;
       case "kyc":

@@ -23,6 +23,7 @@ const UserProfileIcon = styled.div`
 
 const Header = () => {
   const { userLoggedIn, currentUser } = useAuth();
+  // console.log(currentUser);
   return (
     <HeaderContainer>
       {userLoggedIn && currentUser ? (

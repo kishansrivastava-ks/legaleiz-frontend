@@ -16,6 +16,8 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 import ReactSpeedometer from "react-d3-speedometer";
+import { useState } from "react";
+import Modal from "../Modal";
 
 const Heading = styled.div`
   margin-bottom: 1rem;
@@ -256,8 +258,25 @@ const YourComplianceScore = styled.div`
   }
 `;
 
+const services = [
+  {
+    icon: <FaBuilding />,
+    text: "Private Limited Company Registration",
+    price: "10,000",
+  },
+  { icon: <FaTrademark />, text: "Trademark Registration", price: "5,000" },
+  { icon: <FaBook />, text: "Accounting and Book Keeping", price: "8,000" },
+  { icon: <FaFileContract />, text: "Legal Agreement", price: "3,000" },
+  {
+    icon: <FaReceipt />,
+    text: "Goods & Service Tax Registration",
+    price: "7,500",
+  },
+  { icon: <FaFileInvoice />, text: "GST Filings", price: "4,500" },
+];
+
 // PROFILE COMPLETION METER
-function ProfileCompletionMeter({ completion }) {
+export function ProfileCompletionMeter({ completion }) {
   let rating;
 
   if (completion <= 25) {
@@ -327,6 +346,18 @@ function ProfileCompletionMeter({ completion }) {
   );
 }
 function Home() {
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+
+  const handleServiceClick = (title) => {
+    setModalTitle(title);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setModalTitle("");
+  };
   return (
     <>
       <Heading>Home</Heading>
@@ -352,13 +383,19 @@ function Home() {
           <ExploreServices>
             <h3>Explore Servies</h3>
             <div>
-              <NavLink className="nav-link">
+              <NavLink
+                className="nav-link"
+                to="/dashboard/home/explore-services?type=individual"
+              >
                 <span className="nav-icon">
                   <FiUser />
                 </span>
                 For individuals
               </NavLink>
-              <NavLink className="nav-link">
+              <NavLink
+                className="nav-link"
+                to="/dashboard/home/explore-services?type=business"
+              >
                 <span className="nav-icon">
                   <BsFillBuildingFill />
                 </span>
@@ -367,46 +404,34 @@ function Home() {
             </div>
           </ExploreServices>
           <div style={{ marginBottom: "1rem" }}>
-            <h3 style={{ marginBottom: "1rem", color: "#000" }}>
-              Popular Services
-            </h3>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <h3 style={{ marginBottom: "1rem", color: "#000" }}>
+                Popular Services
+              </h3>
+              <NavLink
+                to="/dashboard/home/explore-services?type=individual"
+                style={{
+                  marginBottom: "1rem",
+                  color: "#000",
+                  marginLeft: "auto",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                }}
+              >
+                View All <FaChevronRight />
+              </NavLink>
+            </div>
             <PopularServices>
-              <ServiceLink>
-                <span>
-                  <FaBuilding />
-                </span>
-                Private Limited Company Registration
-              </ServiceLink>
-              <ServiceLink>
-                <span>
-                  <FaTrademark />
-                </span>
-                Trademark Registration
-              </ServiceLink>
-              <ServiceLink>
-                <span>
-                  <FaBook />
-                </span>
-                Accounting and Book Keeping
-              </ServiceLink>
-              <ServiceLink>
-                <span>
-                  <FaFileContract />
-                </span>
-                Legal Agreement
-              </ServiceLink>
-              <ServiceLink>
-                <span>
-                  <FaReceipt />
-                </span>
-                Goods & Service Tax Registration
-              </ServiceLink>
-              <ServiceLink>
-                <span>
-                  <FaFileInvoice />
-                </span>
-                GST Filings
-              </ServiceLink>
+              {services.map((service, index) => (
+                <ServiceLink
+                  key={index}
+                  onClick={() => handleServiceClick(service.text)}
+                >
+                  <span>{service.icon}</span>
+                  {service.text}
+                </ServiceLink>
+              ))}
             </PopularServices>
           </div>
           <NeedExperts>
@@ -462,6 +487,12 @@ function Home() {
           </YourComplianceScore>
         </GridItem>
       </Container>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title={modalTitle}
+        services={services}
+      />
     </>
   );
 }

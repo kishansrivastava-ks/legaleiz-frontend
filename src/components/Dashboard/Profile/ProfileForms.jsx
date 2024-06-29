@@ -1,4 +1,7 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import styled from "styled-components";
+import ProfilePhotoForm from "./ProfilePhotoForm";
 
 const Container = styled.div`
   display: flex;
@@ -60,10 +63,17 @@ const Input = styled.input`
     font-size: 1.5rem;
   }
 `;
+const RadioGroup = styled.div`
+  margin-top: 5px;
+`;
+
+const RadioLabel = styled.label`
+  margin-right: 10px;
+`;
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   flex-basis: 20%;
   /* background-color: yellow; */
 `;
@@ -81,17 +91,61 @@ const UpdateButton = styled.button`
     background-color: #e55347;
   }
 `;
-export const PersonalDetailsForm = () => (
-  <Container>
-    <FormContainer>
-      <h2>Personal Details Form</h2>
-    </FormContainer>
-    <ButtonContainer>
-      <UpdateButton>Update Personal Details</UpdateButton>
-    </ButtonContainer>
-  </Container>
-);
+export const PersonalDetailsForm = ({ currentUser }) => {
+  const { displayName, email, photoURL } = currentUser;
 
+  return (
+    <StyledForm>
+      <FormContainer>
+        <FormGroup>
+          <Label htmlFor="fullName">Full Name</Label>
+          <Input
+            type="text"
+            id="fullName"
+            name="fullName"
+            value={displayName}
+            readOnly
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label htmlFor="dob">Date of Birth</Label>
+          <Input type="date" id="dob" name="dob" />
+        </FormGroup>
+        <FormGroup>
+          <Label>Gender</Label>
+          <RadioGroup>
+            <RadioLabel>
+              <input type="radio" name="gender" value="male" /> Male
+            </RadioLabel>
+            <RadioLabel>
+              <input type="radio" name="gender" value="female" /> Female
+            </RadioLabel>
+            <RadioLabel>
+              <input type="radio" name="gender" value="other" /> Other
+            </RadioLabel>
+          </RadioGroup>
+        </FormGroup>
+        <FormGroup>
+          <Label htmlFor="email">Email</Label>
+          <Input type="email" id="email" name="email" value={email} readOnly />
+        </FormGroup>
+        <FormGroup>
+          <Label htmlFor="mobile">Mobile Number</Label>
+          <Input
+            type="text"
+            id="mobile"
+            name="mobile"
+            placeholder="Mobile Number"
+          />
+        </FormGroup>
+      </FormContainer>
+      <ButtonContainer>
+        <ProfilePhotoForm photoURL={photoURL} />
+        <UpdateButton type="submit">Update Details</UpdateButton>
+      </ButtonContainer>
+    </StyledForm>
+  );
+};
 export const AddressForm = () => (
   <StyledForm>
     <FormContainer>
