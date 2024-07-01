@@ -45,6 +45,9 @@ import Renewal from "./components/Dashboard/MyServices/Renewal.jsx";
 import Completed from "./components/Dashboard/MyServices/Completed.jsx";
 import Closed from "./components/Dashboard/MyServices/Closed.jsx";
 import ExploreServices from "./components/Dashboard/Home/ExploreServices.jsx";
+import HelpAndSupport from "./components/Dashboard/HelpAndSupport.jsx";
+import FAQs from "./components/Dashboard/FAQs.jsx";
+import CreateService from "./utils/CreateService.jsx";
 
 function App() {
   React.useEffect(() => {
@@ -127,6 +130,9 @@ function App() {
             </Route>
             <Route path="compliances" element={<Compliances />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="help-and-support" element={<HelpAndSupport />} />
+            <Route path="faqs" element={<FAQs />} />
+            <Route path="create-service" element={<CreateService />} />
           </Route>
         </Routes>
       </BrowserRouter>

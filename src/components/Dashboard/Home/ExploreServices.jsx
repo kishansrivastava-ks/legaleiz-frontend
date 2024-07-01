@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 // import SearchIcon from "@material-ui/icons/Search";
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { FaChevronLeft } from "react-icons/fa";
+import axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -11,7 +12,8 @@ const Container = styled.div`
   justify-content: center;
   gap: 2rem;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
+  height: 75vh;
 `;
 const ServicesContainer = styled.div`
   flex-basis: 75%;
@@ -84,14 +86,26 @@ const SearchBar = styled.input`
     outline: none;
   }
 `;
-
-// const SearchIconStyled = styled(SearchIcon)`
-//   color: #888;
-// `;
 const Body = styled.div`
   flex-grow: 1;
   overflow-y: auto;
   padding: 20px;
+  &::-webkit-scrollbar {
+    width: 7px;
+    border: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #007bff; /* Scrollbar thumb color */
+    border-radius: 10px; /* Rounded corners */
+    /* border: 3px solid #ffffff; */
+    /* border: none; */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #fff; /* Scrollbar track color */
+    border-radius: 10px; /* Rounded corners */
+  }
 `;
 
 const List = styled.ul`
@@ -103,24 +117,32 @@ const ListItem = styled.li`
   padding: 10px 0;
   border-bottom: 1px solid #ddd;
 `;
-const data = {
-  individual: ["John Doe", "Jane Smith", "Alice Johnson"],
-  business: ["ABC Corp", "XYZ Ltd", "123 Industries"],
-};
+
 function ExploreServices() {
   const [activeTab, setActiveTab] = useState("individual");
-  const [list, setList] = useState(data.individual);
+  const [list, setList] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
+    const fetchData = async (type) => {
+      try {
+        const response = await axios.get(
+          `http://127.0.0.1:8000/api/v1/service?type=${type}`
+        );
+        setList(response.data.data.services);
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      }
+    };
+
     const query = new URLSearchParams(location.search);
     const type = query.get("type");
     if (type === "business" || type === "individual") {
       setActiveTab(type);
     }
-    setList(data[activeTab]);
+    fetchData(activeTab);
   }, [activeTab, location.search]);
 
   const handleSearch = (event) => {
@@ -133,8 +155,9 @@ function ExploreServices() {
   };
 
   const filteredList = list.filter((item) =>
-    item.toLowerCase().includes(searchQuery.toLowerCase())
+    item.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
   return (
     <>
       <div
@@ -179,13 +202,12 @@ function ExploreServices() {
                 value={searchQuery}
                 onChange={handleSearch}
               />
-              {/* <SearchIconStyled /> */}
             </SearchBarContainer>
           </Header>
           <Body>
             <List>
               {filteredList.map((item, index) => (
-                <ListItem key={index}>{item}</ListItem>
+                <ListItem key={index}>{item.title}</ListItem>
               ))}
             </List>
           </Body>

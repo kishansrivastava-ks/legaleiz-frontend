@@ -190,6 +190,7 @@ export const AddressForm = () => (
       </FormGroup>
     </FormContainer>
     <ButtonContainer>
+      <div></div>
       <UpdateButton type="submit">Update Address</UpdateButton>
     </ButtonContainer>
   </StyledForm>
@@ -220,6 +221,7 @@ export const KYCForm = () => (
       </FormGroup>
     </FormContainer>
     <ButtonContainer>
+      <div></div>
       <UpdateButton type="submit">Update KYC</UpdateButton>
     </ButtonContainer>
   </StyledForm>

@@ -23,7 +23,7 @@ const SidebarContainer = styled.div`
   padding: 2rem;
 `;
 
-const Logo = styled.div`
+const Logo = styled(NavLink)`
   font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
@@ -127,7 +127,7 @@ const Sidebar = () => {
 
   return (
     <SidebarContainer>
-      <Logo>
+      <Logo to="/">
         <img src="/logo-clipped.png" alt="logo" />
         <p>Simplifying Law, Empowering You</p>
       </Logo>
