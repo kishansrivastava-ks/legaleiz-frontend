@@ -32,21 +32,6 @@ const VerticalBar = styled.div`
   transform: translateY(-50%) rotate(180deg);
   border-radius: 3px;
 `;
-// Slide-in form styled component
-// const SlideForm = styled.div`
-//   position: fixed;
-//   top: 50%;
-//   transform: translateY(-50%);
-//   right: ${(props) => (props.isOpen ? "0" : "-300px")};
-//   width: 300px;
-//   height: 50%; /* Adjusted height */
-//   background: #fff;
-//   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
-//   padding: 20px;
-//   transition: right 0.3s ease;
-//   z-index: 10;
-//   overflow-y: auto; /* Enable scrolling if content exceeds height */
-// `;
 
 // Button styled component
 const TriggerButton = styled.button`

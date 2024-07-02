@@ -2,6 +2,11 @@
 /* eslint-disable no-unused-vars */
 import styled from "styled-components";
 import ProfilePhotoForm from "./ProfilePhotoForm";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { fetchUserData } from "../../../utils/library";
+import toast from "react-hot-toast";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -92,36 +97,141 @@ const UpdateButton = styled.button`
   }
 `;
 export const PersonalDetailsForm = ({ currentUser }) => {
+  const navigate = useNavigate();
   const { displayName, email, photoURL } = currentUser;
+  const [userData, setUserData] = useState({
+    name: displayName,
+    email: email,
+    dob: "",
+    gender: "",
+    phone: "",
+  });
 
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const userData = await fetchUserData(email);
+        setUser(userData);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    getUserData();
+  }, [email]);
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `http://127.0.0.1:8000/api/v1/user/${encodeURIComponent(email)}`
+  //       );
+  //       if (response.data.status === "success" && response.data.data.user) {
+  //         const { user } = response.data.data;
+  //         setUserData({
+  //           ...user,
+  //           existingUser: true,
+  //           fullName: user.name,
+  //           email: user.email,
+  //           profilePhoto: user.photoURL || photoURL, // Use user's photo if available, else use Google photo
+  //         });
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching user data:", error);
+  //     }
+  //   };
+
+  //   fetchUserData();
+  // }, [email, photoURL]);
+  // const user = fetchUserData(email);
+  console.log(user);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
+  };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.patch(
+        `http://127.0.0.1:8000/api/v1/user/${encodeURIComponent(email)}`,
+        userData
+      );
+      toast.success("Details updated successfully!");
+      navigate("/dashboard/profile");
+    } catch (error) {
+      console.error("Error updating user details:", error);
+      toast.error("Failed to update details. Please try again.");
+    }
+  };
+  const getImageSrc = (photo) => {
+    if (photo && photo.data && photo.contentType) {
+      const base64String = btoa(
+        new Uint8Array(photo.data.data).reduce(
+          (data, byte) => data + String.fromCharCode(byte),
+          ""
+        )
+      );
+      return `data:${photo.contentType};base64,${base64String}`;
+    }
+    return null;
+  };
   return (
-    <StyledForm>
+    <StyledForm onSubmit={handleFormSubmit}>
       <FormContainer>
         <FormGroup>
           <Label htmlFor="fullName">Full Name</Label>
           <Input
             type="text"
             id="fullName"
-            name="fullName"
+            name="name"
             value={displayName}
             readOnly
+            // onChange={handleInputChange}
           />
         </FormGroup>
         <FormGroup>
           <Label htmlFor="dob">Date of Birth</Label>
-          <Input type="date" id="dob" name="dob" />
+          <Input
+            type="date"
+            id="dob"
+            name="dob"
+            value={user?.dob}
+            onChange={handleInputChange}
+          />
         </FormGroup>
         <FormGroup>
           <Label>Gender</Label>
           <RadioGroup>
             <RadioLabel>
-              <input type="radio" name="gender" value="male" /> Male
+              <input
+                type="radio"
+                name="gender"
+                value="male"
+                checked={user?.gender === "male"}
+                onChange={handleInputChange}
+              />{" "}
+              Male
             </RadioLabel>
             <RadioLabel>
-              <input type="radio" name="gender" value="female" /> Female
+              <input
+                type="radio"
+                name="gender"
+                value="female"
+                checked={user?.gender === "female"}
+                onChange={handleInputChange}
+              />{" "}
+              Female
             </RadioLabel>
             <RadioLabel>
-              <input type="radio" name="gender" value="other" /> Other
+              <input
+                type="radio"
+                name="gender"
+                value="other"
+                checked={user?.gender === "other"}
+                onChange={handleInputChange}
+              />{" "}
+              Other
             </RadioLabel>
           </RadioGroup>
         </FormGroup>
@@ -130,17 +240,20 @@ export const PersonalDetailsForm = ({ currentUser }) => {
           <Input type="email" id="email" name="email" value={email} readOnly />
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="mobile">Mobile Number</Label>
+          <Label htmlFor="phone">Mobile Number</Label>
           <Input
             type="text"
-            id="mobile"
-            name="mobile"
-            placeholder="Mobile Number"
+            id="phone"
+            name="phone"
+            value={user?.phone}
+            onChange={handleInputChange}
           />
         </FormGroup>
       </FormContainer>
       <ButtonContainer>
-        <ProfilePhotoForm photoURL={photoURL} />
+        <ProfilePhotoForm
+          photoURL={(user && getImageSrc(user.photo)) || photoURL}
+        />
         <UpdateButton type="submit">Update Details</UpdateButton>
       </ButtonContainer>
     </StyledForm>
