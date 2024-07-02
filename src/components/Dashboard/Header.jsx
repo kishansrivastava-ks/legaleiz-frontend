@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { FaHeadset, FaQuestionCircle, FaUserCircle } from "react-icons/fa";
 import { useAuth } from "../../contexts/authContext/authContext";
 import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { fetchUserData } from "../../utils/library";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -41,6 +43,35 @@ const StyledNavLink = styled(NavLink)`
 const Header = () => {
   const { userLoggedIn, currentUser } = useAuth();
   // console.log(currentUser);
+  const { email } = currentUser;
+
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const userData = await fetchUserData(email);
+        setUser(userData);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    getUserData();
+  }, [email]);
+
+  const getImageSrc = (photo) => {
+    if (photo && photo.data && photo.contentType) {
+      const base64String = btoa(
+        new Uint8Array(photo.data.data).reduce(
+          (data, byte) => data + String.fromCharCode(byte),
+          ""
+        )
+      );
+      return `data:${photo.contentType};base64,${base64String}`;
+    }
+    return null;
+  };
+
   return (
     <HeaderContainer>
       {userLoggedIn && currentUser ? (
@@ -67,10 +98,11 @@ const Header = () => {
         <UserProfileIcon>
           {userLoggedIn && currentUser ? (
             <img
-              src={currentUser.photoURL}
+              src={(user && getImageSrc(user.photo)) || currentUser.photoURL}
               alt="user photo"
               style={{
                 width: "50px",
+                height: "50px",
                 borderRadius: "50%",
                 marginRight: "10px",
                 fontSize: "1rem",

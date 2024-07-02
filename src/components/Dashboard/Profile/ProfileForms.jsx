@@ -120,30 +120,7 @@ export const PersonalDetailsForm = ({ currentUser }) => {
 
     getUserData();
   }, [email]);
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `http://127.0.0.1:8000/api/v1/user/${encodeURIComponent(email)}`
-  //       );
-  //       if (response.data.status === "success" && response.data.data.user) {
-  //         const { user } = response.data.data;
-  //         setUserData({
-  //           ...user,
-  //           existingUser: true,
-  //           fullName: user.name,
-  //           email: user.email,
-  //           profilePhoto: user.photoURL || photoURL, // Use user's photo if available, else use Google photo
-  //         });
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching user data:", error);
-  //     }
-  //   };
 
-  //   fetchUserData();
-  // }, [email, photoURL]);
-  // const user = fetchUserData(email);
   console.log(user);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
