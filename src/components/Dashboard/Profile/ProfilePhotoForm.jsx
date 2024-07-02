@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaCamera } from "react-icons/fa";
-// import { useAuth } from "../../../contexts/authContext/authContext";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { fetchUserData, getImageSrc } from "../../../utils/library";
@@ -111,6 +110,8 @@ const ProfilePhotoForm = ({ photoURL, email }) => {
           toast.success("Profile photo updated successfully!");
           setPreviewURL(getImageSrc(response.data.data.user.photo));
           setSelectedFile(null);
+          setPreviewURL(null);
+          window.location.reload();
         } else {
           toast.error("Failed to update profile photo");
         }
@@ -119,7 +120,7 @@ const ProfilePhotoForm = ({ photoURL, email }) => {
         toast.error("An error occurred while updating the profile photo");
       }
     } else {
-      toast.warn("No file selected");
+      toast.error("No file selected");
     }
   };
 
