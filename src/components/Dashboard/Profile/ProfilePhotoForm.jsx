@@ -1,7 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaCamera } from "react-icons/fa";
+// import { useAuth } from "../../../contexts/authContext/authContext";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { fetchUserData, getImageSrc } from "../../../utils/library";
 
 const StyledForm = styled.form`
   display: flex;
@@ -71,27 +75,75 @@ const SubmitButton = styled.button`
   }
 `;
 
-const ProfilePhotoForm = ({ photoURL }) => {
+const ProfilePhotoForm = ({ photoURL, email }) => {
+  console.log(email);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [previewURL, setPreviewURL] = useState(photoURL);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setSelectedFile(file);
+    // console.log(selectedFile);
+    setPreviewURL(URL.createObjectURL(file));
+    // console.log(previewURL);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle submission logic here (uploading new image)
     if (selectedFile) {
-      console.log("Selected file:", selectedFile);
-      // Implement upload logic here
+      const formData = new FormData();
+      formData.append("photo", selectedFile);
+      console.log(formData);
+
+      try {
+        const response = await axios.patch(
+          `http://127.0.0.1:8000/api/v1/user/${encodeURIComponent(email)}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        console.log(response);
+
+        if (response.data.status === "success") {
+          toast.success("Profile photo updated successfully!");
+          setPreviewURL(getImageSrc(response.data.data.user.photo));
+          setSelectedFile(null);
+        } else {
+          toast.error("Failed to update profile photo");
+        }
+      } catch (error) {
+        console.error("Error updating profile photo:", error);
+        toast.error("An error occurred while updating the profile photo");
+      }
+    } else {
+      toast.warn("No file selected");
     }
   };
 
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const userData = await fetchUserData(email);
+        setUser(userData);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    getUserData();
+  }, [email]);
+
   return (
-    <StyledForm onSubmit={handleSubmit}>
+    <StyledForm>
       <ProfileImage>
-        <Image src={photoURL} alt="Profile" />
+        <Image
+          src={(user && getImageSrc(user.photo)) || previewURL || photoURL}
+          alt="Profile"
+        />
         <EditButton htmlFor="fileInput">
           <EditIcon />
         </EditButton>
@@ -102,7 +154,9 @@ const ProfilePhotoForm = ({ photoURL }) => {
         accept=".jpg,.jpeg,.png"
         onChange={handleFileChange}
       />
-      <SubmitButton type="submit">Update Profile Photo</SubmitButton>
+      <SubmitButton onClick={handleSubmit} type="submit">
+        Update Profile Photo
+      </SubmitButton>
     </StyledForm>
   );
 };

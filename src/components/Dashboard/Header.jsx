@@ -4,7 +4,7 @@ import { FaHeadset, FaQuestionCircle, FaUserCircle } from "react-icons/fa";
 import { useAuth } from "../../contexts/authContext/authContext";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchUserData } from "../../utils/library";
+import { fetchUserData, getImageSrc } from "../../utils/library";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -59,18 +59,18 @@ const Header = () => {
     getUserData();
   }, [email]);
 
-  const getImageSrc = (photo) => {
-    if (photo && photo.data && photo.contentType) {
-      const base64String = btoa(
-        new Uint8Array(photo.data.data).reduce(
-          (data, byte) => data + String.fromCharCode(byte),
-          ""
-        )
-      );
-      return `data:${photo.contentType};base64,${base64String}`;
-    }
-    return null;
-  };
+  // const getImageSrc = (photo) => {
+  //   if (photo && photo.data && photo.contentType) {
+  //     const base64String = btoa(
+  //       new Uint8Array(photo.data.data).reduce(
+  //         (data, byte) => data + String.fromCharCode(byte),
+  //         ""
+  //       )
+  //     );
+  //     return `data:${photo.contentType};base64,${base64String}`;
+  //   }
+  //   return null;
+  // };
 
   return (
     <HeaderContainer>

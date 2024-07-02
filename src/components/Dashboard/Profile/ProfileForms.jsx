@@ -230,6 +230,7 @@ export const PersonalDetailsForm = ({ currentUser }) => {
       <ButtonContainer>
         <ProfilePhotoForm
           photoURL={(user && getImageSrc(user.photo)) || photoURL}
+          email={email}
         />
         <UpdateButton type="submit">Update Details</UpdateButton>
       </ButtonContainer>

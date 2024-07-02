@@ -15,3 +15,16 @@ export const fetchUserData = async (email) => {
     return null;
   }
 };
+
+export const getImageSrc = (photo) => {
+  if (photo && photo.data && photo.contentType) {
+    const base64String = btoa(
+      new Uint8Array(photo.data.data).reduce(
+        (data, byte) => data + String.fromCharCode(byte),
+        ""
+      )
+    );
+    return `data:${photo.contentType};base64,${base64String}`;
+  }
+  return null;
+};
