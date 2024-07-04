@@ -127,6 +127,7 @@ function PartnershipFirm() {
         requirements={requirements}
         registrationItems={registrationItems}
         category="Company Formation"
+        serviceId="668248e9c9ff3066319c7c70"
       />
       <RecommendedProds />
     </>

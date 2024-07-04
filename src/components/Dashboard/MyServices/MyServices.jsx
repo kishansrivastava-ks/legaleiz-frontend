@@ -108,7 +108,8 @@ const Body = styled.div`
   justify-content: center;
   padding: 2rem;
   color: #fff;
-  background-color: #ff6b6b;
+  /* background-color: #ff6b6b; */
+  background-color: #fff;
   margin-top: 1rem;
 `;
 function MyServices() {

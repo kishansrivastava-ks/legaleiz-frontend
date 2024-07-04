@@ -366,7 +366,7 @@ function Home() {
           <QuickAccess>
             <h3>Quick Access</h3>
             <div>
-              <NavLink className="nav-link" to="/dashboard/my-services">
+              <NavLink className="nav-link" to="/dashboard/my-services/ongoing">
                 <span className="nav-icon">
                   <FiBriefcase />
                 </span>

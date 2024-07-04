@@ -1,9 +1,14 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
-import { createContext, useState } from "react";
+import React, { useContext, useState } from "react";
 
-export const UserContext = createContext();
+const UserContext = React.createContext();
 
-export const UserProvider = ({ children }) => {
+export function useUser() {
+  return useContext(UserContext);
+}
+
+export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
 
   return (
@@ -11,4 +16,4 @@ export const UserProvider = ({ children }) => {
       {children}
     </UserContext.Provider>
   );
-};
+}

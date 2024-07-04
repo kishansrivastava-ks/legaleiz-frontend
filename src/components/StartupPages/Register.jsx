@@ -1,6 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import styled from "styled-components";
+import PurchaseModal from "../../utils/PurchaseModal";
+import { useAuth } from "../../contexts/authContext/authContext";
+import toast from "react-hot-toast";
 
 const Container = styled.div`
   width: 100%;
@@ -86,8 +89,12 @@ const RegisterButton = styled.button`
     background-color: #0056b3;
   }
 `;
-function Register({ registrationItems, category }) {
+function Register({ serviceId, registrationItems, category }) {
+  console.log(serviceId);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [extraPrice, setExtraPrice] = useState(0);
+  const { userLoggedIn } = useAuth();
 
   const logos = [
     "https://img.icons8.com/?size=100&id=11079&format=png&color=FA5252",
@@ -109,6 +116,15 @@ function Register({ registrationItems, category }) {
     return registrationItems
       .filter((item) => selectedItems.includes(item.id))
       .reduce((total, item) => total + item.price, 0);
+  };
+
+  const handleRegisterClick = () => {
+    if (!userLoggedIn) {
+      toast.error("You need to be signed in to perform this action");
+      return;
+    }
+    setExtraPrice(calculateTotal() - registrationItems[0].price);
+    setShowModal(true);
   };
 
   return (
@@ -141,7 +157,16 @@ function Register({ registrationItems, category }) {
         ))}
       </PaymentLogos>
 
-      <RegisterButton>Register My Team</RegisterButton>
+      <RegisterButton onClick={handleRegisterClick}>
+        Register My Team
+      </RegisterButton>
+      {showModal && (
+        <PurchaseModal
+          serviceId={serviceId}
+          extraPrice={extraPrice}
+          onClose={() => setShowModal(false)}
+        />
+      )}
     </Container>
   );
 }

@@ -94,6 +94,7 @@ function Container({
   questions,
   registrationItems,
   category,
+  serviceId,
 }) {
   const containerRef = useRef(null);
   const leftRef = useRef(null);
@@ -179,7 +180,11 @@ function Container({
         </div>
       </LeftBox>
       <RightBox>
-        <Register registrationItems={registrationItems} category={category} />
+        <Register
+          serviceId={serviceId}
+          registrationItems={registrationItems}
+          category={category}
+        />
       </RightBox>
     </StyledContainer>
   );

@@ -139,7 +139,7 @@ const Sidebar = () => {
           Home
         </NavItem>
         {/* <NavItem onClick={() => toggleDropdown("myServices")}> */}
-        <NavItem to="/dashboard/my-services">
+        <NavItem to="/dashboard/my-services/ongoing">
           <NavIcon>
             <FaBriefcase />
           </NavIcon>
