@@ -119,6 +119,7 @@ function Patent() {
         questions={questions}
         registrationItems={registrationItems}
         category="Intellectual Property"
+        serviceId="66824a36c9ff3066319c7c7a"
       />
       <RecommendedProds />
     </>

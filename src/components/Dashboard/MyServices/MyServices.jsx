@@ -101,16 +101,17 @@ const SearchButton = styled.button`
   }
 `;
 const Body = styled.div`
-  flex: 1;
+  /* flex: 1; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 1rem;
   color: #fff;
-  /* background-color: #ff6b6b; */
   background-color: #fff;
+  /* background-color: #ff6b6b; */
   margin-top: 1rem;
+  height: 70vh;
 `;
 function MyServices() {
   return (

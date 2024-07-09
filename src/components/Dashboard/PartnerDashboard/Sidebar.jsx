@@ -2,15 +2,15 @@
 import { useState } from "react";
 import styled from "styled-components";
 import {
-  FaHome,
-  FaBriefcase,
-  FaClipboardList,
   FaUser,
   FaSignOutAlt,
+  FaProjectDiagram,
+  FaRupeeSign,
 } from "react-icons/fa";
-import { doSignOut } from "../../firebase/auth";
-import SpinnerMini from "../../ui/SpinnerMini";
 import { NavLink } from "react-router-dom";
+import { doSignOut } from "../../../firebase/auth";
+import SpinnerMini from "../../../ui/SpinnerMini";
+import { FaChartColumn } from "react-icons/fa6";
 
 const SidebarContainer = styled.div`
   display: flex;
@@ -79,11 +79,6 @@ const NavIcon = styled.div`
   font-size: 2rem;
 `;
 
-const NavDropdown = styled.div`
-  display: ${({ isOpen }) => (isOpen ? "block" : "none")};
-  padding-left: 2rem;
-`;
-
 const SignOutButton = styled.button`
   border: none;
   display: flex;
@@ -122,45 +117,33 @@ const Sidebar = () => {
         <p>Simplifying Law, Empowering You</p>
       </Logo>
       <Nav>
-        <NavItem to="/dashboard/home">
+        <NavItem to="/dashboard/partner/my-projects">
           <NavIcon>
-            <FaHome />
+            <FaProjectDiagram />
           </NavIcon>
-          Home
+          My Projects
         </NavItem>
-        {/* <NavItem onClick={() => toggleDropdown("myServices")}> */}
-        <NavItem to="/dashboard/my-services/ongoing">
+
+        <NavItem to="/dashboard/partner/update-status">
           <NavIcon>
-            <FaBriefcase />
+            <FaChartColumn />
           </NavIcon>
-          My Services
+          Update Status
         </NavItem>
-        {/* <NavDropdown isOpen={dropdowns.myServices}>
-          <div>Service 1</div>
-          <div>Service 2</div>
-        </NavDropdown> */}
-        {/* <NavItem onClick={() => toggleDropdown("compliances")}> */}
-        <NavItem to="/dashboard/compliances">
+
+        <NavItem to="/dashboard/partner/my-earnings">
           <NavIcon>
-            <FaClipboardList />
+            <FaRupeeSign />
           </NavIcon>
-          Compliances
+          My Earning
         </NavItem>
-        {/* <NavDropdown isOpen={dropdowns.compliances}>
-          <div>Compliance 1</div>
-          <div>Compliance 2</div>
-        </NavDropdown> */}
-        {/* <NavItem onClick={() => toggleDropdown("profile")}> */}
-        <NavItem to="/dashboard/profile">
+
+        <NavItem to="/dashboard/partner/my-profile">
           <NavIcon>
             <FaUser />
           </NavIcon>
-          Profile
+          My Profile
         </NavItem>
-        {/* <NavDropdown isOpen={dropdowns.profile}>
-          <div>Profile Info</div>
-          <div>Settings</div>
-        </NavDropdown> */}
       </Nav>
       <SignOutButton onClick={handleSignOut}>
         {isSigningOut ? (

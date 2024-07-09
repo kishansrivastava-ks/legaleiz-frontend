@@ -65,6 +65,7 @@ function Trademark() {
         questions={questions}
         registrationItems={registrationItems}
         category="Intellectual Property"
+        serviceId="66824a7ac9ff3066319c7c7e"
       />
       <RecommendedProds />
     </>

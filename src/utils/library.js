@@ -69,3 +69,46 @@ export const addServiceToUser = async (serviceId, userId) => {
     }
   }
 };
+
+// FOR UPDATING THE SERVICE STATUS OF A USER
+export const updateServiceStatus = async (userId, serviceId, updatedStatus) => {
+  try {
+    const response = await axios.post(
+      "http://127.0.0.1:8000/api/v1/user/update-service-status",
+      {
+        userId,
+        serviceId,
+        updatedStatus,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : "Failed to update service status"
+    );
+  }
+};
+
+export const addCommentToService = async (
+  userId,
+  serviceId,
+  comment,
+  commentedBy
+) => {
+  try {
+    const response = await axios.post(
+      "http://127.0.0.1:8000/api/v1/user/add-comment",
+      {
+        userId,
+        serviceId,
+        comment,
+        commentedBy,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to add comment. Please try again later");
+  }
+};

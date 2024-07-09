@@ -155,6 +155,7 @@ function PrivateLimitedCompany() {
         requirements={requirements}
         registrationItems={registrationItems}
         category="Company Formation"
+        serviceId="66824925c9ff3066319c7c72"
       />
       <RecommendedProds />
     </>

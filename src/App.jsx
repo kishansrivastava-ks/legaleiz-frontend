@@ -48,6 +48,13 @@ import ExploreServices from "./components/Dashboard/Home/ExploreServices.jsx";
 import HelpAndSupport from "./components/Dashboard/HelpAndSupport.jsx";
 import FAQs from "./components/Dashboard/FAQs.jsx";
 import CreateService from "./utils/CreateService.jsx";
+import PartnerDashboard from "./pages/Dashboard/PartnerDashboard.jsx";
+
+// PARTNER DASHBOARD COMPONENTS
+import MyProjects from "./components/Dashboard/PartnerDashboard/MyProjects.jsx";
+import UpdateStatus from "./components/Dashboard/PartnerDashboard/UpdateStatus.jsx";
+import MyEarnings from "./components/Dashboard/PartnerDashboard/MyEarnings.jsx";
+import MyProfile from "./components/Dashboard/PartnerDashboard/MyProfile.jsx";
 
 function App() {
   React.useEffect(() => {
@@ -116,7 +123,7 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/signin" element={<LoginPage />} />
 
-          {/* DASHBOARD ROUTES */}
+          {/* USER DASHBOARD ROUTES */}
           <Route path="/dashboard" element={<Dashboard />}>
             <Route path="" element={<Home />} />
             <Route path="home" element={<Home />} />
@@ -133,6 +140,15 @@ function App() {
             <Route path="help-and-support" element={<HelpAndSupport />} />
             <Route path="faqs" element={<FAQs />} />
             <Route path="create-service" element={<CreateService />} />
+          </Route>
+
+          {/* PARTNER DASHBOARD ROUTES */}
+          <Route path="/dashboard/partner" element={<PartnerDashboard />}>
+            <Route path="" element={<MyProjects />} />
+            <Route path="my-projects" element={<MyProjects />} />
+            <Route path="update-status" element={<UpdateStatus />} />
+            <Route path="my-earnings" element={<MyEarnings />} />
+            <Route path="my-profile" element={<MyProfile />} />
           </Route>
         </Routes>
       </BrowserRouter>

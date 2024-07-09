@@ -45,6 +45,7 @@ function GSTRegistration() {
         questions={questions}
         registrationItems={registrationItems}
         category="Registrations and Licenses"
+        serviceId="66824abfc9ff3066319c7c84"
       />
       <RecommendedProds />
     </>

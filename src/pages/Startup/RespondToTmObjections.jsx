@@ -155,6 +155,7 @@ function RespondToTmObjections() {
         requirements={requirements}
         registrationItems={registrationItems}
         category="Intellectual Property"
+        serviceId="66824a63c9ff3066319c7c7c"
       />
       <RecommendedProds />
     </>
