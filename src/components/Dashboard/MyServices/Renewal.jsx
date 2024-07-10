@@ -7,8 +7,6 @@ import SpinnerMini from "../../../ui/SpinnerMini";
 const Container = styled.div`
   height: 100%;
   width: 100%;
-  /* padding: 20px; */
-  /* background-color: #f9f9f9; */
 `;
 
 const ServiceList = styled.ul`
@@ -135,11 +133,50 @@ const CommentsPopupContent = styled.div`
   }
 `;
 
+// FILTER BAR
+const FilterBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  gap: 1rem;
+`;
+
+const SearchInput = styled.input`
+  padding: 0.5rem 1rem;
+
+  border: none;
+  width: 200px;
+  background-color: #fff;
+  border: 1px solid gray;
+  border-radius: 30px;
+  color: #000;
+  font-size: 1.3rem;
+  &::placeholder {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+  }
+`;
+
+const Select = styled.select`
+  padding: 0.5rem;
+  border: none;
+  border-radius: 3px;
+  background-color: #fff;
+  margin-left: 1rem;
+  border: 1px solid gray;
+  color: #000;
+`;
+
 function Renewal() {
   const { userLoggedIn, currentUser } = useAuth();
   const [renewalServices, setRenewalServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [commentsPopup, setCommentsPopup] = useState(null);
+  const [filteredServices, setFilteredServices] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortType, setSortType] = useState("");
 
   useEffect(() => {
     const getUserData = async () => {
@@ -149,6 +186,7 @@ function Renewal() {
           (service) => service.serviceStatus === "renewal"
         );
         setRenewalServices(renewal);
+        setFilteredServices(renewal);
       } catch (error) {
         console.log("Error fetching user data", error);
       } finally {
@@ -157,6 +195,40 @@ function Renewal() {
     };
     getUserData();
   }, [userLoggedIn, currentUser]);
+
+  useEffect(() => {
+    let updatedServices = [...renewalServices];
+
+    // search
+    if (searchTerm) {
+      updatedServices = updatedServices.filter((service) =>
+        service.serviceName.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // sort
+    if (sortType) {
+      updatedServices = updatedServices.sort((a, b) => {
+        switch (sortType) {
+          case "name-asc":
+            return a.serviceName.localeCompare(b.serviceName);
+          case "name-desc":
+            return b.serviceName.localeCompare(a.serviceName);
+          case "date-asc":
+            return new Date(a.purchasedOn) - new Date(b.purchasedOn);
+          case "date-desc":
+            return new Date(b.purchasedOn) - new Date(a.purchasedOn);
+          case "price-asc":
+            return a.servicePrice - b.servicePrice;
+          case "price-desc":
+            return b.servicePrice - a.servicePrice;
+          default:
+            return 0;
+        }
+      });
+    }
+    setFilteredServices(updatedServices);
+  }, [searchTerm, sortType, renewalServices]);
 
   const openCommentPopup = (comments) => {
     setCommentsPopup(comments);
@@ -196,8 +268,25 @@ function Renewal() {
 
   return (
     <Container>
+      <FilterBar>
+        <SearchInput
+          type="text"
+          placeholder="search by service name"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <Select onChange={(e) => setSortType(e.target.value)}>
+          <option value="">Sort By</option>
+          <option value="name-asc">Name (A-Z)</option>
+          <option value="name-desc">Name (Z-A)</option>
+          <option value="date-asc">Date (Ascending)</option>
+          <option value="date-desc">Date (Descending)</option>
+          <option value="price-asc">Price (Low to High)</option>
+          <option value="price-desc">Price (High to Low)</option>
+        </Select>
+      </FilterBar>
       <ServiceList>
-        {renewalServices.map((service) => (
+        {filteredServices.map((service) => (
           <ServiceItem key={service.serviceId}>
             <ServiceName>Service Name: {service.serviceName}</ServiceName>
             <ServiceId>Service ID: {service.serviceId}</ServiceId>

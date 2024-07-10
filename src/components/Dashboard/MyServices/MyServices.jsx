@@ -47,24 +47,24 @@ const NavItem = styled(NavLink).attrs({
 
   &.active {
     background-color: #ff6347;
+    background-color: ${(props) => props.bgcolor};
     color: #fff;
   }
 `;
-const SearchContainer = styled.div`
-  max-width: 700px;
-  flex-basis: 25%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f9f9f9;
-  background: transparent;
-  border-radius: 25px;
-  transition: all 0.3s ease;
+// const SearchContainer = styled.div`
+//   max-width: 700px;
+//   flex-basis: 25%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   background-color: #f9f9f9;
+//   background: transparent;
+//   border-radius: 25px;
+//   transition: all 0.3s ease;
 
-  &:hover {
-    /* box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); */
-  }
-`;
+//   &:hover {
+//   }
+// `;
 
 const SearchInput = styled.input`
   width: 100%;
@@ -119,21 +119,23 @@ function MyServices() {
       <Heading>My Services</Heading>
       <Header>
         <NavContainer>
-          <NavItem to="/dashboard/my-services/ongoing">Ongoing</NavItem>
-          <NavItem to="/dashboard/my-services/renewal">Renewal</NavItem>
-          <NavItem to="/dashboard/my-services/completed">Completed</NavItem>
-          <NavItem to="/dashboard/my-services/closed">Closed</NavItem>
+          <NavItem bgcolor="#fab942 " to="/dashboard/my-services/ongoing">
+            Ongoing
+          </NavItem>
+          <NavItem bgcolor="#46a1fb " to="/dashboard/my-services/renewal">
+            Renewal
+          </NavItem>
+          <NavItem bgcolor="#20cd49 " to="/dashboard/my-services/completed">
+            Completed
+          </NavItem>
+          <NavItem bgcolor="#98a0a6 " to="/dashboard/my-services/closed">
+            Closed
+          </NavItem>
         </NavContainer>
-        <SearchContainer>
-          <SearchInput
-            type="text"
-            placeholder="Search by ticket id or service name"
-          />
-          <SearchButton>
-            {/* <FaSearch /> */}
-            Search
-          </SearchButton>
-        </SearchContainer>
+        {/* <SearchContainer>
+          <SearchInput type="text" placeholder="Search by service name" />
+          <SearchButton>Search</SearchButton>
+        </SearchContainer> */}
       </Header>
       <Body>
         <Outlet />

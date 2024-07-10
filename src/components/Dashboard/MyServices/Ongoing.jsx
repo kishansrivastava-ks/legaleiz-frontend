@@ -12,6 +12,7 @@ const Container = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+  /* position: relative; */
 `;
 
 const ServiceList = styled.ul`
@@ -142,11 +143,50 @@ const CommentsPopupContent = styled.div`
   }
 `;
 
+// FILTER BAR
+const FilterBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  gap: 1rem;
+`;
+
+const SearchInput = styled.input`
+  padding: 0.5rem 1rem;
+
+  border: none;
+  width: 200px;
+  background-color: #fff;
+  border: 1px solid gray;
+  border-radius: 30px;
+  color: #000;
+  font-size: 1.3rem;
+  &::placeholder {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+  }
+`;
+
+const Select = styled.select`
+  padding: 0.5rem;
+  border: none;
+  border-radius: 3px;
+  background-color: #fff;
+  margin-left: 1rem;
+  border: 1px solid gray;
+  color: #000;
+`;
+
 function Ongoing() {
   const { userLoggedIn, currentUser } = useAuth();
   const [ongoingServices, setOngoingServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [commentsPopup, setCommentsPopup] = useState(null);
+  const [filteredServices, setFilteredServices] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortType, setSortType] = useState("");
 
   useEffect(() => {
     const getUserData = async () => {
@@ -157,6 +197,7 @@ function Ongoing() {
             (service) => service.serviceStatus === "ongoing"
           );
           setOngoingServices(ongoing);
+          setFilteredServices(ongoing);
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -167,6 +208,40 @@ function Ongoing() {
 
     getUserData();
   }, [userLoggedIn, currentUser]);
+
+  useEffect(() => {
+    let updatedServices = [...ongoingServices];
+
+    // search
+    if (searchTerm) {
+      updatedServices = updatedServices.filter((service) =>
+        service.serviceName.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // sort
+    if (sortType) {
+      updatedServices = updatedServices.sort((a, b) => {
+        switch (sortType) {
+          case "name-asc":
+            return a.serviceName.localeCompare(b.serviceName);
+          case "name-desc":
+            return b.serviceName.localeCompare(a.serviceName);
+          case "date-asc":
+            return new Date(a.purchasedOn) - new Date(b.purchasedOn);
+          case "date-desc":
+            return new Date(b.purchasedOn) - new Date(a.purchasedOn);
+          case "price-asc":
+            return a.servicePrice - b.servicePrice;
+          case "price-desc":
+            return b.servicePrice - a.servicePrice;
+          default:
+            return 0;
+        }
+      });
+    }
+    setFilteredServices(updatedServices);
+  }, [searchTerm, sortType, ongoingServices]);
 
   const openCommentPopup = (comments) => {
     setCommentsPopup(comments);
@@ -205,8 +280,25 @@ function Ongoing() {
 
   return (
     <Container>
+      <FilterBar>
+        <SearchInput
+          type="text"
+          placeholder="search by service name"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <Select onChange={(e) => setSortType(e.target.value)}>
+          <option value="">Sort By</option>
+          <option value="name-asc">Name (A-Z)</option>
+          <option value="name-desc">Name (Z-A)</option>
+          <option value="date-asc">Date (Ascending)</option>
+          <option value="date-desc">Date (Descending)</option>
+          <option value="price-asc">Price (Low to High)</option>
+          <option value="price-desc">Price (High to Low)</option>
+        </Select>
+      </FilterBar>
       <ServiceList>
-        {ongoingServices.map((service) => (
+        {filteredServices.map((service) => (
           <ServiceItem key={service.serviceId}>
             <ServiceName>Service Name: {service.serviceName}</ServiceName>
             <ServiceId>Service ID: {service.serviceId}</ServiceId>

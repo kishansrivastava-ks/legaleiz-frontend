@@ -4,12 +4,14 @@ import axios from "axios";
 // import toast from "react-hot-toast";
 import {
   addCommentToService,
+  deleteComment,
   fetchUserData,
   updateServiceStatus,
 } from "../../../utils/library";
 import toast from "react-hot-toast";
-import { FaComment, FaEdit } from "react-icons/fa";
+import { FaComment, FaCommentDots, FaEdit, FaTrash } from "react-icons/fa";
 import { useAuth } from "../../../contexts/authContext/authContext";
+import Tooltip from "../../../utils/Tooltip";
 
 const Container = styled.div`
   height: 76vh;
@@ -94,9 +96,31 @@ const UpdateIcon = styled.div`
   /* margin-left: auto; */
   /* display: flex; */
   /* align-items: center; */
+  color: #3498db;
+  /* font-size: 20px; */
+
+  &:hover {
+    color: #2980b9;
+  }
 `;
-const CommentIcon = styled.div`
+const AddCommentIcon = styled.div`
   cursor: pointer;
+  color: #3498db;
+  /* font-size: 20px; */
+
+  &:hover {
+    color: #2980b9;
+  }
+`;
+
+const ViewCommentsIcon = styled.div`
+  cursor: pointer;
+  color: #3498db;
+  /* font-size: 20px; */
+
+  &:hover {
+    color: #2980b9;
+  }
 `;
 
 const Popup = styled.div`
@@ -166,7 +190,7 @@ const PopupContent = styled.div`
   }
 `;
 
-// COMMENT POPUP
+// ADD COMMENT POPUP
 const CommentPopup = styled.div`
   position: fixed;
   top: 0;
@@ -194,7 +218,7 @@ const CommentPopupContent = styled.div`
   }
 
   textarea {
-    width: 80%;
+    width: 100%;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
@@ -226,6 +250,84 @@ const CommentPopupContent = styled.div`
     }
   }
 `;
+
+// VIEW COMMENTS POPUP
+const ViewCommentPopup = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const ViewCommentPopupContent = styled.div`
+  background: white;
+  padding: 20px;
+  /* border-radius: 8px; */
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .comment {
+    text-align: left;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #f9f9f9;
+    /* border-radius: 4px; */
+    position: relative;
+
+    .delete-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      color: #e74c3c;
+
+      &:hover {
+        color: #c0392b;
+      }
+    }
+  }
+
+  .comment-date {
+    font-size: 14px;
+    color: #7f8c8d;
+  }
+
+  button {
+    margin: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    /* border-radius: 4px; */
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #2980b9;
+    }
+  }
+
+  button:last-child {
+    background-color: #e74c3c;
+
+    &:hover {
+      background-color: #c0392b;
+    }
+  }
+`;
+
 function MyProjects() {
   const [purchases, setPurchases] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -235,6 +337,8 @@ function MyProjects() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [comment, setComment] = useState("");
   const [isCommentPopupOpen, setIsCommentPopupOpen] = useState(false);
+  const [isViewCommentsPopupOpen, setIsViewCommentsPopupOpen] = useState(false);
+
   const { currentUser } = useAuth();
 
   useEffect(() => {
@@ -259,11 +363,18 @@ function MyProjects() {
     setSelectedService(purchase);
     setNewStatus(purchase.serviceStatus);
     setIsPopupOpen(true);
+    setIsViewCommentsPopupOpen(false);
   };
 
   const handleCommentClick = (purchase) => {
     setSelectedService(purchase);
     setIsCommentPopupOpen(true);
+    setIsViewCommentsPopupOpen(false);
+  };
+
+  const handleViewCommentsClick = (purchase) => {
+    setSelectedService(purchase);
+    setIsViewCommentsPopupOpen(true);
   };
   const handleStatusChange = async () => {
     const confirmed = window.confirm(
@@ -310,6 +421,27 @@ function MyProjects() {
       toast.error(error.message);
     }
   };
+
+  const handleDeleteComment = async (commentId) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this comment?"
+    );
+
+    if (!confirmed) return;
+
+    try {
+      await deleteComment(
+        selectedService.user,
+        selectedService.service,
+        commentId
+      );
+      toast.success("Comment deleted successfully");
+      setIsViewCommentsPopupOpen(false);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   if (loading) {
     return (
       <Container>
@@ -368,11 +500,22 @@ function MyProjects() {
                 </div>
                 <div style={{}}>
                   <UpdateIcon onClick={() => handleUpdateClick(purchase)}>
-                    <FaEdit />
+                    <Tooltip text="Update Status">
+                      <FaEdit />
+                    </Tooltip>
                   </UpdateIcon>
-                  <CommentIcon onClick={() => handleCommentClick(purchase)}>
-                    <FaComment />
-                  </CommentIcon>
+                  <AddCommentIcon onClick={() => handleCommentClick(purchase)}>
+                    <Tooltip text="Add Comment">
+                      <FaComment />
+                    </Tooltip>
+                  </AddCommentIcon>
+                  <ViewCommentsIcon
+                    onClick={() => handleViewCommentsClick(purchase)}
+                  >
+                    <Tooltip text="View Comments">
+                      <FaCommentDots />
+                    </Tooltip>
+                  </ViewCommentsIcon>
                 </div>
               </div>
             </ServiceItem>
@@ -413,6 +556,28 @@ function MyProjects() {
           </CommentPopupContent>
         </CommentPopup>
       )}
+      {isViewCommentsPopupOpen &&
+        selectedService &&
+        selectedService.comments && (
+          <ViewCommentPopup>
+            <ViewCommentPopupContent>
+              <h2>Comments</h2>
+              {selectedService.comments.map((comment) => (
+                <div key={comment._id} className="comment">
+                  <p>{comment.commentText}</p>
+                  <span className="comment-date">
+                    {new Date(comment.commentedOn).toLocaleDateString()}
+                  </span>
+                  <FaTrash
+                    onClick={() => handleDeleteComment(comment._id)}
+                    className="delete-icon"
+                  />
+                </div>
+              ))}
+              <button onClick={() => setSelectedService(null)}>close</button>
+            </ViewCommentPopupContent>
+          </ViewCommentPopup>
+        )}
     </>
   );
 }

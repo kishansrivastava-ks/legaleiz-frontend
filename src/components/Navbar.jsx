@@ -14,6 +14,7 @@ import { doSignOut } from "../firebase/auth.js";
 import { HiArrowRightOnRectangle } from "react-icons/hi2";
 import SpinnerMini from "../ui/SpinnerMini.jsx";
 import SlideOutNavbar from "./SlideoutNavbar.jsx";
+import { fetchUserData } from "../utils/library.js";
 
 const StyledNavbar = styled.nav`
   grid-row: 1;
@@ -357,9 +358,22 @@ function Navbar() {
   };
 
   const { userLoggedIn, currentUser } = useAuth();
-
-  // handling the signout
   const [isSigningOut, setIsSigningOut] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        if (userLoggedIn && currentUser) {
+          const userData = await fetchUserData(currentUser.email);
+          setUser(userData);
+        }
+      } catch (error) {
+        console.error("Error fetching user details", error.message);
+      }
+    };
+    getUserData();
+  }, [userLoggedIn, currentUser]);
 
   const handleSignOut = async () => {
     setIsSigningOut(true);
@@ -381,36 +395,7 @@ function Navbar() {
   };
 
   const navigate = useNavigate();
-  /*
-  Check for user authentication on component mount
-  const auth = initializeFirebase();
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        setUser(authUser); // User is signed in
-      } else {
-        setUser(null); // User is signed out
-      }
-    });
 
-    // Cleanup the listener when the component unmounts
-    return () => unsubscribe();
-  }, [auth]);
-
-  const handleSignOut = () => {
-    auth
-      .signOut()
-      .then(() => {
-        navigate("/"); // Redirect to home page
-        alert("Signed out successfully");
-      })
-      .catch((error) => {
-        console.error("Error signing out:", error);
-        alert("Error signing out");
-      });
-  };*/
-
-  // for the hover effect on profile
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -599,7 +584,11 @@ function Navbar() {
               />
               {isDropdownOpen && (
                 <ProfileDropDown>
-                  <ProfileDropdownItem to="/dashboard">
+                  <ProfileDropdownItem
+                    to={
+                      user.role === "user" ? "/dashboard" : "/dashboard/partner"
+                    }
+                  >
                     My Account
                   </ProfileDropdownItem>
                 </ProfileDropDown>

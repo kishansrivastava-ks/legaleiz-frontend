@@ -112,3 +112,20 @@ export const addCommentToService = async (
     throw new Error("Failed to add comment. Please try again later");
   }
 };
+
+// DELETE A COMMENT BY A PARTNER
+export const deleteComment = async (userId, serviceId, commentId) => {
+  try {
+    const response = await axios.post(
+      "http://127.0.0.1:8000/api/v1/user/delete-comment",
+      {
+        userId,
+        serviceId,
+        commentId,
+      }
+    );
+    return response;
+  } catch (error) {
+    throw new Error("Failed to delete comment. Please try again later");
+  }
+};
