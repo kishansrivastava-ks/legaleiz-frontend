@@ -5,6 +5,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../../firebase/firebase";
 import { GoogleAuthProvider } from "firebase/auth";
 import { onAuthStateChanged } from "firebase/auth";
+import { fetchUserData } from "../../utils/library";
 
 const AuthContext = React.createContext();
 
@@ -17,6 +18,7 @@ export function AuthProvider({ children }) {
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [isGoogleUser, setIsGoogleUser] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, initializeUser);
@@ -33,10 +35,19 @@ export function AuthProvider({ children }) {
         (provider) => provider.providerId === GoogleAuthProvider.PROVIDER_ID
       );
       setIsGoogleUser(isGoogle);
+
+      // Fetch user data from the database
+      try {
+        const data = await fetchUserData(user.email);
+        setUserData(data);
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+      }
     } else {
       setCurrentUser(null);
       setUserLoggedIn(false);
       setIsGoogleUser(false);
+      setUserData(null);
     }
     setLoading(false);
   }
@@ -45,6 +56,7 @@ export function AuthProvider({ children }) {
     userLoggedIn,
     isGoogleUser,
     currentUser,
+    userData,
     setCurrentUser,
   };
 

@@ -15,9 +15,14 @@ const GlobalStyles = createGlobalStyle`
 */
 
 /* Colors adapted from https://tailwindcss.com/docs/customizing-colors */
+#root {
+  /* transform: scale(0.9); */
+  /* transform-origin: center; */
+}
 
 * {
     -webkit-tap-highlight-color: transparent;
+    /* transform: scale(0.); */
   }
 
 

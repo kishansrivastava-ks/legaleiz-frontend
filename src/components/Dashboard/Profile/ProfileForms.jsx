@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { fetchUserData } from "../../../utils/library";
 import toast from "react-hot-toast";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../contexts/authContext/authContext";
 
 const Container = styled.div`
   display: flex;
@@ -237,83 +238,314 @@ export const PersonalDetailsForm = ({ currentUser }) => {
     </StyledForm>
   );
 };
-export const AddressForm = () => (
-  <StyledForm>
-    <FormContainer>
-      <FormGroup>
-        <Label htmlFor="addressLine1">Address Line 1</Label>
-        <Input
-          type="text"
-          id="addressLine1"
-          name="addressLine1"
-          placeholder="Address Line 1"
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label htmlFor="addressLine2">Address Line 2</Label>
-        <Input
-          type="text"
-          id="addressLine2"
-          name="addressLine2"
-          placeholder="Address Line 2"
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label htmlFor="pin">PIN Code</Label>
-        <Input type="number" id="pin" name="pin" placeholder="PIN Code" />
-      </FormGroup>
-      <FormGroup>
-        <Label htmlFor="district">District</Label>
-        <Input
-          type="text"
-          id="district"
-          name="district"
-          placeholder="District"
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label htmlFor="city">City / Town / Locality / Village</Label>
-        <Input type="text" id="city" name="city" placeholder="City" />
-      </FormGroup>
-      <FormGroup>
-        <Label htmlFor="state">State</Label>
-        <Input type="text" id="state" name="state" placeholder="State" />
-      </FormGroup>
-    </FormContainer>
-    <ButtonContainer>
-      <div></div>
-      <UpdateButton type="submit">Update Address</UpdateButton>
-    </ButtonContainer>
-  </StyledForm>
-);
+
+export const StyledSelect = styled.select`
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  appearance: none;
+  background-color: #fff;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23999" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 50%;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+    outline: none;
+  }
+
+  &:hover {
+    border-color: #007bff;
+  }
+`;
+
+export const StyledOption = styled.option`
+  padding: 8px;
+  font-size: 16px;
+`;
+
+export const AddressForm = () => {
+  const { userData, currentUser } = useAuth();
+  const [address, setAddress] = useState(userData?.address || "");
+
+  const [state, setState] = useState(userData?.state || "");
+  const [city, setCity] = useState(userData?.city || "");
+  const [pin, setPin] = useState(userData?.pinCode || null);
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [formLoading, setFormLoading] = useState(false);
+
+  useEffect(() => {
+    if (userData) {
+      setAddress(userData.address || "");
+      setState(userData.state || "");
+      setCity(userData.city || "");
+      setPin(userData.pinCode || "");
+    }
+  }, [userData]);
+
+  useEffect(() => {
+    // Fetch states when component mounts
+    const fetchStates = async () => {
+      try {
+        const response = await axios.post(
+          `https://countriesnow.space/api/v0.1/countries/states`,
+          {
+            country: "India",
+          }
+        );
+        // console.log(response.data.data.states);
+        setStates(response.data.data.states);
+      } catch (error) {
+        toast.error("Failed to fetch states");
+      }
+    };
+    fetchStates();
+  }, []);
+
+  useEffect(() => {
+    if (state) {
+      // Fetch cities for the selected state
+      const fetchCities = async () => {
+        try {
+          const response = await axios.post(
+            `https://countriesnow.space/api/v0.1/countries/state/cities`,
+            {
+              country: "India",
+              state: state,
+            }
+          );
+          // console.log(response.data);
+          setCities(response.data.data);
+        } catch (error) {
+          toast.error("Failed to fetch cities");
+        }
+      };
+      fetchCities();
+    }
+  }, [state]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFormLoading(true);
+    try {
+      const response = await axios.patch(
+        `http://127.0.0.1:8000/api/v1/user/${encodeURIComponent(
+          currentUser.email
+        )}`,
+        {
+          address,
+          state,
+          city,
+          pinCode: pin,
+        }
+      );
+      toast.success("Address updated successfully!");
+      window.location.reload();
+    } catch (error) {
+      toast.error("Failed to update address. Please try again.");
+    } finally {
+      setFormLoading(false);
+    }
+  };
+
+  return (
+    <StyledForm onSubmit={handleSubmit}>
+      <FormContainer>
+        <FormGroup>
+          <Label htmlFor="address">Address</Label>
+          <Input
+            type="text"
+            id="address"
+            name="address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            placeholder="Address"
+          />
+        </FormGroup>
+
+        <FormGroup>
+          <Label htmlFor="state">State</Label>
+          <StyledSelect
+            id="state"
+            name="state"
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+          >
+            <StyledOption value="">Select State</StyledOption>
+            {states.map((state) => (
+              <StyledOption key={state.iso2} value={state.iso2}>
+                {state.name}
+              </StyledOption>
+            ))}
+          </StyledSelect>
+        </FormGroup>
+        <FormGroup>
+          <Label htmlFor="city">City / Town / Locality / Village</Label>
+          <StyledSelect
+            id="city"
+            name="city"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          >
+            <StyledOption value="">Select City</StyledOption>
+            {cities.map((city) => (
+              <StyledOption key={city.id} value={city.name}>
+                {city.toString()}
+              </StyledOption>
+            ))}
+          </StyledSelect>
+        </FormGroup>
+        <FormGroup>
+          <Label htmlFor="pin">PIN Code</Label>
+          <div style={{ width: "100%" }}>
+            <Input
+              type="number"
+              id="pin"
+              name="pin"
+              placeholder="Enter your PIN Code"
+              value={pin}
+              onChange={(e) => {
+                setPin(e.target.value);
+              }}
+            />
+          </div>
+        </FormGroup>
+      </FormContainer>
+      <ButtonContainer>
+        <div></div>
+        <UpdateButton type="submit" disabled={formLoading}>
+          {formLoading ? "Updating..." : "Update Address"}
+        </UpdateButton>
+      </ButtonContainer>
+    </StyledForm>
+  );
+};
 
 // 🔴 KYC FORM
+const Warning = styled.p`
+  color: red;
+  font-size: 1rem;
+`;
+export const KYCForm = () => {
+  const { useLoggedIn, currentUser, userData } = useAuth();
+  const [aadhar, setAadhar] = useState(userData?.aadhar || "");
+  const [pan, setPan] = useState(userData?.pan || "");
+  const [loading, setLoading] = useState(false);
+  const [aadharError, setAadharError] = useState("");
+  const [panError, setPanError] = useState("");
 
-export const KYCForm = () => (
-  <StyledForm>
-    <FormContainer>
-      <FormGroup>
-        <Label htmlFor="aadhar">Aadhar Number</Label>
-        <Input
-          type="text"
-          id="aadhar"
-          name="aadhar"
-          placeholder="Enter your Aadhar number"
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label htmlFor="pan">PAN Number</Label>
-        <Input
-          type="text"
-          id="pan"
-          name="pan"
-          placeholder="Enter your PAN number"
-        />
-      </FormGroup>
-    </FormContainer>
-    <ButtonContainer>
-      <div></div>
-      <UpdateButton type="submit">Update KYC</UpdateButton>
-    </ButtonContainer>
-  </StyledForm>
-);
+  useEffect(() => {
+    if (userData) {
+      setAadhar(userData.aadhar || "");
+      setPan(userData.pan || "");
+    }
+  }, [userData]);
+
+  const validateAadhar = (value) => {
+    const regex = /^\d{12}$/;
+    if (!regex.test(value)) {
+      setAadharError("Invalid Aadhar number. It should be a 12-digit number.");
+    } else {
+      setAadharError("");
+    }
+  };
+  const validatePan = (value) => {
+    const regex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+    if (!regex.test(value)) {
+      setPanError(
+        "Invalid PAN number. It should be in the format: AAAAA9999A."
+      );
+    } else {
+      setPanError("");
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (aadharError || panError) {
+      toast.error("Please fix the errors before submitting.");
+      return;
+    }
+    setLoading(true);
+
+    try {
+      const response = await axios.patch(
+        `http://127.0.0.1:8000/api/v1/user/${encodeURIComponent(
+          currentUser.email
+        )}`,
+        {
+          aadhar,
+          pan,
+        }
+      );
+      console.log(response);
+
+      if (response.status === 200) {
+        toast.success("KYC Updated Successfully");
+        // setTimeout(() => {
+        //   window.location.reload();
+        // }, 2000);
+      } else {
+        throw new Error("Failed to update KYC");
+      }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <StyledForm onSubmit={handleSubmit}>
+      <FormContainer>
+        <FormGroup>
+          <Label htmlFor="aadhar">Aadhar Number</Label>
+          <div style={{ width: "100%" }}>
+            <Input
+              type="text"
+              id="aadhar"
+              name="aadhar"
+              placeholder="Enter your Aadhar number"
+              value={aadhar}
+              onChange={(e) => {
+                setAadhar(e.target.value);
+                validateAadhar(e.target.value);
+              }}
+            />
+            {aadharError && <Warning>{aadharError}</Warning>}
+          </div>
+        </FormGroup>
+        <FormGroup>
+          <Label htmlFor="pan">PAN Number</Label>
+          <div style={{ width: "100%" }}>
+            <Input
+              type="text"
+              id="pan"
+              name="pan"
+              value={pan}
+              onChange={(e) => {
+                setPan(e.target.value);
+                validatePan(e.target.value);
+              }}
+              placeholder="Enter your PAN number"
+            />
+            {panError && <Warning>{panError}</Warning>}
+          </div>
+        </FormGroup>
+      </FormContainer>
+      <ButtonContainer>
+        <div></div>
+        <UpdateButton type="submit" disabled={loading}>
+          {loading ? "Updating..." : "Update KYC"}
+        </UpdateButton>
+      </ButtonContainer>
+    </StyledForm>
+  );
+};

@@ -26,7 +26,7 @@ const StyledNavbar = styled.nav`
   background-color: #fff;
   padding: 0 3rem;
   display: flex;
-  /* justify-content: space-around; */
+  justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-weight: 600;
@@ -179,6 +179,10 @@ const Link = styled(NavLink)`
     transition: all 0.1s;
   }
   transition: all 0.1s;
+`;
+
+const LogoLink = styled(Link)`
+  /* background-color: red; */
 `;
 
 const SignOutButton = styled.button`
@@ -404,7 +408,9 @@ function Navbar() {
 
   return (
     <StyledNavbar>
-      <Logo src="/logo.png" alt="Logo" />
+      <LogoLink to="/">
+        <Logo src="/logo.png" alt="Logo" />
+      </LogoLink>
       <NavItems>
         <TalkToLawyer>
           <div style={{ display: "flex", alignItems: "center" }}>
