@@ -109,18 +109,30 @@ export const PersonalDetailsForm = ({ currentUser }) => {
   });
 
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const getUserData = async () => {
       try {
         const userData = await fetchUserData(email);
         setUser(userData);
+        setUserData({
+          ...userData,
+          name: displayName,
+          email: email,
+          dob: userData.dob
+            ? new Date(userData.dob).toISOString().split("T")[0]
+            : "",
+          gender: userData.gender || "",
+          phone: userData.phone || "",
+        });
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
 
     getUserData();
-  }, [email]);
+  }, [email, displayName]);
 
   console.log(user);
   const handleInputChange = (e) => {
@@ -130,6 +142,7 @@ export const PersonalDetailsForm = ({ currentUser }) => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await axios.patch(
         `http://127.0.0.1:8000/api/v1/user/${encodeURIComponent(email)}`,
@@ -140,6 +153,8 @@ export const PersonalDetailsForm = ({ currentUser }) => {
     } catch (error) {
       console.error("Error updating user details:", error);
       toast.error("Failed to update details. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
   const getImageSrc = (photo) => {
@@ -174,7 +189,7 @@ export const PersonalDetailsForm = ({ currentUser }) => {
             type="date"
             id="dob"
             name="dob"
-            value={user?.dob}
+            value={userData.dob}
             onChange={handleInputChange}
           />
         </FormGroup>
@@ -186,7 +201,7 @@ export const PersonalDetailsForm = ({ currentUser }) => {
                 type="radio"
                 name="gender"
                 value="male"
-                checked={user?.gender === "male"}
+                checked={userData.gender === "male"}
                 onChange={handleInputChange}
               />{" "}
               Male
@@ -196,7 +211,7 @@ export const PersonalDetailsForm = ({ currentUser }) => {
                 type="radio"
                 name="gender"
                 value="female"
-                checked={user?.gender === "female"}
+                checked={userData.gender === "female"}
                 onChange={handleInputChange}
               />{" "}
               Female
@@ -206,7 +221,7 @@ export const PersonalDetailsForm = ({ currentUser }) => {
                 type="radio"
                 name="gender"
                 value="other"
-                checked={user?.gender === "other"}
+                checked={userData.gender === "other"}
                 onChange={handleInputChange}
               />{" "}
               Other
@@ -223,7 +238,7 @@ export const PersonalDetailsForm = ({ currentUser }) => {
             type="text"
             id="phone"
             name="phone"
-            value={user?.phone}
+            value={userData.phone}
             onChange={handleInputChange}
           />
         </FormGroup>
@@ -233,7 +248,9 @@ export const PersonalDetailsForm = ({ currentUser }) => {
           photoURL={(user && getImageSrc(user.photo)) || photoURL}
           email={email}
         />
-        <UpdateButton type="submit">Update Details</UpdateButton>
+        <UpdateButton type="submit" disabled={loading}>
+          {loading ? "Updating..." : "Update Details"}
+        </UpdateButton>
       </ButtonContainer>
     </StyledForm>
   );
