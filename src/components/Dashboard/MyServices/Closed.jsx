@@ -19,6 +19,7 @@ const ServiceList = styled.ul`
 
 const ServiceItem = styled.li`
   background-color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 15px;

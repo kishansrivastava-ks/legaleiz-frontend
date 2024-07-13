@@ -160,28 +160,44 @@ const RequestList = styled.div`
 
 const RequestItem = styled.div`
   background: #f8f9fa;
-  padding: 15px;
+  padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const RequestDetails = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   justify-content: space-between;
+`;
+
+const RequestDetail = styled.p`
+  margin: 0;
+  display: flex;
   align-items: center;
+  font-size: 0.9em;
+  flex: 1 1 calc(50% - 10px);
+  strong {
+    font-weight: bold;
+    margin-right: 5px;
+  }
 `;
 
 const WithdrawButton = styled.button`
-  padding: 5px 10px;
   background-color: #dc3545;
   color: white;
   border: none;
-  cursor: pointer;
+  padding: 5px 15px;
   border-radius: 5px;
-  font-size: 14px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  align-self: flex-end;
   &:hover {
     background-color: #c82333;
-  }
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 5px #c82333;
   }
 `;
 
@@ -205,7 +221,9 @@ const HelpAndSupport = () => {
 
   const fetchRequests = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/v1/query");
+      const response = await axios.get(
+        "http://127.0.0.1:8000/api/v1/query/getAll"
+      );
       const userRequests = response.data.data.queries.filter(
         (query) => query.userId === userData._id
       );
@@ -217,13 +235,20 @@ const HelpAndSupport = () => {
   };
 
   const handleWithdrawRequest = async (id) => {
-    try {
-      await axios.delete(`http://127.0.0.1:8000/api/v1/query/${id}`);
-      toast.success("Request withdrawn successfully.");
-      fetchRequests(); // Refresh the requests list
-    } catch (error) {
-      toast.error("Failed to withdraw request.");
-      console.error("Error withdrawing request:", error);
+    const confirm = window.confirm(
+      "Are you sure you want to withdraw this request?"
+    );
+    if (confirm) {
+      try {
+        await axios.delete(`http://127.0.0.1:8000/api/v1/query/${id}`);
+        toast.success("Request withdrawn successfully.");
+        fetchRequests(); // Refresh the requests list
+      } catch (error) {
+        toast.error("Failed to withdraw request.");
+        console.error("Error withdrawing request:", error);
+      }
+    } else {
+      return;
     }
   };
 
@@ -339,34 +364,40 @@ const HelpAndSupport = () => {
           <ModalContent>
             <CloseButton onClick={closeModal}>&times;</CloseButton>
             <h2>My Requests</h2>
-            <RequestList>
-              {requests.map((request) => (
-                <RequestItem key={request._id}>
-                  <p>
-                    <strong>Service:</strong> {request.serviceName}
-                  </p>
-                  <p>
-                    <strong>Reason:</strong> {request.reason}
-                  </p>
-                  <p>
-                    <strong>Description:</strong> {request.description}
-                  </p>
-                  <p>
-                    <strong>Date:</strong>{" "}
-                    {new Date(request.date).toLocaleString()}
-                  </p>
-                  <p>
-                    <strong>Addressed:</strong>{" "}
-                    {request.addressed ? "Yes" : "No"}
-                  </p>
-                  <WithdrawButton
-                    onClick={() => handleWithdrawRequest(request._id)}
-                  >
-                    Withdraw Request
-                  </WithdrawButton>
-                </RequestItem>
-              ))}
-            </RequestList>
+            {requests.length == 0 ? (
+              <div>No active requests found</div>
+            ) : (
+              <RequestList>
+                {requests.map((request) => (
+                  <RequestItem key={request._id}>
+                    <RequestDetails>
+                      <RequestDetail>
+                        <strong>Service:</strong> {request.serviceName}
+                      </RequestDetail>
+                      <RequestDetail>
+                        <strong>Reason:</strong> {request.reason}
+                      </RequestDetail>
+                      <RequestDetail>
+                        <strong>Description:</strong> {request.description}
+                      </RequestDetail>
+                      <RequestDetail>
+                        <strong>Date:</strong>{" "}
+                        {new Date(request.dateAsked).toLocaleString()}
+                      </RequestDetail>
+                      <RequestDetail>
+                        <strong>Addressed:</strong>{" "}
+                        {request.addressed ? "Yes" : "No"}
+                      </RequestDetail>
+                      <WithdrawButton
+                        onClick={() => handleWithdrawRequest(request._id)}
+                      >
+                        Withdraw Request
+                      </WithdrawButton>
+                    </RequestDetails>
+                  </RequestItem>
+                ))}
+              </RequestList>
+            )}
           </ModalContent>
         </Modal>
       )}
