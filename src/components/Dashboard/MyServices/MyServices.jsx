@@ -123,15 +123,6 @@ function MyServices() {
     queryFn: () => getServices(currentUser.email),
   });
 
-  // get the count for each kind of service from the services
-  // if (services) {
-  //   const serviceCount = services.reduce((acc, service) => {
-  //     acc[service.kind] = (acc[service.kind] || 0) + 1;
-  //     return acc;
-  //   }, {});
-  //   console.log(serviceCount);
-  // }
-
   return (
     <Container>
       <Heading>My Services ({services && services.length})</Heading>

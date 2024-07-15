@@ -185,8 +185,6 @@ const FallbackContainer = styled.div`
 
 function Closed() {
   const { currentUser } = useAuth();
-  // const [closedServices, setClosedServices] = useState([]);
-  // const [loading, setLoading] = useState(true);
   const [commentsPopup, setCommentsPopup] = useState(null);
   const [filteredServices, setFilteredServices] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -196,27 +194,6 @@ function Closed() {
     queryKey: ["closedServices"],
     queryFn: () => getServices(currentUser.email, "closed"),
   });
-
-  // useEffect(() => {
-  //   const getUserData = async () => {
-  //     try {
-  //       if (userLoggedIn && currentUser) {
-  //         const user = await fetchUserData(currentUser.email);
-  //         const closed = user.purchasedServices.filter(
-  //           (service) => service.serviceStatus === "closed"
-  //         );
-  //         setClosedServices(closed);
-  //         setFilteredServices(closed);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching user data:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   getUserData();
-  // }, [userLoggedIn, currentUser]);
 
   useEffect(() => {
     if (data) {
@@ -260,35 +237,6 @@ function Closed() {
   const closeCommentsPopup = () => {
     setCommentsPopup(null);
   };
-
-  // if (loading) {
-  //   return (
-  //     <Container
-  //       style={{
-  //         display: "flex",
-  //         alignItems: "center",
-  //         justifyContent: "center",
-  //       }}
-  //     >
-  //       <SpinnerMini color="#000" />
-  //     </Container>
-  //   );
-  // }
-
-  // if (closedServices.length === 0) {
-  //   return (
-  //     <Container
-  //       style={{
-  //         display: "flex",
-  //         alignItems: "center",
-  //         justifyContent: "center",
-  //         color: "#000",
-  //       }}
-  //     >
-  //       No closed services found.
-  //     </Container>
-  //   );
-  // }
 
   return (
     <Container>

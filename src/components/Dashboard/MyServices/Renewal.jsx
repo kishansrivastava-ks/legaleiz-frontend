@@ -181,8 +181,7 @@ const FallbackContainer = styled.div`
 `;
 function Renewal() {
   const { currentUser } = useAuth();
-  // const [renewalServices, setRenewalServices] = useState([]);
-  // const [loading, setLoading] = useState(true);
+
   const [commentsPopup, setCommentsPopup] = useState(null);
   const [filteredServices, setFilteredServices] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -192,24 +191,6 @@ function Renewal() {
     queryKey: ["renewalServices"],
     queryFn: () => getServices(currentUser.email, "renewal"),
   });
-
-  // useEffect(() => {
-  //   const getUserData = async () => {
-  //     try {
-  //       const user = await fetchUserData(currentUser.email);
-  //       const renewal = user.purchasedServices.filter(
-  //         (service) => service.serviceStatus === "renewal"
-  //       );
-  //       setRenewalServices(renewal);
-  //       setFilteredServices(renewal);
-  //     } catch (error) {
-  //       console.log("Error fetching user data", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   getUserData();
-  // }, [userLoggedIn, currentUser]);
 
   useEffect(() => {
     if (data) {
@@ -253,35 +234,6 @@ function Renewal() {
   const closeCommentsPopup = () => {
     setCommentsPopup(null);
   };
-
-  // if (loading) {
-  //   return (
-  //     <Container
-  //       style={{
-  //         display: "flex",
-  //         alignItems: "center",
-  //         justifyContent: "center",
-  //       }}
-  //     >
-  //       <SpinnerMini color="#000" />
-  //     </Container>
-  //   );
-  // }
-
-  // if (renewalServices.length === 0) {
-  //   return (
-  //     <Container
-  //       style={{
-  //         display: "flex",
-  //         alignItems: "center",
-  //         justifyContent: "center",
-  //         color: "#000",
-  //       }}
-  //     >
-  //       No renewal services found.
-  //     </Container>
-  //   );
-  // }
 
   return (
     <Container>

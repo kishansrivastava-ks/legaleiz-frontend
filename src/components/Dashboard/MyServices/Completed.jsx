@@ -179,12 +179,12 @@ const FallbackContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #000;
 `;
 
 function Completed() {
   const { currentUser } = useAuth();
-  // const [completedServices, setCompletedServices] = useState([]);
-  // const [loading, setLoading] = useState(true);
+
   const [commentsPopup, setCommentsPopup] = useState(null);
   const [filteredServices, setFilteredServices] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -194,27 +194,6 @@ function Completed() {
     queryKey: ["completedServices"],
     queryFn: () => getServices(currentUser.email, "completed"),
   });
-
-  // useEffect(() => {
-  //   const getUserData = async () => {
-  //     try {
-  //       if (userLoggedIn && currentUser) {
-  //         const user = await fetchUserData(currentUser.email);
-  //         const completed = user.purchasedServices.filter(
-  //           (service) => service.serviceStatus === "completed"
-  //         );
-  //         setCompletedServices(completed);
-  //         setFilteredServices(completed);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching user data:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   getUserData();
-  // }, [userLoggedIn, currentUser]);
 
   useEffect(() => {
     if (data) {
@@ -258,35 +237,6 @@ function Completed() {
   const closeCommentsPopup = () => {
     setCommentsPopup(null);
   };
-
-  // if (loading) {
-  //   return (
-  //     <Container
-  //       style={{
-  //         display: "flex",
-  //         alignItems: "center",
-  //         justifyContent: "center",
-  //       }}
-  //     >
-  //       <SpinnerMini color="#000" />
-  //     </Container>
-  //   );
-  // }
-
-  // if (completedServices.length === 0) {
-  //   return (
-  //     <Container
-  //       style={{
-  //         display: "flex",
-  //         alignItems: "center",
-  //         justifyContent: "center",
-  //         color: "#000",
-  //       }}
-  //     >
-  //       No services have been completed yet!
-  //     </Container>
-  //   );
-  // }
 
   return (
     <Container>

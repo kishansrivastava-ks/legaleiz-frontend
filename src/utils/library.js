@@ -184,3 +184,17 @@ export async function getServices(email, status = null) {
     return null;
   }
 }
+
+export async function getPurchases() {
+  try {
+    const response = await axios.get("http://127.0.0.1:8000/api/v1/purchase");
+    if (response.data.status === "success") {
+      return response.data.data.purchases;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching purchases:", error);
+    return null;
+  }
+}

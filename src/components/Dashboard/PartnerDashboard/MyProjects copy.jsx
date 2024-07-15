@@ -14,8 +14,7 @@ import toast from "react-hot-toast";
 import { FaComment, FaCommentDots, FaEdit, FaTrash } from "react-icons/fa";
 import { useAuth } from "../../../contexts/authContext/authContext";
 import Tooltip from "../../../utils/Tooltip";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import SpinnerMini from "../../../ui/SpinnerMini";
+import { useQuery } from "@tanstack/react-query";
 
 const Container = styled.div`
   height: 76vh;
@@ -334,13 +333,14 @@ const ViewCommentPopupContent = styled.div`
 
 function MyProjects() {
   const [purchases, setPurchases] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedService, setSelectedService] = useState(null);
   const [newStatus, setNewStatus] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [comment, setComment] = useState("");
   const [isCommentPopupOpen, setIsCommentPopupOpen] = useState(false);
   const [isViewCommentsPopupOpen, setIsViewCommentsPopupOpen] = useState(false);
-  const queryClient = useQueryClient();
 
   const { currentUser } = useAuth();
 
@@ -348,13 +348,25 @@ function MyProjects() {
     queryKey: ["purchases"],
     queryFn: getPurchases,
   });
-  // console.log(data);
+  console.log(data);
 
   useEffect(() => {
-    if (data) {
-      setPurchases(data);
-    }
-  }, [data]);
+    const fetchPurchases = async () => {
+      try {
+        const response = await axios.get(
+          "http://127.0.0.1:8000/api/v1/purchase"
+        );
+        setPurchases(response.data.data.purchases);
+      } catch (err) {
+        setError("Failed to fetch purchases. Please try again later.");
+        // toast.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPurchases();
+  }, []);
 
   const handleUpdateClick = (purchase) => {
     setSelectedService(purchase);
@@ -413,10 +425,6 @@ function MyProjects() {
       );
 
       toast.success("Comment added successfully");
-      queryClient.invalidateQueries({
-        queryKey: ["purchases"],
-      });
-
       setIsCommentPopupOpen(false);
     } catch (error) {
       toast.error(error.message);
@@ -437,87 +445,91 @@ function MyProjects() {
         commentId
       );
       toast.success("Comment deleted successfully");
-      queryClient.invalidateQueries({
-        queryKey: ["purchases"],
-      });
       setIsViewCommentsPopupOpen(false);
     } catch (error) {
       toast.error(error.message);
     }
   };
 
+  if (loading) {
+    return (
+      <Container>
+        <Loader>Loading...</Loader>
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container>
+        <Loader>{error}</Loader>
+      </Container>
+    );
+  }
+
+  if (purchases.length === 0) {
+    return (
+      <Container>
+        <NoServicesMessage>No active services found.</NoServicesMessage>
+      </Container>
+    );
+  }
+
   return (
     <>
-      <Heading>My Projects ({data && data.length})</Heading>
+      <Heading>My Projects</Heading>
       <Container>
-        {isPending ? (
-          <Loader>
-            <SpinnerMini color="#000" />
-          </Loader>
-        ) : purchases.length === 0 ? (
-          <Loader>No active services found</Loader>
-        ) : (
-          <ServiceList>
-            {data &&
-              purchases.map((purchase) => (
-                <ServiceItem key={purchase._id}>
-                  <div>
-                    <ServiceName>
-                      Service Name: {purchase.serviceName}
-                    </ServiceName>
-                    <ServiceId>Service ID: {purchase.service}</ServiceId>
+        <ServiceList>
+          {purchases.map((purchase) => (
+            <ServiceItem key={purchase._id}>
+              <div>
+                <ServiceName>Service Name: {purchase.serviceName}</ServiceName>
+                <ServiceId>Service ID: {purchase.service}</ServiceId>
+                <ServiceDetail>Purchased By: {purchase.userName}</ServiceDetail>
+                <ServiceDetail>User ID: {purchase.user}</ServiceDetail>
+              </div>
+              <div style={{ display: "flex", gap: "1rem" }}>
+                <div style={{ textAlign: "right" }}>
+                  <ServiceStatus>
+                    Status: {purchase.serviceStatus}
+                  </ServiceStatus>
+                  <ServiceDate>
+                    Purchased On:{" "}
+                    {new Date(purchase.purchasedOn).toLocaleDateString()}
+                  </ServiceDate>
+                  <ServicePrice>Price: ${purchase.servicePrice}</ServicePrice>
+                  {purchase.extraPrice > 0 && (
                     <ServiceDetail>
-                      Purchased By: {purchase.userName}
+                      Extra Price: ${purchase.extraPrice}
                     </ServiceDetail>
-                    <ServiceDetail>User ID: {purchase.user}</ServiceDetail>
-                  </div>
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    <div style={{ textAlign: "right" }}>
-                      <ServiceStatus>
-                        Status: {purchase.serviceStatus}
-                      </ServiceStatus>
-                      <ServiceDate>
-                        Purchased On:{" "}
-                        {new Date(purchase.purchasedOn).toLocaleDateString()}
-                      </ServiceDate>
-                      <ServicePrice>
-                        Price: ${purchase.servicePrice}
-                      </ServicePrice>
-                      {purchase.extraPrice > 0 && (
-                        <ServiceDetail>
-                          Extra Price: ${purchase.extraPrice}
-                        </ServiceDetail>
-                      )}
-                      <ServiceDetail>
-                        Total Price: ${purchase.totalPrice}
-                      </ServiceDetail>
-                    </div>
-                    <div style={{}}>
-                      <UpdateIcon onClick={() => handleUpdateClick(purchase)}>
-                        <Tooltip text="Update Status">
-                          <FaEdit />
-                        </Tooltip>
-                      </UpdateIcon>
-                      <AddCommentIcon
-                        onClick={() => handleCommentClick(purchase)}
-                      >
-                        <Tooltip text="Add Comment">
-                          <FaComment />
-                        </Tooltip>
-                      </AddCommentIcon>
-                      <ViewCommentsIcon
-                        onClick={() => handleViewCommentsClick(purchase)}
-                      >
-                        <Tooltip text="View Comments">
-                          <FaCommentDots />
-                        </Tooltip>
-                      </ViewCommentsIcon>
-                    </div>
-                  </div>
-                </ServiceItem>
-              ))}
-          </ServiceList>
-        )}
+                  )}
+                  <ServiceDetail>
+                    Total Price: ${purchase.totalPrice}
+                  </ServiceDetail>
+                </div>
+                <div style={{}}>
+                  <UpdateIcon onClick={() => handleUpdateClick(purchase)}>
+                    <Tooltip text="Update Status">
+                      <FaEdit />
+                    </Tooltip>
+                  </UpdateIcon>
+                  <AddCommentIcon onClick={() => handleCommentClick(purchase)}>
+                    <Tooltip text="Add Comment">
+                      <FaComment />
+                    </Tooltip>
+                  </AddCommentIcon>
+                  <ViewCommentsIcon
+                    onClick={() => handleViewCommentsClick(purchase)}
+                  >
+                    <Tooltip text="View Comments">
+                      <FaCommentDots />
+                    </Tooltip>
+                  </ViewCommentsIcon>
+                </div>
+              </div>
+            </ServiceItem>
+          ))}
+        </ServiceList>
       </Container>
       {isPopupOpen && (
         <Popup>
