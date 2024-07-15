@@ -4,9 +4,8 @@ import { useAuth } from "../../contexts/authContext/authContext";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getRequests, withdrawRequest } from "../../utils/library";
-import SpinnerMini from "../../ui/SpinnerMini";
+import { useQuery } from "@tanstack/react-query";
+import { getRequests } from "../../utils/library";
 
 const Container = styled.div`
   display: flex;
@@ -222,27 +221,38 @@ const HelpAndSupport = () => {
     }
   }, [userData]);
 
-  // REACT QUERY TO GET THE USER REQUESTS
-  const { isPending, data, error } = useQuery({
-    queryKey: ["requests"],
-    queryFn: getRequests,
-  });
+  const fetchRequests = async () => {
+    try {
+      const response = await axios.get(
+        "http://127.0.0.1:8000/api/v1/query/getAll"
+      );
+      const userRequests = response.data.data.queries.filter(
+        (query) => query.userId === userData._id
+      );
+      setRequests(userRequests);
+    } catch (error) {
+      toast.error("Failed to fetch requests.");
+      console.error("Error fetching requests:", error);
+    }
+  };
 
-  const userRequests =
-    data && data.filter((query) => query.userId === userData._id);
-  console.log(userRequests);
-
-  // WITHDRAWING A REQUEST QUERY
-  const queryClient = useQueryClient();
-  const { isPending: isWithdrawing, mutate } = useMutation({
-    mutationFn: (id) => withdrawRequest(id),
-    onSuccess: () => {
-      // invalidating the requests query to fetch it again as soon as a request is withdrawn
-      queryClient.invalidateQueries({
-        queryKey: ["requests"],
-      });
-    },
-  });
+  const handleWithdrawRequest = async (id) => {
+    const confirm = window.confirm(
+      "Are you sure you want to withdraw this request?"
+    );
+    if (confirm) {
+      try {
+        await axios.delete(`http://127.0.0.1:8000/api/v1/query/${id}`);
+        toast.success("Request withdrawn successfully.");
+        fetchRequests();
+      } catch (error) {
+        toast.error("Failed to withdraw request.");
+        console.error("Error withdrawing request:", error);
+      }
+    } else {
+      return;
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -278,9 +288,6 @@ const HelpAndSupport = () => {
         reason: "",
         issue: "",
       });
-      queryClient.invalidateQueries({
-        queryKey: ["requests"],
-      });
     } catch (error) {
       toast.error("Failed to submit request. Please try again!");
       console.error("Error submitting query:", error);
@@ -289,7 +296,7 @@ const HelpAndSupport = () => {
 
   const openModal = () => {
     setIsModalOpen(true);
-    // fetchRequests();
+    fetchRequests();
   };
 
   const closeModal = () => {
@@ -359,14 +366,11 @@ const HelpAndSupport = () => {
           <ModalContent>
             <CloseButton onClick={closeModal}>&times;</CloseButton>
             <h2>My Requests</h2>
-
-            {isPending ? (
-              <SpinnerMini color="#000  " />
-            ) : userRequests.length == 0 ? (
+            {requests.length == 0 ? (
               <div>No active requests found</div>
             ) : (
               <RequestList>
-                {userRequests.map((request) => (
+                {requests.map((request) => (
                   <RequestItem key={request._id}>
                     <RequestDetails>
                       <RequestDetail>
@@ -387,9 +391,7 @@ const HelpAndSupport = () => {
                         {request.addressed ? "Yes" : "No"}
                       </RequestDetail>
                       <WithdrawButton
-                        // onClick={() => handleWithdrawRequest(request._id)}
-                        onClick={() => mutate(request._id)}
-                        disabled={isWithdrawing}
+                        onClick={() => handleWithdrawRequest(request._id)}
                       >
                         Withdraw Request
                       </WithdrawButton>

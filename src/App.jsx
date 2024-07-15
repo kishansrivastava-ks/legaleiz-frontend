@@ -55,6 +55,17 @@ import MyProjects from "./components/Dashboard/PartnerDashboard/MyProjects.jsx";
 import UpdateStatus from "./components/Dashboard/PartnerDashboard/UpdateStatus.jsx";
 import MyEarnings from "./components/Dashboard/PartnerDashboard/MyEarnings.jsx";
 import MyProfile from "./components/Dashboard/PartnerDashboard/MyProfile.jsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // staleTime: 60 * 1000,
+      staleTime: 0,
+    },
+  },
+});
 
 function App() {
   React.useEffect(() => {
@@ -65,7 +76,8 @@ function App() {
     });
   }, []);
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
@@ -172,7 +184,7 @@ function App() {
           },
         }}
       />
-    </>
+    </QueryClientProvider>
   );
 }
 

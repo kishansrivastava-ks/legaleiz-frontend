@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../contexts/authContext/authContext";
-import { fetchUserData } from "../../../utils/library";
+import { fetchUserData, getServices } from "../../../utils/library";
 import styled from "styled-components";
 import SpinnerMini from "../../../ui/SpinnerMini";
+import { useQuery } from "@tanstack/react-query";
 
 const Container = styled.div`
   height: 100%;
@@ -179,69 +181,84 @@ const Select = styled.select`
   color: #000;
 `;
 
+const FallbackContainer = styled.div`
+  /* background-color: red; */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 function Ongoing() {
   const { userLoggedIn, currentUser } = useAuth();
-  const [ongoingServices, setOngoingServices] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [ongoingServices, setOngoingServices] = useState([]);
+  // const [loading, setLoading] = useState(true);
   const [commentsPopup, setCommentsPopup] = useState(null);
   const [filteredServices, setFilteredServices] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortType, setSortType] = useState("");
 
+  const { isPending, data } = useQuery({
+    queryKey: ["ongoingServices"],
+    queryFn: () => getServices(currentUser.email, "ongoing"),
+  });
+  // console.log(data);
+
+  // useEffect(() => {
+  //   const getUserData = async () => {
+  //     try {
+  //       if (userLoggedIn && currentUser) {
+  //         const user = await fetchUserData(currentUser.email);
+  //         const ongoing = user.purchasedServices.filter(
+  //           (service) => service.serviceStatus === "ongoing"
+  //         );
+  //         setOngoingServices(ongoing);
+  //         setFilteredServices(ongoing);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching user data:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   getUserData();
+  // }, [userLoggedIn, currentUser]);
+
   useEffect(() => {
-    const getUserData = async () => {
-      try {
-        if (userLoggedIn && currentUser) {
-          const user = await fetchUserData(currentUser.email);
-          const ongoing = user.purchasedServices.filter(
-            (service) => service.serviceStatus === "ongoing"
-          );
-          setOngoingServices(ongoing);
-          setFilteredServices(ongoing);
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      } finally {
-        setLoading(false);
+    if (data) {
+      let updatedServices = [...data];
+
+      // search
+      if (searchTerm) {
+        updatedServices = updatedServices.filter((service) =>
+          service.serviceName.toLowerCase().includes(searchTerm.toLowerCase())
+        );
       }
-    };
 
-    getUserData();
-  }, [userLoggedIn, currentUser]);
-
-  useEffect(() => {
-    let updatedServices = [...ongoingServices];
-
-    // search
-    if (searchTerm) {
-      updatedServices = updatedServices.filter((service) =>
-        service.serviceName.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+      // sort
+      if (sortType) {
+        updatedServices = updatedServices.sort((a, b) => {
+          switch (sortType) {
+            case "name-asc":
+              return a.serviceName.localeCompare(b.serviceName);
+            case "name-desc":
+              return b.serviceName.localeCompare(a.serviceName);
+            case "date-asc":
+              return new Date(a.purchasedOn) - new Date(b.purchasedOn);
+            case "date-desc":
+              return new Date(b.purchasedOn) - new Date(a.purchasedOn);
+            case "price-asc":
+              return a.servicePrice - b.servicePrice;
+            case "price-desc":
+              return b.servicePrice - a.servicePrice;
+            default:
+              return 0;
+          }
+        });
+      }
+      setFilteredServices(updatedServices);
     }
-
-    // sort
-    if (sortType) {
-      updatedServices = updatedServices.sort((a, b) => {
-        switch (sortType) {
-          case "name-asc":
-            return a.serviceName.localeCompare(b.serviceName);
-          case "name-desc":
-            return b.serviceName.localeCompare(a.serviceName);
-          case "date-asc":
-            return new Date(a.purchasedOn) - new Date(b.purchasedOn);
-          case "date-desc":
-            return new Date(b.purchasedOn) - new Date(a.purchasedOn);
-          case "price-asc":
-            return a.servicePrice - b.servicePrice;
-          case "price-desc":
-            return b.servicePrice - a.servicePrice;
-          default:
-            return 0;
-        }
-      });
-    }
-    setFilteredServices(updatedServices);
-  }, [searchTerm, sortType, ongoingServices]);
+  }, [searchTerm, sortType, data]);
 
   const openCommentPopup = (comments) => {
     setCommentsPopup(comments);
@@ -249,88 +266,109 @@ function Ongoing() {
   const closeCommentsPopup = () => {
     setCommentsPopup(null);
   };
-  if (loading) {
-    return (
-      <Container
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <SpinnerMini color="#000" />
-      </Container>
-    );
-  }
+  // if (isPending) {
+  //   return (
+  //     <Container
+  //       style={{
+  //         display: "flex",
+  //         alignItems: "center",
+  //         justifyContent: "center",
+  //       }}
+  //     >
+  //       <SpinnerMini color="#000" />
+  //     </Container>
+  //   );
+  // }
 
-  if (ongoingServices.length === 0) {
-    return (
-      <Container
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "#000",
-        }}
-      >
-        No ongoing services found.
-      </Container>
-    );
-  }
+  // if (data && data.length === 0) {
+  //   return (
+  //     <Container
+  //       style={{
+  //         display: "flex",
+  //         alignItems: "center",
+  //         justifyContent: "center",
+  //         color: "#000",
+  //       }}
+  //     >
+  //       No ongoing services found.
+  //     </Container>
+  //   );
+  // }
 
   return (
     <Container>
-      <FilterBar>
-        <SearchInput
-          type="text"
-          placeholder="search by service name"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <Select onChange={(e) => setSortType(e.target.value)}>
-          <option value="">Sort By</option>
-          <option value="name-asc">Name (A-Z)</option>
-          <option value="name-desc">Name (Z-A)</option>
-          <option value="date-asc">Date (Ascending)</option>
-          <option value="date-desc">Date (Descending)</option>
-          <option value="price-asc">Price (Low to High)</option>
-          <option value="price-desc">Price (High to Low)</option>
-        </Select>
-      </FilterBar>
-      <ServiceList>
-        {filteredServices.map((service) => (
-          <ServiceItem key={service.serviceId}>
-            <ServiceName>Service Name: {service.serviceName}</ServiceName>
-            <ServiceId>Service ID: {service.serviceId}</ServiceId>
-            <ServicePrice>Price: ${service.servicePrice}</ServicePrice>
-            <ServiceDate>
-              Purchased On: {new Date(service.purchasedOn).toLocaleDateString()}
-            </ServiceDate>
-            <CommentsButton onClick={() => openCommentPopup(service.comments)}>
-              comments ({service.comments.length})
-            </CommentsButton>
-            {commentsPopup && (
-              <CommentsPopup>
-                <CommentsPopupContent>
-                  <h2>Comments</h2>
-                  {commentsPopup.length === 0 && (
-                    <p style={{ color: "#000" }}>No comments yet!</p>
+      {isPending ? (
+        <FallbackContainer>
+          <SpinnerMini color="#000" />
+        </FallbackContainer>
+      ) : data && data.length === 0 ? (
+        <FallbackContainer>No ongoing services found!</FallbackContainer>
+      ) : (
+        <>
+          <FilterBar>
+            <SearchInput
+              type="text"
+              placeholder="search by service name"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <Select onChange={(e) => setSortType(e.target.value)}>
+              <option value="">Sort By</option>
+              <option value="name-asc">Name (A-Z)</option>
+              <option value="name-desc">Name (Z-A)</option>
+              <option value="date-asc">Date (Ascending)</option>
+              <option value="date-desc">Date (Descending)</option>
+              <option value="price-asc">Price (Low to High)</option>
+              <option value="price-desc">Price (High to Low)</option>
+            </Select>
+          </FilterBar>
+          <ServiceList>
+            {data && data.length === 0 ? (
+              <div>No ongoing services found</div>
+            ) : (
+              filteredServices.map((service) => (
+                <ServiceItem key={service.serviceId}>
+                  <ServiceName>Service Name: {service.serviceName}</ServiceName>
+                  <ServiceId>Service ID: {service.serviceId}</ServiceId>
+                  <ServicePrice>Price: ${service.servicePrice}</ServicePrice>
+                  <ServiceDate>
+                    Purchased On:{" "}
+                    {new Date(service.purchasedOn).toLocaleDateString()}
+                  </ServiceDate>
+                  <CommentsButton
+                    onClick={() => openCommentPopup(service.comments)}
+                  >
+                    comments ({service.comments.length})
+                  </CommentsButton>
+                  {commentsPopup && (
+                    <CommentsPopup>
+                      <CommentsPopupContent>
+                        <h2>Comments</h2>
+                        {commentsPopup.length === 0 && (
+                          <p style={{ color: "#000" }}>No comments yet!</p>
+                        )}
+                        {commentsPopup.map((comment, index) => (
+                          <div key={index} className="comment">
+                            <p style={{ color: "#000" }}>
+                              {comment.commentText}
+                            </p>
+                            <p className="commentedOn">
+                              {new Date(
+                                comment.commentedOn
+                              ).toLocaleDateString()}
+                            </p>
+                          </div>
+                        ))}
+                        <button onClick={closeCommentsPopup}>close</button>
+                      </CommentsPopupContent>
+                    </CommentsPopup>
                   )}
-                  {commentsPopup.map((comment, index) => (
-                    <div key={index} className="comment">
-                      <p style={{ color: "#000" }}>{comment.commentText}</p>
-                      <p className="commentedOn">
-                        {new Date(comment.commentedOn).toLocaleDateString()}
-                      </p>
-                    </div>
-                  ))}
-                  <button onClick={closeCommentsPopup}>close</button>
-                </CommentsPopupContent>
-              </CommentsPopup>
+                </ServiceItem>
+              ))
             )}
-          </ServiceItem>
-        ))}
-      </ServiceList>
+          </ServiceList>
+        </>
+      )}
     </Container>
   );
 }

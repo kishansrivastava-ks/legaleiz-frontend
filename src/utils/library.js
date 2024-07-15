@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 
 // GET USER DATA FROM DATABASE USING HIS EMAIL
 export const fetchUserData = async (email) => {
@@ -129,3 +130,57 @@ export const deleteComment = async (userId, serviceId, commentId) => {
     throw new Error("Failed to delete comment. Please try again later");
   }
 };
+
+export const getRequests = async () => {
+  try {
+    const response = await axios.get(
+      "http://127.0.0.1:8000/api/v1/query/getAll"
+    );
+    // const userRequests = response.data.data.queries.filter(
+    //   (query) => query.userId === userId
+    // );
+    return response.data.data.queries;
+  } catch (error) {
+    throw new Error("Failed to fetch requests");
+  }
+};
+
+export async function withdrawRequest(id) {
+  const confirm = window.confirm(
+    "Are you sure you want to withdraw this request?"
+  );
+  if (confirm) {
+    try {
+      await axios.delete(`http://127.0.0.1:8000/api/v1/query/${id}`);
+      toast.success("Request withdrawn successfully.");
+    } catch (error) {
+      toast.error("Failed to withdraw request.");
+      console.error("Error withdrawing request:", error);
+    }
+  } else {
+    return;
+  }
+}
+
+export async function getServices(email, status = null) {
+  try {
+    const response = await axios.get(
+      `http://127.0.0.1:8000/api/v1/user/${encodeURIComponent(email)}`
+    );
+    if (response.data.status === "success") {
+      const user = response.data.data.user;
+      if (status === null) {
+        return user.purchasedServices;
+      }
+      const services = user.purchasedServices.filter(
+        (service) => service.serviceStatus === status
+      );
+      return services;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching user services:", error);
+    return null;
+  }
+}

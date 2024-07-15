@@ -2,6 +2,9 @@
 import styled, { keyframes } from "styled-components";
 import { NavLink, Outlet } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
+import { useAuth } from "../../../contexts/authContext/authContext";
+import { useQuery } from "@tanstack/react-query";
+import { getServices } from "../../../utils/library";
 
 const Heading = styled.div`
   margin-bottom: 1rem;
@@ -114,22 +117,54 @@ const Body = styled.div`
   height: 70vh;
 `;
 function MyServices() {
+  const { userLoggedIn, currentUser } = useAuth();
+  const { data: services } = useQuery({
+    queryKey: ["services"],
+    queryFn: () => getServices(currentUser.email),
+  });
+
+  // get the count for each kind of service from the services
+  // if (services) {
+  //   const serviceCount = services.reduce((acc, service) => {
+  //     acc[service.kind] = (acc[service.kind] || 0) + 1;
+  //     return acc;
+  //   }, {});
+  //   console.log(serviceCount);
+  // }
+
   return (
     <Container>
-      <Heading>My Services</Heading>
+      <Heading>My Services ({services && services.length})</Heading>
       <Header>
         <NavContainer>
           <NavItem bgcolor="#fab942 " to="/dashboard/my-services/ongoing">
-            Ongoing
+            Ongoing (
+            {services &&
+              services.filter((service) => service.serviceStatus === "ongoing")
+                .length}
+            )
           </NavItem>
           <NavItem bgcolor="#46a1fb " to="/dashboard/my-services/renewal">
-            Renewal
+            Renewal (
+            {services &&
+              services.filter((service) => service.serviceStatus === "renewal")
+                .length}
+            )
           </NavItem>
           <NavItem bgcolor="#20cd49 " to="/dashboard/my-services/completed">
-            Completed
+            Completed (
+            {services &&
+              services.filter(
+                (service) => service.serviceStatus === "completed"
+              ).length}
+            )
           </NavItem>
           <NavItem bgcolor="#98a0a6 " to="/dashboard/my-services/closed">
-            Closed
+            Closed (
+            {services &&
+              services.filter((service) => service.serviceStatus === "closed")
+                .length}
+            )
           </NavItem>
         </NavContainer>
         {/* <SearchContainer>
@@ -138,7 +173,11 @@ function MyServices() {
         </SearchContainer> */}
       </Header>
       <Body>
-        <Outlet />
+        {!userLoggedIn ? (
+          <div>Please login to view your services!</div>
+        ) : (
+          <Outlet />
+        )}
       </Body>
     </Container>
   );

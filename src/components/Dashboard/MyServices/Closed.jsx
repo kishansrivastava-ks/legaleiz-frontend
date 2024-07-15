@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../contexts/authContext/authContext";
-import { fetchUserData } from "../../../utils/library";
+import { getServices } from "../../../utils/library";
 import styled from "styled-components";
 import SpinnerMini from "../../../ui/SpinnerMini";
+import { useQuery } from "@tanstack/react-query";
 
 const Container = styled.div`
   height: 100%;
@@ -172,69 +173,86 @@ const Select = styled.select`
   border: 1px solid gray;
   color: #000;
 `;
+
+const FallbackContainer = styled.div`
+  /* background-color: red; */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+`;
+
 function Closed() {
-  const { userLoggedIn, currentUser } = useAuth();
-  const [closedServices, setClosedServices] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { currentUser } = useAuth();
+  // const [closedServices, setClosedServices] = useState([]);
+  // const [loading, setLoading] = useState(true);
   const [commentsPopup, setCommentsPopup] = useState(null);
   const [filteredServices, setFilteredServices] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortType, setSortType] = useState("");
 
+  const { isPending, data } = useQuery({
+    queryKey: ["closedServices"],
+    queryFn: () => getServices(currentUser.email, "closed"),
+  });
+
+  // useEffect(() => {
+  //   const getUserData = async () => {
+  //     try {
+  //       if (userLoggedIn && currentUser) {
+  //         const user = await fetchUserData(currentUser.email);
+  //         const closed = user.purchasedServices.filter(
+  //           (service) => service.serviceStatus === "closed"
+  //         );
+  //         setClosedServices(closed);
+  //         setFilteredServices(closed);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching user data:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   getUserData();
+  // }, [userLoggedIn, currentUser]);
+
   useEffect(() => {
-    const getUserData = async () => {
-      try {
-        if (userLoggedIn && currentUser) {
-          const user = await fetchUserData(currentUser.email);
-          const closed = user.purchasedServices.filter(
-            (service) => service.serviceStatus === "closed"
-          );
-          setClosedServices(closed);
-          setFilteredServices(closed);
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      } finally {
-        setLoading(false);
+    if (data) {
+      let updatedServices = [...data];
+
+      // search
+      if (searchTerm) {
+        updatedServices = updatedServices.filter((service) =>
+          service.serviceName.toLowerCase().includes(searchTerm.toLowerCase())
+        );
       }
-    };
 
-    getUserData();
-  }, [userLoggedIn, currentUser]);
-
-  useEffect(() => {
-    let updatedServices = [...closedServices];
-
-    // search
-    if (searchTerm) {
-      updatedServices = updatedServices.filter((service) =>
-        service.serviceName.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+      // sort
+      if (sortType) {
+        updatedServices = updatedServices.sort((a, b) => {
+          switch (sortType) {
+            case "name-asc":
+              return a.serviceName.localeCompare(b.serviceName);
+            case "name-desc":
+              return b.serviceName.localeCompare(a.serviceName);
+            case "date-asc":
+              return new Date(a.purchasedOn) - new Date(b.purchasedOn);
+            case "date-desc":
+              return new Date(b.purchasedOn) - new Date(a.purchasedOn);
+            case "price-asc":
+              return a.servicePrice - b.servicePrice;
+            case "price-desc":
+              return b.servicePrice - a.servicePrice;
+            default:
+              return 0;
+          }
+        });
+      }
+      setFilteredServices(updatedServices);
     }
-
-    // sort
-    if (sortType) {
-      updatedServices = updatedServices.sort((a, b) => {
-        switch (sortType) {
-          case "name-asc":
-            return a.serviceName.localeCompare(b.serviceName);
-          case "name-desc":
-            return b.serviceName.localeCompare(a.serviceName);
-          case "date-asc":
-            return new Date(a.purchasedOn) - new Date(b.purchasedOn);
-          case "date-desc":
-            return new Date(b.purchasedOn) - new Date(a.purchasedOn);
-          case "price-asc":
-            return a.servicePrice - b.servicePrice;
-          case "price-desc":
-            return b.servicePrice - a.servicePrice;
-          default:
-            return 0;
-        }
-      });
-    }
-    setFilteredServices(updatedServices);
-  }, [searchTerm, sortType, closedServices]);
+  }, [searchTerm, sortType, data]);
 
   const openCommentPopup = (comments) => {
     setCommentsPopup(comments);
@@ -243,88 +261,101 @@ function Closed() {
     setCommentsPopup(null);
   };
 
-  if (loading) {
-    return (
-      <Container
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <SpinnerMini color="#000" />
-      </Container>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <Container
+  //       style={{
+  //         display: "flex",
+  //         alignItems: "center",
+  //         justifyContent: "center",
+  //       }}
+  //     >
+  //       <SpinnerMini color="#000" />
+  //     </Container>
+  //   );
+  // }
 
-  if (closedServices.length === 0) {
-    return (
-      <Container
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "#000",
-        }}
-      >
-        No closed services found.
-      </Container>
-    );
-  }
+  // if (closedServices.length === 0) {
+  //   return (
+  //     <Container
+  //       style={{
+  //         display: "flex",
+  //         alignItems: "center",
+  //         justifyContent: "center",
+  //         color: "#000",
+  //       }}
+  //     >
+  //       No closed services found.
+  //     </Container>
+  //   );
+  // }
 
   return (
     <Container>
-      <FilterBar>
-        <SearchInput
-          type="text"
-          placeholder="search by service name"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <Select onChange={(e) => setSortType(e.target.value)}>
-          <option value="">Sort By</option>
-          <option value="name-asc">Name (A-Z)</option>
-          <option value="name-desc">Name (Z-A)</option>
-          <option value="date-asc">Date (Ascending)</option>
-          <option value="date-desc">Date (Descending)</option>
-          <option value="price-asc">Price (Low to High)</option>
-          <option value="price-desc">Price (High to Low)</option>
-        </Select>
-      </FilterBar>
-      <ServiceList>
-        {filteredServices.map((service) => (
-          <ServiceItem key={service.serviceId}>
-            <ServiceName>Service Name: {service.serviceName}</ServiceName>
-            <ServiceId>Service ID: {service.serviceId}</ServiceId>
-            <ServicePrice>Price: ${service.servicePrice}</ServicePrice>
-            <ServiceDate>
-              Purchased On: {new Date(service.purchasedOn).toLocaleDateString()}
-            </ServiceDate>
-            <CommentsButton onClick={() => openCommentPopup(service.comments)}>
-              comments ({service.comments.length})
-            </CommentsButton>
-            {commentsPopup && (
-              <CommentsPopup>
-                <CommentsPopupContent>
-                  <h2>Comments</h2>
-                  {commentsPopup.length === 0 && (
-                    <p style={{ color: "#000" }}>No comments yet!</p>
-                  )}
-                  {commentsPopup.map((comment, index) => (
-                    <div key={index} className="comment">
-                      <p style={{ color: "#000" }}>{comment.commentText}</p>
-                      <p className="commentedOn">
-                        {new Date(comment.commentedOn).toLocaleDateString()}
-                      </p>
-                    </div>
-                  ))}
-                  <button onClick={closeCommentsPopup}>close</button>
-                </CommentsPopupContent>
-              </CommentsPopup>
-            )}
-          </ServiceItem>
-        ))}
-      </ServiceList>
+      {isPending ? (
+        <FallbackContainer>
+          <SpinnerMini color="#000" />
+        </FallbackContainer>
+      ) : data && data.length === 0 ? (
+        <FallbackContainer>No closed services found!</FallbackContainer>
+      ) : (
+        <>
+          <FilterBar>
+            <SearchInput
+              type="text"
+              placeholder="search by service name"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <Select onChange={(e) => setSortType(e.target.value)}>
+              <option value="">Sort By</option>
+              <option value="name-asc">Name (A-Z)</option>
+              <option value="name-desc">Name (Z-A)</option>
+              <option value="date-asc">Date (Ascending)</option>
+              <option value="date-desc">Date (Descending)</option>
+              <option value="price-asc">Price (Low to High)</option>
+              <option value="price-desc">Price (High to Low)</option>
+            </Select>
+          </FilterBar>
+          <ServiceList>
+            {filteredServices.map((service) => (
+              <ServiceItem key={service.serviceId}>
+                <ServiceName>Service Name: {service.serviceName}</ServiceName>
+                <ServiceId>Service ID: {service.serviceId}</ServiceId>
+                <ServicePrice>Price: ${service.servicePrice}</ServicePrice>
+                <ServiceDate>
+                  Purchased On:{" "}
+                  {new Date(service.purchasedOn).toLocaleDateString()}
+                </ServiceDate>
+                <CommentsButton
+                  onClick={() => openCommentPopup(service.comments)}
+                >
+                  comments ({service.comments.length})
+                </CommentsButton>
+                {commentsPopup && (
+                  <CommentsPopup>
+                    <CommentsPopupContent>
+                      <h2>Comments</h2>
+                      {commentsPopup.length === 0 && (
+                        <p style={{ color: "#000" }}>No comments yet!</p>
+                      )}
+                      {commentsPopup.map((comment, index) => (
+                        <div key={index} className="comment">
+                          <p style={{ color: "#000" }}>{comment.commentText}</p>
+                          <p className="commentedOn">
+                            {new Date(comment.commentedOn).toLocaleDateString()}
+                          </p>
+                        </div>
+                      ))}
+                      <button onClick={closeCommentsPopup}>close</button>
+                    </CommentsPopupContent>
+                  </CommentsPopup>
+                )}
+              </ServiceItem>
+            ))}
+          </ServiceList>
+        </>
+      )}
     </Container>
   );
 }
