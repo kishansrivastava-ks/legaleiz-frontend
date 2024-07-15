@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { BsFillBuildingFill } from "react-icons/bs";
 import {
@@ -18,6 +19,9 @@ import styled from "styled-components";
 import ReactSpeedometer from "react-d3-speedometer";
 import { useState } from "react";
 import Modal from "../Modal";
+import { useAuth } from "../../../contexts/authContext/authContext";
+import { useQuery } from "@tanstack/react-query";
+import { fetchUserData } from "../../../utils/library";
 
 const Heading = styled.div`
   margin-bottom: 1rem;
@@ -348,6 +352,13 @@ export function ProfileCompletionMeter({ completion }) {
 function Home() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
+  const { userLoggedIn, currentUser } = useAuth();
+  const { isPending, data: user } = useQuery({
+    queryKey: ["user"],
+    queryFn: () => fetchUserData(currentUser.email),
+  });
+
+  // console.log(user);
 
   const handleServiceClick = (title) => {
     setModalTitle(title);
@@ -362,130 +373,139 @@ function Home() {
     <>
       <Heading>Home</Heading>
       <Container>
-        <GridItem>
-          <QuickAccess>
-            <h3>Quick Access</h3>
-            <div>
-              <NavLink className="nav-link" to="/dashboard/my-services/ongoing">
-                <span className="nav-icon">
-                  <FiBriefcase />
-                </span>
-                19 Active Services
-              </NavLink>
-              <NavLink className="nav-link" to="/dashboard/compliances">
-                <span className="nav-icon">
-                  <FiClipboard />{" "}
-                </span>
-                1 Upcoming Compliances
-              </NavLink>
-            </div>
-          </QuickAccess>
-          <ExploreServices>
-            <h3>Explore Servies</h3>
-            <div>
-              <NavLink
-                className="nav-link"
-                to="/dashboard/home/explore-services?type=individual"
-              >
-                <span className="nav-icon">
-                  <FiUser />
-                </span>
-                For individuals
-              </NavLink>
-              <NavLink
-                className="nav-link"
-                to="/dashboard/home/explore-services?type=business"
-              >
-                <span className="nav-icon">
-                  <BsFillBuildingFill />
-                </span>
-                for business
-              </NavLink>
-            </div>
-          </ExploreServices>
-          <div style={{ marginBottom: "1rem" }}>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <h3 style={{ marginBottom: "1rem", color: "#000" }}>
-                Popular Services
-              </h3>
-              <NavLink
-                to="/dashboard/home/explore-services?type=individual"
-                style={{
-                  marginBottom: "1rem",
-                  color: "#000",
-                  marginLeft: "auto",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.5rem",
-                }}
-              >
-                View All <FaChevronRight />
-              </NavLink>
-            </div>
-            <PopularServices>
-              {services.map((service, index) => (
-                <ServiceLink
-                  key={index}
-                  onClick={() => handleServiceClick(service.text)}
-                >
-                  <span>{service.icon}</span>
-                  {service.text}
-                </ServiceLink>
-              ))}
-            </PopularServices>
-          </div>
-          <NeedExperts>
-            <h3 style={{ marginBottom: "1rem" }}>Need Experts ?</h3>
-            <ExpertsContainer>
-              <div>
-                <span>
-                  <FaHeadset />
-                </span>
-                Talk to a Lawyer
+        {!userLoggedIn ? (
+          <div>Sing in to view dashboard</div>
+        ) : (
+          <>
+            <GridItem>
+              <QuickAccess>
+                <h3>Quick Access</h3>
+                <div>
+                  <NavLink
+                    className="nav-link"
+                    to="/dashboard/my-services/ongoing"
+                  >
+                    <span className="nav-icon">
+                      <FiBriefcase />
+                    </span>
+                    {user && user.purchasedServices.length} Active Services
+                  </NavLink>
+                  <NavLink className="nav-link" to="/dashboard/compliances">
+                    <span className="nav-icon">
+                      <FiClipboard />{" "}
+                    </span>
+                    1 Upcoming Compliances
+                  </NavLink>
+                </div>
+              </QuickAccess>
+              <ExploreServices>
+                <h3>Explore Servies</h3>
+                <div>
+                  <NavLink
+                    className="nav-link"
+                    to="/dashboard/home/explore-services?type=individual"
+                  >
+                    <span className="nav-icon">
+                      <FiUser />
+                    </span>
+                    For individuals
+                  </NavLink>
+                  <NavLink
+                    className="nav-link"
+                    to="/dashboard/home/explore-services?type=business"
+                  >
+                    <span className="nav-icon">
+                      <BsFillBuildingFill />
+                    </span>
+                    for business
+                  </NavLink>
+                </div>
+              </ExploreServices>
+              <div style={{ marginBottom: "1rem" }}>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <h3 style={{ marginBottom: "1rem", color: "#000" }}>
+                    Popular Services
+                  </h3>
+                  <NavLink
+                    to="/dashboard/home/explore-services?type=individual"
+                    style={{
+                      marginBottom: "1rem",
+                      color: "#000",
+                      marginLeft: "auto",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.5rem",
+                    }}
+                  >
+                    View All <FaChevronRight />
+                  </NavLink>
+                </div>
+                <PopularServices>
+                  {services.map((service, index) => (
+                    <ServiceLink
+                      key={index}
+                      onClick={() => handleServiceClick(service.text)}
+                    >
+                      <span>{service.icon}</span>
+                      {service.text}
+                    </ServiceLink>
+                  ))}
+                </PopularServices>
               </div>
-              <div>
-                <span>
-                  <FaHeadset />
-                </span>
-                Talk to a CA
-              </div>
-              <div>
-                <span>
-                  <FaHeadset />
-                </span>
-                Talk to a CS
-              </div>
-            </ExpertsContainer>
-          </NeedExperts>
-        </GridItem>
-        <GridItem>
-          <NeedsAttention>
-            <h3>
-              <span>
-                <FaExclamationTriangle />
-              </span>
-              Needs Attention
-            </h3>
-            <AttentionLink>
-              Integrated Accounting + GST{" "}
-              <span>
-                <FaChevronRight />
-              </span>
-            </AttentionLink>
-            <AttentionLink>
-              Private Limited Company Registration{" "}
-              <span>
-                <FaChevronRight />
-              </span>
-            </AttentionLink>
-          </NeedsAttention>
-        </GridItem>
-        <GridItem>
-          <YourComplianceScore>
-            <h3>Your Compliances Score</h3>
-            <ProfileCompletionMeter completion={78} />
-          </YourComplianceScore>
-        </GridItem>
+              <NeedExperts>
+                <h3 style={{ marginBottom: "1rem" }}>Need Experts ?</h3>
+                <ExpertsContainer>
+                  <div>
+                    <span>
+                      <FaHeadset />
+                    </span>
+                    Talk to a Lawyer
+                  </div>
+                  <div>
+                    <span>
+                      <FaHeadset />
+                    </span>
+                    Talk to a CA
+                  </div>
+                  <div>
+                    <span>
+                      <FaHeadset />
+                    </span>
+                    Talk to a CS
+                  </div>
+                </ExpertsContainer>
+              </NeedExperts>
+            </GridItem>
+            <GridItem>
+              <NeedsAttention>
+                <h3>
+                  <span>
+                    <FaExclamationTriangle />
+                  </span>
+                  Needs Attention
+                </h3>
+                <AttentionLink>
+                  Integrated Accounting + GST{" "}
+                  <span>
+                    <FaChevronRight />
+                  </span>
+                </AttentionLink>
+                <AttentionLink>
+                  Private Limited Company Registration{" "}
+                  <span>
+                    <FaChevronRight />
+                  </span>
+                </AttentionLink>
+              </NeedsAttention>
+            </GridItem>
+            <GridItem>
+              <YourComplianceScore>
+                <h3>Your Compliances Score</h3>
+                <ProfileCompletionMeter completion={78} />
+              </YourComplianceScore>
+            </GridItem>
+          </>
+        )}
       </Container>
       <Modal
         isOpen={isModalOpen}
