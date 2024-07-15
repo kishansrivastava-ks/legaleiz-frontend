@@ -16,6 +16,8 @@ import { useAuth } from "../../../contexts/authContext/authContext";
 import Tooltip from "../../../utils/Tooltip";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import SpinnerMini from "../../../ui/SpinnerMini";
+import ServicesOperations from "./ServicesOperations";
+import { useSearchParams } from "react-router-dom";
 
 const Container = styled.div`
   height: 76vh;
@@ -83,6 +85,9 @@ const ServiceStatus = styled(ServiceDetail)`
 `;
 const Heading = styled.h3`
   margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const Loader = styled.div`
@@ -341,7 +346,8 @@ function MyProjects() {
   const [isCommentPopupOpen, setIsCommentPopupOpen] = useState(false);
   const [isViewCommentsPopupOpen, setIsViewCommentsPopupOpen] = useState(false);
   const queryClient = useQueryClient();
-
+  const [filteredPurchases, setFilteredPurchases] = useState([]);
+  const [searchParams] = useSearchParams();
   const { currentUser } = useAuth();
 
   const { isPending, data } = useQuery({
@@ -349,12 +355,26 @@ function MyProjects() {
     queryFn: getPurchases,
   });
   // console.log(data);
+  const filterValue = searchParams.get("status") || "all";
+  console.log(filterValue);
+
+  let filteredServices;
 
   useEffect(() => {
     if (data) {
-      setPurchases(data);
+      // setPurchases(data);
+      let updatedPurchases = [...data];
+
+      if (filterValue) {
+        if (filterValue != "all") {
+          updatedPurchases = updatedPurchases.filter(
+            (service) => service.serviceStatus === filterValue
+          );
+        }
+        setFilteredPurchases(updatedPurchases);
+      }
     }
-  }, [data]);
+  }, [data, filterValue]);
 
   const handleUpdateClick = (purchase) => {
     setSelectedService(purchase);
@@ -373,6 +393,7 @@ function MyProjects() {
     setSelectedService(purchase);
     setIsViewCommentsPopupOpen(true);
   };
+
   const handleStatusChange = async () => {
     const confirmed = window.confirm(
       "Are you sure you want to update the status?"
@@ -391,6 +412,9 @@ function MyProjects() {
         )
       );
       toast.success("Service status updated successfully");
+      queryClient.invalidateQueries({
+        queryKey: ["purchases"],
+      });
       setIsPopupOpen(false);
     } catch (error) {
       toast.error(error.message);
@@ -448,74 +472,76 @@ function MyProjects() {
 
   return (
     <>
-      <Heading>My Projects ({data && data.length})</Heading>
+      <Heading>
+        My Projects ({data && data.length}){" "}
+        <span>
+          <ServicesOperations />
+        </span>
+      </Heading>
       <Container>
         {isPending ? (
           <Loader>
             <SpinnerMini color="#000" />
           </Loader>
-        ) : purchases.length === 0 ? (
-          <Loader>No active services found</Loader>
+        ) : data && data.length === 0 ? (
+          <Loader>No active purchases found</Loader>
         ) : (
           <ServiceList>
-            {data &&
-              purchases.map((purchase) => (
-                <ServiceItem key={purchase._id}>
-                  <div>
-                    <ServiceName>
-                      Service Name: {purchase.serviceName}
-                    </ServiceName>
-                    <ServiceId>Service ID: {purchase.service}</ServiceId>
-                    <ServiceDetail>
-                      Purchased By: {purchase.userName}
-                    </ServiceDetail>
-                    <ServiceDetail>User ID: {purchase.user}</ServiceDetail>
-                  </div>
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    <div style={{ textAlign: "right" }}>
-                      <ServiceStatus>
-                        Status: {purchase.serviceStatus}
-                      </ServiceStatus>
-                      <ServiceDate>
-                        Purchased On:{" "}
-                        {new Date(purchase.purchasedOn).toLocaleDateString()}
-                      </ServiceDate>
-                      <ServicePrice>
-                        Price: ${purchase.servicePrice}
-                      </ServicePrice>
-                      {purchase.extraPrice > 0 && (
-                        <ServiceDetail>
-                          Extra Price: ${purchase.extraPrice}
-                        </ServiceDetail>
-                      )}
+            {filteredPurchases.map((purchase) => (
+              <ServiceItem key={purchase._id}>
+                <div>
+                  <ServiceName>
+                    Service Name: {purchase.serviceName}
+                  </ServiceName>
+                  <ServiceId>Service ID: {purchase.service}</ServiceId>
+                  <ServiceDetail>
+                    Purchased By: {purchase.userName}
+                  </ServiceDetail>
+                  <ServiceDetail>User ID: {purchase.user}</ServiceDetail>
+                </div>
+                <div style={{ display: "flex", gap: "1rem" }}>
+                  <div style={{ textAlign: "right" }}>
+                    <ServiceStatus>
+                      Status: {purchase.serviceStatus}
+                    </ServiceStatus>
+                    <ServiceDate>
+                      Purchased On:{" "}
+                      {new Date(purchase.purchasedOn).toLocaleDateString()}
+                    </ServiceDate>
+                    <ServicePrice>Price: ${purchase.servicePrice}</ServicePrice>
+                    {purchase.extraPrice > 0 && (
                       <ServiceDetail>
-                        Total Price: ${purchase.totalPrice}
+                        Extra Price: ${purchase.extraPrice}
                       </ServiceDetail>
-                    </div>
-                    <div style={{}}>
-                      <UpdateIcon onClick={() => handleUpdateClick(purchase)}>
-                        <Tooltip text="Update Status">
-                          <FaEdit />
-                        </Tooltip>
-                      </UpdateIcon>
-                      <AddCommentIcon
-                        onClick={() => handleCommentClick(purchase)}
-                      >
-                        <Tooltip text="Add Comment">
-                          <FaComment />
-                        </Tooltip>
-                      </AddCommentIcon>
-                      <ViewCommentsIcon
-                        onClick={() => handleViewCommentsClick(purchase)}
-                      >
-                        <Tooltip text="View Comments">
-                          <FaCommentDots />
-                        </Tooltip>
-                      </ViewCommentsIcon>
-                    </div>
+                    )}
+                    <ServiceDetail>
+                      Total Price: ${purchase.totalPrice}
+                    </ServiceDetail>
                   </div>
-                </ServiceItem>
-              ))}
+                  <div style={{}}>
+                    <UpdateIcon onClick={() => handleUpdateClick(purchase)}>
+                      <Tooltip text="Update Status">
+                        <FaEdit />
+                      </Tooltip>
+                    </UpdateIcon>
+                    <AddCommentIcon
+                      onClick={() => handleCommentClick(purchase)}
+                    >
+                      <Tooltip text="Add Comment">
+                        <FaComment />
+                      </Tooltip>
+                    </AddCommentIcon>
+                    <ViewCommentsIcon
+                      onClick={() => handleViewCommentsClick(purchase)}
+                    >
+                      <Tooltip text="View Comments">
+                        <FaCommentDots />
+                      </Tooltip>
+                    </ViewCommentsIcon>
+                  </div>
+                </div>
+              </ServiceItem>
+            ))}
           </ServiceList>
         )}
       </Container>
