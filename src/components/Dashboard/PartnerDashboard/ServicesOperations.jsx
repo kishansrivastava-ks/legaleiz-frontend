@@ -43,17 +43,36 @@ function ServicesOperations() {
   }
   return (
     <StyledFilter>
-      <FilterButton onClick={() => handleClick("all")}>All</FilterButton>
-      <FilterButton onClick={() => handleClick("ongoing")}>
+      <FilterButton
+        active={searchParams.get("status") === "all"}
+        onClick={() => handleClick("all")}
+      >
+        All
+      </FilterButton>
+      <FilterButton
+        active={searchParams.get("status") === "ongoing"}
+        onClick={() => handleClick("ongoing")}
+      >
         Ongoing
       </FilterButton>
-      <FilterButton onClick={() => handleClick("renewal")}>
+      <FilterButton
+        active={searchParams.get("status") === "renewal"}
+        onClick={() => handleClick("renewal")}
+      >
         Renewal
       </FilterButton>
-      <FilterButton onClick={() => handleClick("completed")}>
+      <FilterButton
+        active={searchParams.get("status") === "completed"}
+        onClick={() => handleClick("completed")}
+      >
         Completed
       </FilterButton>
-      <FilterButton onClick={() => handleClick("closed")}>Closed</FilterButton>
+      <FilterButton
+        active={searchParams.get("status") === "closed"}
+        onClick={() => handleClick("closed")}
+      >
+        Closed
+      </FilterButton>
     </StyledFilter>
   );
 }

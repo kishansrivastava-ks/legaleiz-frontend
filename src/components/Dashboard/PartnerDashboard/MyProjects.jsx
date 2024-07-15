@@ -105,7 +105,8 @@ const UpdateIcon = styled.div`
   /* margin-left: auto; */
   /* display: flex; */
   /* align-items: center; */
-  color: #3498db;
+  /* color: #3498db; */
+  color: var(--color-brand-600);
   /* font-size: 20px; */
 
   &:hover {
@@ -115,6 +116,7 @@ const UpdateIcon = styled.div`
 const AddCommentIcon = styled.div`
   cursor: pointer;
   color: #3498db;
+  color: var(--color-brand-600);
   /* font-size: 20px; */
 
   &:hover {
@@ -124,7 +126,9 @@ const AddCommentIcon = styled.div`
 
 const ViewCommentsIcon = styled.div`
   cursor: pointer;
-  color: #3498db;
+  /* color: #3498db; */
+  color: var(--color-brand-600);
+
   /* font-size: 20px; */
 
   &:hover {
