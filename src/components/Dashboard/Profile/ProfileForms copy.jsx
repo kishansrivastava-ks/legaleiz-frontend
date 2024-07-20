@@ -8,7 +8,6 @@ import { fetchUserData } from "../../../utils/library";
 import toast from "react-hot-toast";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/authContext/authContext";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const Container = styled.div`
   display: flex;
@@ -288,35 +287,29 @@ export const StyledOption = styled.option`
 `;
 
 export const AddressForm = () => {
-  // USING QUERIES
-  const queryClient = useQueryClient();
-  const user = queryClient.getQueryData(["user"]);
-  console.log("printing user data");
-  // console.log(data);
+  const { userData, currentUser } = useAuth();
+  const [address, setAddress] = useState(userData?.address || "");
 
-  const { currentUser } = useAuth();
-  const [address, setAddress] = useState(user?.address || "");
-
-  const [state, setState] = useState(user?.state || "");
-  const [city, setCity] = useState(user?.city || "");
-  const [pin, setPin] = useState(user?.pinCode || null);
+  const [state, setState] = useState(userData?.state || "");
+  const [city, setCity] = useState(userData?.city || "");
+  const [pin, setPin] = useState(userData?.pinCode || null);
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formLoading, setFormLoading] = useState(false);
 
   useEffect(() => {
-    if (user) {
-      setAddress(user.address || "");
-      setState(user.state || "");
-      setCity(user.city || "");
-      setPin(user.pinCode || "");
+    if (userData) {
+      setAddress(userData.address || "");
+      setState(userData.state || "");
+      setCity(userData.city || "");
+      setPin(userData.pinCode || "");
     }
-  }, [user]);
+  }, [userData]);
 
-  useQuery({
-    queryKey: ["states"],
-    queryFn: async () => {
+  useEffect(() => {
+    // Fetch states when component mounts
+    const fetchStates = async () => {
       try {
         const response = await axios.post(
           `https://countriesnow.space/api/v0.1/countries/states`,
@@ -324,29 +317,14 @@ export const AddressForm = () => {
             country: "India",
           }
         );
+        // console.log(response.data.data.states);
         setStates(response.data.data.states);
       } catch (error) {
-        toast.error("failed to fetch states");
+        toast.error("Failed to fetch states");
       }
-    },
-  });
-
-  // useEffect(() => {
-  //   const fetchStates = async () => {
-  //     try {
-  //       const response = await axios.post(
-  //         `https://countriesnow.space/api/v0.1/countries/states`,
-  //         {
-  //           country: "India",
-  //         }
-  //       );
-  //       setStates(response.data.data.states);
-  //     } catch (error) {
-  //       toast.error("Failed to fetch states");
-  //     }
-  //   };
-  //   fetchStates();
-  // }, []);
+    };
+    fetchStates();
+  }, []);
 
   useEffect(() => {
     if (state) {

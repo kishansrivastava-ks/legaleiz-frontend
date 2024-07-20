@@ -106,6 +106,9 @@ const Header = () => {
                 borderRadius: "50%",
                 marginRight: "10px",
                 fontSize: "1rem",
+                objectFit: "cover",
+                objectPosition: "center",
+                aspectRatio: "1 / 1",
               }}
             />
           ) : (

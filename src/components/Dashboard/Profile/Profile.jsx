@@ -1,8 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { AddressForm, KYCForm, PersonalDetailsForm } from "./ProfileForms";
 import { FaUser, FaHome, FaCreditCard } from "react-icons/fa";
 import { useAuth } from "../../../contexts/authContext/authContext";
+import { useQuery } from "@tanstack/react-query";
+import { fetchUserData } from "../../../utils/library";
 
 const GlobalStyle = createGlobalStyle`
   *:focus {
@@ -59,6 +62,12 @@ const Body = styled.div`
 function Profile() {
   const [activeTab, setActiveTab] = useState("personalDetails");
   const { currentUser } = useAuth();
+
+  const { isPending, data: user } = useQuery({
+    queryKey: ["user"],
+    queryFn: () => fetchUserData(currentUser.email),
+  });
+  console.log(user);
 
   const renderForm = () => {
     switch (activeTab) {

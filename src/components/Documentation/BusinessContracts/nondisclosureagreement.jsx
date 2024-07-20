@@ -6,13 +6,22 @@ const StyledOverView = styled.div`
   /* padding: 5px 10px; */
   border-radius: 5px;
   text-align: justify;
+  & > p {
+    line-height: 1.4;
+    font-size: 1.8rem;
+  }
 `;
 
 const StyledFormat = styled.div``;
 
 // const StyledExamples = styled.div``;
 const StyledTemplate = styled.div``;
-const StyledViolate = styled.div``;
+const StyledViolate = styled.div`
+  & > p {
+    line-height: 1.4;
+    font-size: 1.8rem;
+  }
+`;
 
 // const StyledFAQ = styled.div``;
 

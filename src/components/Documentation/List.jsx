@@ -6,6 +6,9 @@ const StyledList = styled.div`
   border-radius: 5px;
   & > ul > li {
     margin-bottom: 1rem;
+    font-size: 1.8rem;
+    line-height: 1.4;
+    text-align: justify;
     & > span {
       font-weight: bold;
     }
