@@ -18,7 +18,7 @@ const ModalBackground = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  margin-top: 50%;
+  margin-top: 2rem;
   background-color: white;
   border-radius: 10px;
   width: 90%;
