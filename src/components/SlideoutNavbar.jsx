@@ -140,36 +140,149 @@ const SlideOutNavbar = () => {
     ],
     Documentation: [
       {
-        menuItem: "Legal Documents",
+        menuItem: "Business Contracts",
         links: [
-          { name: "Contracts", href: "/documentation/contracts" },
-          { name: "Agreements", href: "/documentation/agreements" },
-          { name: "Forms", href: "/documentation/forms" },
+          {
+            name: "Non Disclosure Agreement NDA",
+            href: "/documentation/business-contracts/non-disclosure-agreement-nda",
+          },
+          {
+            name: "Joint Venture Agreement",
+            href: "/documentation/business-contracts/joint-venture-agreement",
+          },
+          {
+            name: "Shareholders Agreement",
+            href: "/documentation/business-contracts/shareholders-agreement",
+          },
+          {
+            name: "Master Service Agreement",
+            href: "/documentation/business-contracts/master-service-agreement",
+          },
+          {
+            name: "Franchise Agreement",
+            href: "/documentation/business-contracts/franchise-agreement",
+          },
+          {
+            name: "Service Legal Agreement",
+            href: "/documentation/business-contracts/service-legal-agreement",
+          },
+          {
+            name: "Succession Certificate",
+            href: "/documentation/business-contracts/succession-certificate",
+          },
+          {
+            name: "Memorandum of Understanding",
+            href: "/documentation/business-contracts/memorandum-of-understanding",
+          },
+          {
+            name: "Consultancy Agreement",
+            href: "/documentation/business-contracts/consultancy-agreement",
+          },
+          {
+            name: "Vendor Agreement",
+            href: "/documentation/business-contracts/vendor-agreement",
+          },
+          {
+            name: "Founders Agreement",
+            href: "/documentation/business-contracts/founders-agreement",
+          },
+          {
+            name: "Noncompete Agreement",
+            href: "/documentation/business-contracts/noncompete-agreement",
+          },
+          {
+            name: "Trade License",
+            href: "/documentation/business-contracts/trade-license",
+          },
+          {
+            name: "Legal Heir Certificate",
+            href: "/documentation/business-contracts/legal-heir-certificate",
+          },
+          {
+            name: "Relinquishment Deed",
+            href: "/documentation/business-contracts/relinquishment-deed",
+          },
+          {
+            name: "Share Purchase Agreement",
+            href: "/documentation/business-contracts/share-purchase-agreement",
+          },
+          {
+            name: "Scope of Work Agreement",
+            href: "/documentation/business-contracts/scope-of-work-agreement",
+          },
+          { name: "GDPR", href: "/documentation/business-contracts/gdpr" },
+          {
+            name: "Finance Agreement",
+            href: "/documentation/business-contracts/finance-agreement",
+          },
         ],
       },
       {
-        menuItem: "Templates",
+        menuItem: "Personal And Family",
         links: [
           {
-            name: "Business Templates",
-            href: "/documentation/templates/business",
+            name: "Will Registration",
+            href: "/documentation/personal-and-family/will-registration",
           },
           {
-            name: "Personal Templates",
-            href: "/documentation/templates/personal",
+            name: "Probate of Will",
+            href: "/documentation/personal-and-family/probate-of-will",
           },
-          { name: "Legal Templates", href: "/documentation/templates/legal" },
+          {
+            name: "Power of Attorneys",
+            href: "/documentation/personal-and-family/power-of-attorneys",
+          },
         ],
       },
       {
-        menuItem: "Guidelines",
+        menuItem: "Notices",
+        links: [
+          { name: "Legal Notice", href: "/documentation/notices/legal-notice" },
+          {
+            name: "Legal Notice for Money Recovery",
+            href: "/documentation/notices/legal-notice-for-money-recovery",
+          },
+          {
+            name: "Legal Notice for recovery of dues",
+            href: "/documentation/notices/legal-notice-for-recovery-of-dues",
+          },
+          {
+            name: "Cheque Bounce Notice",
+            href: "/documentation/notices/cheque-bounce-notice",
+          },
+          {
+            name: "Legal Notice Under Consumer Protection Act",
+            href: "/documentation/notices/legal-notice-under-consumer-protection-act",
+          },
+        ],
+      },
+      {
+        menuItem: "Real Estate",
         links: [
           {
-            name: "Company Policies",
-            href: "/documentation/guidelines/company-policies",
+            name: "Rental Agreement",
+            href: "/documentation/real-estate/rental-agreement",
           },
-          { name: "HR Guidelines", href: "/documentation/guidelines/hr" },
-          { name: "Compliance", href: "/documentation/guidelines/compliance" },
+          { name: "Sale Deed", href: "/documentation/real-estate/sale-deed" },
+          { name: "Gift Deed", href: "/documentation/real-estate/gift-deed" },
+          {
+            name: "Rental Tenant Notice",
+            href: "/documentation/real-estate/rental-tenant-notice",
+          },
+        ],
+      },
+      {
+        menuItem: "HR Policies",
+        links: [
+          {
+            name: "Employment Agreement",
+            href: "/documentation/hr-policies/employment-agreement",
+          },
+          { name: "ESOP", href: "/documentation/hr-policies/esop" },
+          {
+            name: "Payroll Maintenance",
+            href: "/documentation/hr-policies/payroll-maintenance",
+          },
         ],
       },
     ],

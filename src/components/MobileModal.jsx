@@ -9,7 +9,7 @@ const ModalBackground = styled.div`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   z-index: 1000;
   opacity: ${(props) => (props.isOpen ? "1" : "0")};
@@ -18,7 +18,7 @@ const ModalBackground = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  margin-top: -5rem;
+  margin-top: 50%;
   background-color: white;
   border-radius: 10px;
   width: 90%;
