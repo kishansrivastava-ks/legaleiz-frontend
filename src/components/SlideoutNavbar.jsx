@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -48,26 +49,42 @@ const SlideOutNavbar = () => {
     setOpenIndex(index === openIndex ? null : index);
   };
 
+  const menuItems = {
+    "Talk to Lawyer": [
+      { name: "Personal", link: "/consultation" },
+      { name: "Business", link: "/legal-advice" },
+    ],
+    Startup: [
+      { name: "Incubation", link: "/incubation" },
+      { name: "Funding", link: "/funding" },
+      { name: "Mentorship", link: "/mentorship" },
+    ],
+    Documentation: [
+      { name: "Legal Documents", link: "/legal-documents" },
+      { name: "Templates", link: "/templates" },
+      { name: "Guidelines", link: "/guidelines" },
+    ],
+    "Partner with Us": [
+      { name: "Partnership Benefits", link: "/partnership-benefits" },
+    ],
+  };
+
   return (
     <SlideNavbarContainer>
-      {["Talk to Lawyer", "Startup", "Documentation", "Partner with Us"].map(
-        (item, index) => (
-          <div key={index}>
-            <SlideNavItem onClick={() => handleNavItemClick(index)}>
-              {item}
-            </SlideNavItem>
-            <SlideDropdownMenu isOpen={openIndex === index}>
-              {["Menu Item 1", "Menu Item 2", "Menu Item 3"].map(
-                (dropdownItem, idx) => (
-                  <SlideDropdownItem key={idx}>
-                    {dropdownItem}
-                  </SlideDropdownItem>
-                )
-              )}
-            </SlideDropdownMenu>
-          </div>
-        )
-      )}
+      {Object.keys(menuItems).map((item, index) => (
+        <div key={index}>
+          <SlideNavItem onClick={() => handleNavItemClick(index)}>
+            {item}
+          </SlideNavItem>
+          <SlideDropdownMenu isOpen={openIndex === index}>
+            {menuItems[item].map((dropdownItem, idx) => (
+              <SlideDropdownItem key={idx} href={dropdownItem.link}>
+                {dropdownItem.name}
+              </SlideDropdownItem>
+            ))}
+          </SlideDropdownMenu>
+        </div>
+      ))}
     </SlideNavbarContainer>
   );
 };
