@@ -6,7 +6,7 @@ import MobileModal from "./MobileModal";
 const SlideNavbarContainer = styled.div`
   width: 100%;
   /* background-color: #333; */
-  color: #333;
+  color: rgb(51, 51, 51);
   overflow: hidden;
   /* margin-top: 2rem; */
 `;
@@ -194,33 +194,35 @@ const SlideOutNavbar = () => {
   };
 
   return (
-    <SlideNavbarContainer>
-      {Object.keys(menuItems).map((item, index) => (
-        <div key={index}>
-          <SlideNavItem onClick={() => handleNavItemClick(index)}>
-            {item}
-          </SlideNavItem>
-          <SlideDropdownMenu isOpen={openIndex === index}>
-            {menuItems[item].map((dropdownItem, idx) => (
-              <SlideDropdownItem
-                key={idx}
-                onClick={() =>
-                  handleModalOpen(dropdownItem.menuItem, dropdownItem.links)
-                }
-              >
-                {dropdownItem.menuItem}
-              </SlideDropdownItem>
-            ))}
-          </SlideDropdownMenu>
-        </div>
-      ))}
+    <>
+      <SlideNavbarContainer>
+        {Object.keys(menuItems).map((item, index) => (
+          <div key={index}>
+            <SlideNavItem onClick={() => handleNavItemClick(index)}>
+              {item}
+            </SlideNavItem>
+            <SlideDropdownMenu isOpen={openIndex === index}>
+              {menuItems[item].map((dropdownItem, idx) => (
+                <SlideDropdownItem
+                  key={idx}
+                  onClick={() =>
+                    handleModalOpen(dropdownItem.menuItem, dropdownItem.links)
+                  }
+                >
+                  {dropdownItem.menuItem}
+                </SlideDropdownItem>
+              ))}
+            </SlideDropdownMenu>
+          </div>
+        ))}
+      </SlideNavbarContainer>
       <MobileModal
         isOpen={isModalOpen}
         onClose={handleModalClose}
         title={modalContent.title}
         links={modalContent.links}
       />
-    </SlideNavbarContainer>
+    </>
   );
 };
 export default SlideOutNavbar;

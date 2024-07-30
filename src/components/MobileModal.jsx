@@ -2,11 +2,11 @@
 import styled from "styled-components";
 
 const ModalBackground = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  left: -9.5rem;
+  width: 101vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
@@ -18,6 +18,7 @@ const ModalBackground = styled.div`
 `;
 
 const ModalContainer = styled.div`
+  margin-top: -5rem;
   background-color: white;
   border-radius: 10px;
   width: 90%;
