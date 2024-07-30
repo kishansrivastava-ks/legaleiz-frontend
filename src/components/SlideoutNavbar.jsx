@@ -315,20 +315,8 @@ const SlideOutNavbar = () => {
     ],
     "Partner with Us": [
       {
-        menuItem: "Partnership Benefits",
-        links: [
-          { name: "Revenue Sharing", href: "/partnership/revenue-sharing" },
-          { name: "Brand Association", href: "/partnership/brand-association" },
-          { name: "Co-Marketing", href: "/partnership/co-marketing" },
-        ],
-      },
-      {
         menuItem: "Become a Partner",
-        links: [
-          { name: "Join Us", href: "/partnership/join-us" },
-          { name: "Affiliate Program", href: "/partnership/affiliate-program" },
-          { name: "Referral Program", href: "/partnership/referral-program" },
-        ],
+        links: [{ name: "Join Us", href: "/partner-with-us" }],
       },
     ],
   };

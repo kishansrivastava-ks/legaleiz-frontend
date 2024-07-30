@@ -49,6 +49,10 @@ const CloseButton = styled.button`
   font-size: 1.5rem;
   cursor: pointer;
   color: #333;
+  & :focus {
+    outline: none;
+    border: none;
+  }
 `;
 
 const ModalContent = styled.div`
