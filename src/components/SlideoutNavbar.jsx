@@ -64,19 +64,46 @@ const SlideOutNavbar = () => {
   const menuItems = {
     "Talk to Lawyer": [
       {
-        menuItem: "Consultation Types",
+        menuItem: "Personal",
         links: [
-          { name: "Personal", href: "/consultation/personal" },
-          { name: "Business", href: "/consultation/business" },
-          { name: "Family", href: "/consultation/family" },
+          { name: "Family & Matrimonial", href: "/legal-consultation/consult" },
+          { name: "Divorce", href: "/divorce-consultation" },
+          { name: "Property", href: "/property-consultation" },
+          { name: "Will", href: "/legal-consultation/consult" },
+          { name: "Labour & Employment", href: "/legal-consultation/consult" },
+          { name: "Consumer Protection", href: "/legal-consultation/consult" },
+          { name: "Cyber Crime", href: "/legal-consultation/consult" },
+          { name: "Cheque Bounce", href: "/legal-consultation/consult" },
         ],
       },
       {
-        menuItem: "Legal Areas",
+        menuItem: "Business",
         links: [
-          { name: "Criminal Law", href: "/consultation/criminal-law" },
-          { name: "Civil Law", href: "/consultation/civil-law" },
-          { name: "Corporate Law", href: "/consultation/corporate-law" },
+          { name: "Company Matters", href: "/business-consultation/consult" },
+          {
+            name: "HR & Labour Compliance",
+            href: "/business-consultation/consult",
+          },
+          {
+            name: "Trademark & Copyrights",
+            href: "/business-consultation/consult",
+          },
+          {
+            name: "Investment & Fundraise",
+            href: "/business-consultation/consult",
+          },
+          { name: "Direct Tax", href: "/business-consultation/consult" },
+          { name: "GST", href: "/business-consultation/consult" },
+          {
+            name: "Company (ROC) Compliance",
+            href: "/business-consultation/consult",
+          },
+          { name: "Debt Recovery", href: "/business-consultation/consult" },
+          { name: "NCLT Matter", href: "/business-consultation/consult" },
+          {
+            name: "Another Business Legal Matter",
+            href: "/business-consultation/consult",
+          },
         ],
       },
     ],
