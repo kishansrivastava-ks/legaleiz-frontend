@@ -21,9 +21,13 @@ const Card = styled.div`
   border-top: 0.5rem solid ${(props) => props.borderColor || "black"};
   flex-basis: 23%;
   text-align: center;
+
   @media (max-width: 768px) {
-    min-width: 100%;
+    flex: 0 0 100%;
+    scroll-snap-align: start;
     flex-basis: 100%;
+    min-width: 100%;
+    justify-content: stretch;
   }
 `;
 
