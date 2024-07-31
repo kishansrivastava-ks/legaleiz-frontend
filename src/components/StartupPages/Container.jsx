@@ -22,6 +22,15 @@ const StyledContainer = styled.div`
   position: relative;
   background-color: #fff;
   padding: 2vmax 5vmax;
+  /* border: 2px solid red; */
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+  @media (max-width: 768px) {
+    padding-left: 0;
+    padding-right: 0;
+    padding: 0;
+  }
 `;
 const LeftBox = styled.div`
   overflow: hidden;
@@ -52,6 +61,11 @@ const LeftBox = styled.div`
     background: #f1f1f1; /* Scrollbar track color */
     border-radius: 10px; /* Rounded corners */
   }
+
+  border: 2px solid blue;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 const RightBox = styled.div`
   overflow: hidden;
@@ -63,6 +77,11 @@ const RightBox = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   margin-left: 1rem;
+
+  border: 2px solid green;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const testimonials = [
