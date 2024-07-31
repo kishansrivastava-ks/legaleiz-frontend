@@ -16,14 +16,11 @@ const Title = styled.div`
   text-align: left;
   flex: 1 1;
   width: 100%;
-  /* background-color: purple; */
-  /* color: #fff; */
-  /* padding: 1vmax 0; */
   font-size: 2vmax;
   letter-spacing: 2px;
+  font-weight: bold;
 `;
 const Body = styled.div`
-  /* background-color: blue; */
   display: flex;
   flex: 1 1;
   width: 100%;
@@ -32,34 +29,12 @@ const Body = styled.div`
   margin-top: 1vmax;
   gap: 1rem;
   & > div {
-    /* border: 1px solid #000; */
     flex: 1 1;
     padding: 0 1rem;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     border-radius: 10px;
-
-    /*
-    & > div {
-      background-color: #fff;
-      border: 0.7rem solid #fff;
-      width: 3vmax;
-      height: 3vmax;
-      border-radius: 50%;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: black;
-      text-align: center;
-      margin: 0 auto;
-      position: absolute;
-      top: -2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      font-weight: 600;
-    }*/
 
     & > h4 {
       font-weight: 550;
@@ -70,6 +45,22 @@ const Body = styled.div`
       margin: 1vmax 0;
     }
   }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    & > div {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      & > h4 {
+        font-size: 1rem;
+        margin-left: 1rem;
+      }
+      & > p {
+        font-size: 0.8rem;
+      }
+    }
+  }
 `;
 const Image = styled.img`
   margin: 1vmax 0;
@@ -78,7 +69,6 @@ const Image = styled.img`
   background-color: ${(props) => props.bgColor};
   border-radius: 10px;
   padding: 0.5rem;
-  /* color: #fea5a5; */
 `;
 function HowItWorks() {
   return (
