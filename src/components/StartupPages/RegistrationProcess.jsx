@@ -16,6 +16,10 @@ const RegProcess = styled.div`
     width: 100%;
     margin-bottom: 2rem;
     letter-spacing: 2px;
+    @media (max-width: 768px) {
+      font-size: 2vmax;
+      margin-bottom: 1rem;
+    }
   }
 `;
 const Heading = styled.div`
@@ -23,6 +27,9 @@ const Heading = styled.div`
   font-weight: 500;
   width: 100%;
   margin-bottom: 1vmax;
+  @media (max-width: 768px) {
+    font-size: 2vmax;
+  }
 `;
 const List = styled.ul`
   list-style: none;
@@ -38,6 +45,13 @@ const ListItem = styled.li`
 
   & > p {
     margin-left: 1rem;
+  }
+  @media (max-width: 768px) {
+    gap: 1rem;
+    font-size: 2vmax;
+    & > p {
+      margin: 0;
+    }
   }
 `;
 function RegistrationProcess({ heading, steps }) {

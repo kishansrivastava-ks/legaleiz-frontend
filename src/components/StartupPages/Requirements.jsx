@@ -17,8 +17,16 @@ const Box = styled.div`
 const Heading = styled.div`
   font-size: 2vmax;
   margin-bottom: 1vmax;
+  @media (max-width: 768px) {
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
 `;
-const Caption = styled.div``;
+const Caption = styled.div`
+  @media (max-width: 768px) {
+    font-size: 2vmax;
+  }
+`;
 const Requirements = styled.ul`
   list-style: none;
 `;
@@ -28,6 +36,10 @@ const ListItem = styled.li`
   gap: 2rem;
 
   margin: 1vmax 0;
+  @media (max-width: 768px) {
+    gap: 1rem;
+    font-size: 2vmax;
+  }
 `;
 
 function Definition({ title, requirements }) {

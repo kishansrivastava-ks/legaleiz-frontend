@@ -48,6 +48,9 @@ const LeftBox = styled.div`
   &::-webkit-scrollbar {
     width: 7px;
     border: none;
+    @media (max-width: 768px) {
+      width: 3px;
+    }
   }
 
   &::-webkit-scrollbar-thumb {
