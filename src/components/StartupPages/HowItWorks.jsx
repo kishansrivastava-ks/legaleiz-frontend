@@ -53,11 +53,11 @@ const Body = styled.div`
       align-items: center;
       justify-content: space-between;
       & > h4 {
-        font-size: 1rem;
+        font-size: 2vmax;
         margin-left: 1rem;
       }
       & > p {
-        font-size: 0.8rem;
+        font-size: 2vmax;
       }
     }
   }

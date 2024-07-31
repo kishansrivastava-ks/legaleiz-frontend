@@ -16,6 +16,9 @@ const Question = styled.div`
   font-size: 2vmax;
   margin-bottom: 1.5vmax;
   letter-spacing: 1.5px;
+  @media (max-width: 768px) {
+    font-weight: bold;
+  }
 `;
 const Answer = styled.div`
   font-size: 1.2vmax;
@@ -23,6 +26,13 @@ const Answer = styled.div`
   color: gray;
   letter-spacing: 1px;
   text-align: justify;
+
+  @media (max-width: 768px) {
+    font-size: 2vmax;
+    line-height: 1.2;
+    letter-spacing: 0;
+    color: #000;
+  }
 `;
 const Image = styled.img``;
 
