@@ -4,17 +4,13 @@ import ReactStars from "react-rating-stars-component";
 
 const StyledStats = styled.div`
   width: 100%;
-  /* background-color: rgb(255, 0, 0); */
-  /* padding: 1vmax; */
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   gap: 1.5vmax;
 `;
 
 const RatingBox = styled.div`
-  /* background-color: lightblue; */
   color: #000;
   flex: 1 1;
   flex-basis: 20%;
@@ -23,7 +19,6 @@ const RatingBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: space-evenly; */
   height: max-content;
   padding: 1vmax 0;
   gap: 1rem;
@@ -60,6 +55,9 @@ const Heading = styled.div`
   text-transform: uppercase;
   letter-spacing: 3px;
   width: 100%;
+  @media (max-width: 768px) {
+    font-size: 2.5vmax;
+  }
 `;
 const Para = styled.p`
   font-weight: 500;
@@ -67,6 +65,9 @@ const Para = styled.p`
   text-align: justify;
   width: 100%;
   margin: 1vmax 0;
+  @media (max-width: 768px) {
+    font-size: 2vmax;
+  }
 `;
 const Purchased = styled.div`
   display: flex;
@@ -78,12 +79,18 @@ const Purchased = styled.div`
     width: 1.5vmax;
     border-radius: 50%;
     margin-right: 1rem;
+    @media (max-width: 768px) {
+      width: 2vmax;
+    }
   }
   & > p {
     font-size: 1.2vmax;
     & > span {
       font-weight: 600;
       color: #000;
+    }
+    @media (max-width: 768px) {
+      font-size: 2vmax;
     }
   }
 `;
