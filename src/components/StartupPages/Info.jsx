@@ -41,6 +41,11 @@ const InfoHeading = styled.div`
   font-weight: bold;
   letter-spacing: 2px;
   margin: 1rem 0;
+  @media (max-width: 768px) {
+    font-size: large;
+    max-width: 70%;
+  }
+  /* border: 2px solid green; */
 `;
 
 const InfoCaption = styled.div`
@@ -48,6 +53,9 @@ const InfoCaption = styled.div`
   font-size: 1.5vw;
   letter-spacing: 1.5px;
   margin: 1rem 0;
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
 `;
 const StyledImageBox = styled.div`
   height: 100%;
@@ -61,7 +69,7 @@ const StyledImageBox = styled.div`
     top: 0;
     right: 2%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
   }
 `;
@@ -73,6 +81,8 @@ const StyledImage = styled.img`
     border-radius: 50%;
     height: 50%;
     aspect-ratio: 1 / 1;
+    margin-top: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 `;
 
