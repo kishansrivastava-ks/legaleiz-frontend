@@ -65,7 +65,7 @@ const LeftBox = styled.div`
     border-radius: 10px; /* Rounded corners */
   }
 
-  border: 2px solid blue;
+  /* border: 2px solid blue; */
   @media (max-width: 768px) {
     width: 100%;
   }
