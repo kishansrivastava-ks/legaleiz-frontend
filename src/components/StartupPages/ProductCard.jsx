@@ -6,13 +6,11 @@ const Card = styled.div`
   border-right-color: #fff;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   display: flex;
-  /* flex: 1 1; */
   align-self: stretch;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   gap: 2vmax;
-  /* background-color: blueviolet; */
   border-radius: 8px;
   & > h2 {
     font-weight: 500;
@@ -23,6 +21,10 @@ const Card = styled.div`
   border-top: 0.5rem solid ${(props) => props.borderColor || "black"};
   flex-basis: 23%;
   text-align: center;
+  @media (max-width: 768px) {
+    min-width: 100%;
+    flex-basis: 100%;
+  }
 `;
 
 const Button = styled.a`
