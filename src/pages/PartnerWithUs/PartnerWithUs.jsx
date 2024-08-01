@@ -59,15 +59,32 @@ const Info = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    @media (max-width: 768px) {
+      min-width: 100%;
+      height: max-content;
+    }
   }
   border-bottom: 1px solid lightgray;
+  /* border: 2px solid red; */
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    position: relative;
+    height: max-content;
+  }
 `;
 const Heading1 = styled.h2`
   max-width: 70%;
-  font-size: xx-large;
+  font-size: 2vmax;
+  @media (max-width: 768px) {
+    font-size: 2.5vmax;
+  }
 `;
 const Caption = styled.h4`
   font-size: x-large;
+  @media (max-width: 768px) {
+    font-size: smaller;
+    margin: 1rem 0;
+  }
 `;
 const Button = styled.button`
   background: none;
@@ -83,9 +100,22 @@ const Button = styled.button`
     cursor: pointer;
     background-color: #0c09c6;
   }
+  @media (max-width: 768px) {
+    font-size: small;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+  }
 `;
 const Image = styled.img`
   height: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  @media (max-width: 768px) {
+    position: absolute;
+    height: 6rem;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    right: 5%;
+  }
 `;
 
 // PARTNERS
