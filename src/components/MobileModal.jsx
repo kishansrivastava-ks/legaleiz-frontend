@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const ModalBackground = styled.div`
@@ -59,7 +60,7 @@ const ModalContent = styled.div`
   padding: 1rem 1.5rem;
 `;
 
-const ModalLink = styled.a`
+const ModalLink = styled(NavLink)`
   display: block;
   margin-bottom: 1rem;
   font-size: 1rem;
@@ -81,7 +82,7 @@ const Modal = ({ isOpen, onClose, title, links }) => {
         </ModalHeader>
         <ModalContent>
           {links.map((link, index) => (
-            <ModalLink key={index} href={link.href}>
+            <ModalLink key={index} to={link.href}>
               {link.name}
             </ModalLink>
           ))}

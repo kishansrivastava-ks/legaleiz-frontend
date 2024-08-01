@@ -8,6 +8,7 @@ const ChatBox = styled.div`
   flex-direction: row;
   justify-content: space-between;
   border-radius: 10px;
+  /* border: 2px solid red; */
 `;
 
 const Box1 = styled.div`
@@ -25,15 +26,24 @@ const Box1 = styled.div`
     font-size: 4vmax;
     color: #fff;
 
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+
     & > span {
       color: #30fd30;
     }
   }
 
   & > h3 {
-    font-size: 1%.5;
+    font-size: 1.5;
     color: #fff;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
   }
+  /* border: 3px solid red; */
 `;
 const ChatBtn = styled.button`
   padding: 0.8vmax 2vmax;
@@ -49,6 +59,13 @@ const ChatBtn = styled.button`
     transition: all 0.5s ease-in-out;
   }
   transition: all 0.5s ease-in-out;
+
+  @media (max-width: 768px) {
+    transform: scale(0.6);
+    margin: 0;
+    /* border: 2px solid red; */
+    margin-left: -2.5rem;
+  }
   //
 `;
 const Box2 = styled.div`

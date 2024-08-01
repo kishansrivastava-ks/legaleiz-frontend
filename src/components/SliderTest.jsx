@@ -16,6 +16,7 @@ const TestimonialsWrapper = styled.div`
   padding-top: 2vmax;
   @media (max-width: 768px) {
     padding: 5vmax 6vmax;
+    margin-top: -2rem;
   }
 `;
 const Heading = styled.h2`
@@ -24,7 +25,8 @@ const Heading = styled.h2`
   letter-spacing: 2px;
   color: #333;
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: 2vmax;
+    letter-spacing: 1px;
   }
 `;
 const TestimonialCard = styled.div`
@@ -53,6 +55,7 @@ const TestimonialCard = styled.div`
     & > * {
       transform: skew(0deg);
     }
+    transform: scale(0.8) scaleX(1.2) scaleY(0.8);
   }
 `;
 const Review = styled.p`
@@ -74,11 +77,19 @@ const Review = styled.p`
     right: -1rem;
     bottom: -1rem;
   }
+  @media (max-width: 768px) {
+    transform: scaleX(0.8) scaleY(1.2);
+  }
 `;
 const UserWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  & > * {
+    @media (max-width: 768px) {
+      transform: scaleX(0.8) scaleY(1.2);
+    }
+  }
 `;
 const UserPhoto = styled.img`
   width: 30px;
@@ -96,7 +107,7 @@ const DotsWrapper = styled.div`
   justify-content: center;
   margin-top: 1vmax 0;
   @media (max-width: 768px) {
-    /* margin-bottom: 2vmax; */
+    margin-top: -2rem;
   }
 `;
 const Dot = styled.div`

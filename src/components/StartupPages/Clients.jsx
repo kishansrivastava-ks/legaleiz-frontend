@@ -5,6 +5,7 @@ const ClientContainer = styled.div`
   /* padding: 3rem 10vw; */
   width: 100%;
   height: max-content;
+  /* border: 2px solid red; */
 `;
 
 const Container = styled.div`
@@ -12,6 +13,11 @@ const Container = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   grid-template-rows: auto;
   border: 0;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
 
   & > div {
     /* background-color: #e79c9c; */
@@ -39,6 +45,11 @@ const Title = styled.h2`
   text-align: left;
   line-height: 3vmax;
   margin-bottom: 2vmax;
+  @media (max-width: 768px) {
+    font-weight: bold;
+    text-align: center;
+    font-size: 2.5vmax;
+  }
 `;
 
 function Clients() {

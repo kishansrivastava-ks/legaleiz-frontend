@@ -11,7 +11,13 @@ const Container = styled.div`
   & > h2 {
     font-weight: 550;
     letter-spacing: 2px;
+    @media (max-width: 768px) {
+      font-size: smaller;
+      font-weight: bold;
+    }
   }
+
+  /* border: 2px solid red; */
 `;
 
 const QuestionsContainer = ({ heading = true, questions }) => {

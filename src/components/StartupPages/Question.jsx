@@ -23,6 +23,11 @@ const QuestionHeader = styled.div`
 const QuestionText = styled.div`
   font-size: 1.3vmax;
   letter-spacing: 2px;
+  @media (max-width: 768px) {
+    font-size: 2vmax;
+    letter-spacing: 1px;
+    line-height: 1.2;
+  }
 `;
 
 const Symbol = styled.div`
@@ -47,6 +52,11 @@ const Answer = styled.div`
   background-color: #fff;
   border-top: 1px solid lightgray;
   border-width: 90%;
+  @media (max-width: 768px) {
+    font-size: 1.7vmax;
+    letter-spacing: 1px;
+    line-height: 1.2;
+  }
 `;
 
 const Question = ({ question, answer, isOpen, onClick }) => {
