@@ -23,13 +23,13 @@ const StyledContainer = styled.div`
   background-color: #fff;
   padding: 2vmax 5vmax;
   /* border: 2px solid red; */
+
   @media (max-width: 768px) {
     flex-direction: column;
-  }
-  @media (max-width: 768px) {
     padding-left: 0;
     padding-right: 0;
     padding: 0;
+    height: max-content;
   }
 `;
 const LeftBox = styled.div`
