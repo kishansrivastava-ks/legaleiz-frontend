@@ -108,13 +108,14 @@ const Button = styled.button`
 `;
 const Image = styled.img`
   height: 100%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   @media (max-width: 768px) {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: absolute;
     height: 6rem;
     border-radius: 50%;
     aspect-ratio: 1 / 1;
     right: 5%;
+    top: 20%;
   }
 `;
 
@@ -255,6 +256,8 @@ const AccordionContainer = () => {
 
 // EXPERIENCE
 const Experience = styled.div`
+  /* border: 3px solid red; */
+  display: flex;
   width: 100vw;
   height: max-content;
   /* background-color: yellow; */
@@ -263,8 +266,17 @@ const Experience = styled.div`
   flex-direction: column;
   align-items: center;
 
+  @media (max-width: 768px) {
+    padding: 0;
+  }
+
   & > h2 {
     margin-bottom: 3rem;
+    @media (max-width: 768px) {
+      font-size: 3vmax;
+      /* border: 2px solid red; */
+      width: max-content;
+    }
   }
   & > h3 {
     margin: 3rem 0;
@@ -273,14 +285,39 @@ const Experience = styled.div`
   & > div {
     display: flex;
     gap: 4rem;
+    @media (max-width: 768px) {
+      width: 100%;
+      flex-direction: column;
+      gap: 1rem;
+      /* border: 2px solid red; */
+    }
     & > div {
-      /* background-color: yellow; */
+      /* border: 2px solid red; */
       display: flex;
       flex-direction: column;
       align-items: center;
+
+      @media (max-width: 768px) {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        font-size: smaller;
+        padding: 0 2rem;
+        margin-bottom: 1rem;
+      }
+      & > img {
+        @media (max-width: 768px) {
+          height: 5rem;
+        }
+      }
       & > p {
         text-align: center;
         margin-top: 2rem;
+        @media (max-width: 768px) {
+          margin-top: 0;
+          text-align: left;
+          margin-left: 1rem;
+        }
       }
     }
   }
@@ -295,8 +332,8 @@ function PartnerWithUs() {
         <Info>
           <div>
             <Heading1>
-              Let’s Partner Up! Become our partner and drive your business to
-              the next level.
+              Let&apos;s Partner Up! Become our partner and drive your business
+              to the next level.
             </Heading1>
             <Caption>Connect with us now!</Caption>
             <Button>Download Partner Success Stories</Button>
