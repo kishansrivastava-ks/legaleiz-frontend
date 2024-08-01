@@ -84,6 +84,9 @@ const RightBox = styled.div`
   border: 2px solid green;
   @media (max-width: 768px) {
     width: 100%;
+    margin: 0;
+    /* border: 2px solid red; */
+    border: none;
   }
 `;
 

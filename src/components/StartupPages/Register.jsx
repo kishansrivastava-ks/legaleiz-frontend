@@ -9,6 +9,10 @@ const Container = styled.div`
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
+  /* border: 3px solid green; */
+  @media (max-width: 768px) {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
 `;
 const Heading = styled.h1`
   font-size: 2vmax;
@@ -16,11 +20,18 @@ const Heading = styled.h1`
   text-align: center;
   font-weight: 500;
   letter-spacing: 2px;
+  @media (max-width: 768px) {
+    font-weight: bold;
+    font-size: 2.5vmax;
+  }
 `;
 const ItemList = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+  @media (max-width: 768px) {
+    margin-bottom: 10px;
+  }
 `;
 const Item = styled.div`
   display: flex;
@@ -31,6 +42,12 @@ const Item = styled.div`
   border-bottom: 1px solid #ccc;
   margin-bottom: 10px;
   padding: 1.5vmax 0;
+  & > span {
+    @media (max-width: 768px) {
+      font-size: 2vmax;
+      font-weight: bold;
+    }
+  }
 `;
 const StyledCheckbox = styled.input.attrs({ type: "checkbox" })`
   appearance: none;
@@ -55,6 +72,11 @@ const StyledCheckbox = styled.input.attrs({ type: "checkbox" })`
     font-size: 14px;
     line-height: 18px;
   }
+
+  @media (max-width: 768px) {
+    width: 15px;
+    height: 15px;
+  }
 `;
 const Total = styled.div`
   display: flex;
@@ -62,6 +84,10 @@ const Total = styled.div`
   font-size: 1.2vmax;
   font-weight: bold;
   margin-bottom: 20px;
+  @media (max-width: 768px) {
+    font-size: 2vmax;
+    letter-spacing: 2px;
+  }
 `;
 const PaymentLogos = styled.div`
   display: flex;
@@ -73,6 +99,9 @@ const PaymentLogos = styled.div`
 `;
 const Logo = styled.img`
   height: 40px;
+  @media (max-width: 768px) {
+    height: 30px;
+  }
 `;
 const RegisterButton = styled.button`
   display: block;
@@ -87,6 +116,18 @@ const RegisterButton = styled.button`
   cursor: pointer;
   &:hover {
     background-color: #0056b3;
+  }
+  @media (max-width: 768px) {
+    width: 150px;
+    padding: 5px 10px;
+    font-size: 2.5vmax;
+    border-radius: 3px;
+  }
+`;
+
+const Label = styled.label`
+  @media (max-width: 768px) {
+    font-size: 2.5vmax;
   }
 `;
 function Register({ serviceId, registrationItems, category }) {
@@ -134,13 +175,13 @@ function Register({ serviceId, registrationItems, category }) {
       <ItemList>
         {registrationItems.map((item) => (
           <Item key={item.id}>
-            <label>
+            <Label>
               <StyledCheckbox
                 checked={selectedItems.includes(item.id)}
                 onChange={() => handleCheckboxChange(item.id)}
               />
               {item.title}
-            </label>
+            </Label>
             <span>₹{item.price}</span>
           </Item>
         ))}
