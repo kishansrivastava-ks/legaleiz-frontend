@@ -129,7 +129,16 @@ const PartnersContainer = styled.div`
     width: 100%;
     text-align: center;
     margin-bottom: 2rem;
+    @media (max-width: 768px) {
+      font-size: 2.5vmax;
+      margin-top: 1rem;
+      letter-spacing: 1px;
+    }
   }
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+  /* border: 3px solid red; */
 `;
 const Container = styled.div`
   width: 100%;

@@ -14,6 +14,12 @@ const Container = styled.div`
   grid-template-rows: repeat(2, 1fr);
   gap: 20px;
   padding: 20px;
+  @media (max-width: 768px) {
+    width: 100%;
+    /* border: 2px solid green; */
+    gap: 1rem;
+    padding: 1rem;
+  }
 `;
 const Card = styled.div`
   background: #fff;
@@ -28,11 +34,23 @@ const Card = styled.div`
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
+  @media (max-width: 768px) {
+    aspect-ratio: 1 / 1;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
 `;
 const CardImage = styled.img`
   /* width: 100%; */
   height: auto;
   border-radius: 8px 8px 0 0;
+  @media (max-width: 768px) {
+    height: 3.5rem;
+  }
 `;
 
 const CardText = styled.p`
@@ -40,6 +58,10 @@ const CardText = styled.p`
   margin-top: 10px;
   font-size: 16px;
   color: #333;
+  @media (max-width: 768px) {
+    font-size: 1.5vmax;
+    margin: 0;
+  }
 `;
 const fadeInScale = keyframes`
   0% {
