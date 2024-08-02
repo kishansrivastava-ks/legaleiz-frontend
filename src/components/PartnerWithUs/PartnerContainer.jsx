@@ -93,14 +93,28 @@ const PopupContainer = styled.div`
   padding: 40px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   position: relative;
-  /* max-width: 90%;
-  max-height: 90%; */
   height: 60vh;
   width: 60vw;
   overflow-y: auto;
   transition: transform 0.3s ease-out;
   transform: scale(${(props) => (props.isOpen ? 1 : 0)});
   animation: ${fadeInScale} 0.4s ease-out;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    width: 90vw;
+  }
+  & > h2 {
+    @media (max-width: 768px) {
+      font-size: 3vmax;
+    }
+  }
+  & > p {
+    @media (max-width: 768px) {
+      font-size: 2.5vmax;
+      margin-top: 1rem;
+    }
+  }
 `;
 const CloseButton = styled(AiOutlineClose)`
   position: absolute;
