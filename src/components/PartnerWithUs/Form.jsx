@@ -21,6 +21,10 @@ const SlideForm = styled.div`
   transition: right 0.3s ease;
   z-index: 50;
   overflow-y: auto;
+
+  @media (max-width: 768px) {
+    max-width: 300px;
+  }
 `;
 
 const FormInput = styled.input`
@@ -30,6 +34,11 @@ const FormInput = styled.input`
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-bottom: 15px;
+  @media (max-width: 768px) {
+    font-size: 10px;
+    padding: 5px;
+    margin-bottom: 5px;
+  }
 `;
 
 const FormSelect = styled.select`
@@ -39,6 +48,11 @@ const FormSelect = styled.select`
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-bottom: 15px;
+  @media (max-width: 768px) {
+    font-size: 10px;
+    padding: 5px;
+    margin-bottom: 5px;
+  }
 `;
 
 const FormTextarea = styled.textarea`
@@ -48,6 +62,11 @@ const FormTextarea = styled.textarea`
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-bottom: 15px;
+  @media (max-width: 768px) {
+    font-size: 10px;
+    padding: 5px;
+    margin-bottom: 5px;
+  }
 `;
 
 const CheckboxLabel = styled.label`
@@ -55,6 +74,9 @@ const CheckboxLabel = styled.label`
   align-items: center;
   margin-bottom: 15px;
   font-size: 1vmax;
+  @media (max-width: 768px) {
+    font-size: 10px;
+  }
 `;
 
 const CheckboxInput = styled.input`
@@ -72,6 +94,9 @@ const SubmitButton = styled.button`
   pointer-events: ${(props) => (props.disabled ? "none" : "auto")};
   margin-left: 50%;
   transform: translateX(-50%);
+  @media (max-width: 768px) {
+    font-size: 10px;
+  }
 `;
 
 const Form = ({ isOpen }) => {

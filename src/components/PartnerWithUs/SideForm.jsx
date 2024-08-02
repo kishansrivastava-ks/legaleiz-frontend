@@ -14,6 +14,12 @@ const GlobalStyle = createGlobalStyle`
 
 // Vertical bar styled component
 const VerticalBar = styled.div`
+  @media (max-width: 768px) {
+    right: ${(props) => (props.isOpen ? "300px" : "0")};
+    padding: 1.5rem 7px;
+    font-size: 2vmax;
+    width: 3rem;
+  }
   position: fixed;
   top: 50%;
   right: ${(props) => (props.isOpen ? "350px" : "0")};
