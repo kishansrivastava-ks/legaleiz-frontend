@@ -2,6 +2,7 @@ import styled from "styled-components";
 import List from "../List";
 import QuestionsContainer from "../../StartupPages/QuestionsContainer";
 import StyledOverview from "../StyledOverview";
+import Paragraph from "../Paragraph";
 
 // const StyledOverView = styled.div`
 //   /* padding: 5px 10px; */
@@ -23,10 +24,10 @@ const StyledFormat = styled.div``;
 // const StyledExamples = styled.div``;
 const StyledTemplate = styled.div``;
 const StyledViolate = styled.div`
-  & > p {
+  /* & > p {
     line-height: 1.4;
     font-size: 1.8rem;
-  }
+  } */
 `;
 
 // const StyledFAQ = styled.div``;
@@ -167,14 +168,14 @@ export const Exclusions = () => {
   ];
   return (
     <>
-      <p style={{ textAlign: "justify", marginBottom: "1rem" }}>
+      <Paragraph>
         An NDA, or non-disclosure agreement, is a legal contract between two
         parties that outlines what information is confidential and agrees that
         the receiving party will not disclose that information to unauthorized
         third parties. However, some exclusions exist to what is regarded as
         confidential information under an NDA. These exclusions typically
         include:
-      </p>
+      </Paragraph>
       <List list={list} />
     </>
   );
@@ -208,11 +209,11 @@ export const Needs = () => {
   ];
   return (
     <>
-      <p style={{ textAlign: "justify", marginBottom: "1rem" }}>
+      <Paragraph>
         You need an NDA whenever you are sharing confidential information with
         someone who is not your employee or agent. This could include situations
         such as:
-      </p>
+      </Paragraph>
       <List list={list} />
     </>
   );
@@ -269,13 +270,13 @@ export const Requirements = () => {
 export const Template = () => <StyledTemplate></StyledTemplate>;
 export const Violate = () => (
   <StyledViolate>
-    <p style={{ marginBottom: "1rem" }}>
+    <Paragraph>
       If you violate a Nondisclosure Agreement (NDA), you may face legal
       consequences, such as monetary damages or injunctive relief. The precise
       repercussions will vary depending on the conditions of the particular NDA
       and the type of violation.
-    </p>
-    <p>
+    </Paragraph>
+    <Paragraph>
       In the event of a violation, NDAs typically contain provisions for
       monetary compensation and injunctive redress. Damages may include actual
       damages suffered by the disclosing party as a result of the breach, as
@@ -283,7 +284,7 @@ export const Violate = () => (
       breach. Injunctive relief may include court orders to stop the breaching
       party from continuing to disclose or use the confidential information, or
       to return any confidential information in their possession.
-    </p>
+    </Paragraph>
   </StyledViolate>
 );
 export const Examples = () => {
@@ -345,10 +346,10 @@ export const Information = () => {
   ];
   return (
     <>
-      <p>
+      <Paragraph>
         The type of information that is protected under an NDA can vary
         depending on the context of the agreement, but generally includes:
-      </p>
+      </Paragraph>
       <List list={list} />
     </>
   );
