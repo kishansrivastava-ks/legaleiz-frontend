@@ -22,6 +22,7 @@ import {
   WhyLegalEiz,
   FAQ,
 } from "../../../components/Documentation/BusinessContracts/nondisclosureagreement";
+import Container from "../../../components/Documentation/Container";
 
 // CREATE AN ARRAY OUT OF IT TO PASS TO SCROLLABLE CONTAINER
 const sections = [
@@ -77,15 +78,6 @@ const sections = [
     component: <FAQ />,
   },
 ];
-
-const Container = styled.div`
-  padding: 2vmax;
-  background-color: #fff;
-  border-bottom: 1px solid lightgray;
-  @media (max-width: 768px) {
-    padding: 0;
-  }
-`;
 
 function NonDisclosureAgreement() {
   return (

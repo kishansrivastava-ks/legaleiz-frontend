@@ -1,21 +1,16 @@
-import styled from "styled-components";
+// import styled from "styled-components";
 import List from "../List";
-
-const StyledOverView = styled.div`
-  /* padding: 5px 10px; */
-  border-radius: 5px;
-  text-align: justify;
-`;
+import StyledOverview from "../StyledOverview";
 
 export const Overview = () => (
-  <StyledOverView>
+  <StyledOverview>
     <p>
       A joint venture agreement is a legal document that establishes a
       collaborative business relationship between two or more parties. It
       outlines the rights, responsibilities, and expectations of each party
       involved in the venture.
     </p>
-  </StyledOverView>
+  </StyledOverview>
 );
 
 export const Needs = () => {

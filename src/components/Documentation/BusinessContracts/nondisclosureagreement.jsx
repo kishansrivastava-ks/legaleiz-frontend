@@ -1,21 +1,22 @@
 import styled from "styled-components";
 import List from "../List";
 import QuestionsContainer from "../../StartupPages/QuestionsContainer";
+import StyledOverview from "../StyledOverview";
 
-const StyledOverView = styled.div`
-  /* padding: 5px 10px; */
-  border-radius: 5px;
-  text-align: justify;
-  & > p {
-    line-height: 1.4;
-    font-size: 1.8rem;
-  }
-  @media (max-width: 768px) {
-    & > p {
-      font-size: 2vmax;
-    }
-  }
-`;
+// const StyledOverView = styled.div`
+//   /* padding: 5px 10px; */
+//   border-radius: 5px;
+//   text-align: justify;
+//   & > p {
+//     line-height: 1.4;
+//     font-size: 1.8rem;
+//   }
+//   @media (max-width: 768px) {
+//     & > p {
+//       font-size: 2vmax;
+//     }
+//   }
+// `;
 
 const StyledFormat = styled.div``;
 
@@ -32,7 +33,7 @@ const StyledViolate = styled.div`
 
 // Create functional components for each section
 export const Overview = () => (
-  <StyledOverView>
+  <StyledOverview>
     <p>
       A non-disclosure agreement (NDA), also known as a confidentiality
       agreement, is a legally binding contract that protects proprietary
@@ -45,7 +46,7 @@ export const Overview = () => (
       multiple clients across the same industry, frequently enter into NDAs to
       uphold legal obligations and maintain client trust.
     </p>
-  </StyledOverView>
+  </StyledOverview>
 );
 
 export const Types = () => {
