@@ -1,12 +1,6 @@
-import styled from "styled-components";
+// import styled from "styled-components";
 import List from "../List";
-
-const StyledOverView = styled.div`
-  /* padding: 5px 10px; */
-  border-radius: 5px;
-  text-align: justify;
-`;
-
+import StyledOverView from "../StyledOverview";
 export const Overview = () => (
   <StyledOverView>
     <p>

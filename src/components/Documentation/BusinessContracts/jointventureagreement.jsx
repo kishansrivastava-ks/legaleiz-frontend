@@ -33,11 +33,6 @@ export const Needs = () => {
   ];
   return (
     <>
-      {/* <p style={{ textAlign: "justify", marginBottom: "1rem" }}>
-        You need an NDA whenever you are sharing confidential information with
-        someone who is not your employee or agent. This could include situations
-        such as:
-      </p> */}
       <List list={list} />
     </>
   );

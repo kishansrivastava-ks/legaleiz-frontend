@@ -10,12 +10,6 @@ import {
 } from "../../../components/Documentation/BusinessContracts/jointventureagreement";
 import Container from "../../../components/Documentation/Container";
 
-// const Container = styled.div`
-//   padding: 2vmax;
-//   background-color: #fff;
-//   border-bottom: 1px solid lightgray;
-// `;
-
 const sections = [
   {
     heading: "Overview",

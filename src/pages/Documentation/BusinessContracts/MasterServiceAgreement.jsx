@@ -9,12 +9,7 @@ import {
   Benefits,
   Disclaimer,
 } from "../../../components/Documentation/BusinessContracts/masterserviceagreement";
-
-const Container = styled.div`
-  padding: 2vmax;
-  background-color: #fff;
-  border-bottom: 1px solid lightgray;
-`;
+import Container from "../../../components/Documentation/Container";
 
 const sections = [
   {

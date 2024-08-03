@@ -1,15 +1,6 @@
 import styled from "styled-components";
 import List from "../List";
-
-const StyledOverView = styled.div`
-  /* padding: 5px 10px; */
-  border-radius: 5px;
-  text-align: justify;
-  & > p {
-    line-height: 1.4;
-    font-size: 1.8rem;
-  }
-`;
+import StyledOverView from "../StyledOverView";
 
 export const Overview = () => (
   <StyledOverView>
@@ -113,11 +104,21 @@ export const Benefits = () => {
 };
 export const Disclaimer = () => {
   return (
-    <div style={{ fontSize: "1.8rem", lineHeight: "1.4", fontStyle: "italic" }}>
-      <span style={{ fontWeight: "bold" }}>Disclaimer:</span>This webpage
+    <Disclaim>
+      <span style={{ fontWeight: "bold" }}>Disclaimer:&nbsp;</span>This webpage
       provides general information only and should not be considered legal
       advice. It&apos;s highly recommended to consult with a business attorney
       to create a Master Service Agreement customized to your specific needs
-    </div>
+    </Disclaim>
   );
 };
+
+const Disclaim = styled.div`
+  font-size: 1.8rem;
+  line-height: 1.4;
+  font-style: italic;
+  @media (max-width: 768px) {
+    font-size: 2vmax;
+    text-align: justify;
+  }
+`;
