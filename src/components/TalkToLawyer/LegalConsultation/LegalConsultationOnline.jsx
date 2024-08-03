@@ -5,19 +5,23 @@ import styled from "styled-components";
 import ReactStars from "react-rating-stars-component";
 
 const Container = styled.div`
-  /* background-color: blue; */
   display: flex;
   gap: 4rem;
   padding-bottom: 4rem;
   border-bottom: 1px solid lightgray;
-  width: 100%;
+  width: 100vw;
   padding: 2vmax 8vmax;
+
+  border: 3px solid red;
+
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+    flex-direction: column;
+    gap: 2rem;
+  }
 `;
 const LeftContainer = styled.div`
-  /* background-color: yellow; */
   padding: 1rem;
-  /* flex: 1 1; */
-  /* flex-basis: %; */
   min-width: 55%;
   display: flex;
   flex-direction: column;
@@ -28,11 +32,19 @@ const Heading = styled.h2`
   letter-spacing: 4px;
   margin-bottom: 2rem;
   width: 100%;
+  @media (max-width: 768px) {
+    letter-spacing: 2px;
+    font-size: 3vmax;
+    margin-bottom: 1rem;
+  }
 `;
 const Stats = styled.div`
   width: 100%;
   display: flex;
   margin-bottom: 2rem;
+  @media (max-width: 768px) {
+    margin-bottom: 1rem;
+  }
 `;
 const Stat = styled.div`
   padding: 0.5rem 1rem;
@@ -45,7 +57,13 @@ const Stat = styled.div`
   border-radius: 25px;
   background-color: ${(props) => props.bgColor};
   margin-right: 1rem;
-
+  @media (max-width: 768px) {
+    flex-basis: 50%;
+    font-size: 1vmax;
+    letter-spacing: 0;
+    padding: 0.3rem 0.5rem;
+    justify-content: center;
+  }
   & > img {
     margin-right: 1rem;
     width: 2rem;
@@ -56,6 +74,9 @@ const Intro = styled.div`
     margin: 1rem 0;
     font-size: 1.8rem;
     text-align: left;
+    @media (max-width: 768px) {
+      font-size: 2vmax;
+    }
   }
 `;
 const List = styled.ul`
@@ -67,8 +88,15 @@ const ListItem = styled.li`
   display: flex;
   justify-content: flex-start;
   font-size: 1.1vmax;
+  @media (max-width: 768px) {
+    font-size: 1.5vmax;
+    align-items: flex-start;
+  }
   & > div {
     margin-right: 1rem;
+    @media (max-width: 768px) {
+      margin-top: 0.3rem;
+    }
   }
 `;
 
