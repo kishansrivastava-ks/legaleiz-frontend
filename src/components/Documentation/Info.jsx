@@ -18,16 +18,14 @@ const StyledInfo = styled.div`
   text-align: center;
   text-transform: uppercase;
   border: 1rem solid #fff;
-
-  /* test */
   position: relative;
   background-image: url("/images/info-background.jpg");
-  background-size: cover; /* Adjust the image to cover the entire component */
-  background-repeat: no-repeat; /* Prevent the image from repeating */
-  background-position: center; /* Center the image */
-  /* width: 100%; 
-  height: 100vh;  */
-  overflow: hidden; /* Prevent overflow if content exceeds */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: hidden;
+
+  /* border: 2px solid red; */
 
   &::before {
     content: "";
@@ -36,20 +34,28 @@ const StyledInfo = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 255, 0.7); /* Transparent blue overlay */
-    clip-path: polygon(0 0, 65% 0, 45% 100%, 0 100%); /* Slanted right edge */
-    pointer-events: none; /* Allow clicks through the overlay */
+    background: rgba(0, 0, 255, 0.7);
+    clip-path: polygon(0 0, 65% 0, 45% 100%, 0 100%);
+    pointer-events: none;
   }
   > * {
-    position: relative; /* Ensure text and other content appear above the overlay */
+    position: relative;
     z-index: 1;
     text-align: left;
-    /* font-family: "Roboto", sans-serif; */
     font-family: "Montserrat", sans-serif;
     letter-spacing: 7px;
     font-weight: 500;
     width: 50%;
-    /* background-color: rebeccapurple; */
+
+    @media (max-width: 768px) {
+      font-weight: bold;
+      font-size: 3vmax;
+      letter-spacing: 2px;
+    }
+  }
+  @media (max-width: 768px) {
+    padding: 3vmax 2vmax;
+    border: none;
   }
 `;
 
