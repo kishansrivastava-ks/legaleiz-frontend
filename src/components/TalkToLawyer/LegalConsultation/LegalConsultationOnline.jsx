@@ -89,7 +89,7 @@ const ListItem = styled.li`
   justify-content: flex-start;
   font-size: 1.1vmax;
   @media (max-width: 768px) {
-    font-size: 1.5vmax;
+    font-size: 2vmax;
     align-items: flex-start;
   }
   & > div {
@@ -247,6 +247,18 @@ const GoogleReviews = styled.div`
     font-size: 1.5rem;
     line-height: 1;
     margin-top: 0.5rem;
+    @media (max-width: 768px) {
+      margin-top: 0;
+      font-size: 1.5vmax;
+    }
+  }
+  & > div > h4 {
+    @media (max-width: 768px) {
+      font-size: 2vmax;
+    }
+  }
+  @media (max-width: 768px) {
+    margin-top: 1rem;
   }
 `;
 const starsOptions = {
@@ -266,6 +278,12 @@ const ConsultLawyerBtn = styled.button`
   letter-spacing: 2px;
   &:hover {
     background-color: #0000c5;
+  }
+  @media (max-width: 768px) {
+    width: 80%;
+    align-self: center;
+    padding: 0.5rem;
+    font-size: 2vmax;
   }
 `;
 const Features = styled.div`
