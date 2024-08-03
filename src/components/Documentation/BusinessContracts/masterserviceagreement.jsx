@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import List from "../List";
-import StyledOverView from "../StyledOverView";
+import StyledOverview from "../StyledOverview";
 
 export const Overview = () => (
-  <StyledOverView>
+  <StyledOverview>
     <p>
       A master service agreement (MSA) is a foundational legal document that
       establishes the core terms and conditions for ongoing service engagements
@@ -11,7 +11,7 @@ export const Overview = () => (
       blueprint for a successful working relationship, outlining expectations
       and reducing complexity for future projects. .
     </p>
-  </StyledOverView>
+  </StyledOverview>
 );
 
 export const Needs = () => {
