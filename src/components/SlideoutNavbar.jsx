@@ -66,6 +66,7 @@ const SlideOutNavbar = () => {
       {
         menuItem: "Personal",
         links: [
+          { name: "Personal", href: "/legal-consultation" },
           { name: "Family & Matrimonial", href: "/legal-consultation/consult" },
           { name: "Divorce", href: "/divorce-consultation" },
           { name: "Property", href: "/property-consultation" },
@@ -79,6 +80,7 @@ const SlideOutNavbar = () => {
       {
         menuItem: "Business",
         links: [
+          { name: "Business", href: "/business-consultation" },
           { name: "Company Matters", href: "/business-consultation/consult" },
           {
             name: "HR & Labour Compliance",
