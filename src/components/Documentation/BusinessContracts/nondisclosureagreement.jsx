@@ -10,6 +10,11 @@ const StyledOverView = styled.div`
     line-height: 1.4;
     font-size: 1.8rem;
   }
+  @media (max-width: 768px) {
+    & > p {
+      font-size: 2vmax;
+    }
+  }
 `;
 
 const StyledFormat = styled.div``;

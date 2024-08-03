@@ -13,6 +13,12 @@ const StyledList = styled.div`
       font-weight: bold;
     }
   }
+
+  @media (max-width: 768px) {
+    & > ul > li {
+      font-size: 2vmax;
+    }
+  }
 `;
 
 function List({ list }) {
