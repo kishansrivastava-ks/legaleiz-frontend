@@ -291,11 +291,11 @@ const RightBox = styled.div`
     }
 
     & > p {
-      font-size: 1rem;
+      font-size: 2vmax;
     }
   }
 
-  @media (max-width: 480px) {
+  /* @media (max-width: 480px) {
     margin-top: 1.5rem;
     padding: 1.5vmax 1vmax;
 
@@ -307,7 +307,7 @@ const RightBox = styled.div`
     & > p {
       font-size: 0.9rem;
     }
-  }
+  } */
 `;
 const Stamp = styled.div`
   & > img {
