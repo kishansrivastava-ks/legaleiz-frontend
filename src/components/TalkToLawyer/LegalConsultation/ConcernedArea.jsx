@@ -9,9 +9,14 @@ const Container = styled.div`
   gap: 4rem;
   padding-bottom: 4rem;
   border-bottom: 1px solid lightgray;
-  /* border: 5px solid red; */
   width: 100%;
   padding: 2vmax 8vmax;
+
+  border: 3px solid red;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 100vw;
+  }
 `;
 const LeftBox = styled.div`
   /* background-color: yellow; */
@@ -183,26 +188,64 @@ const BuyTalktime = styled.button`
 // FOR THE RIGHT STAMP
 const RightBox = styled.div`
   margin-top: 3rem;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  min-width: 25%;
-  /* border: 1px solid black; */
   padding: 3vmax 1vmax;
+  min-width: 25%;
   height: max-content;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 
   & > h2 {
     margin-bottom: 2rem;
     letter-spacing: 1px;
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 2rem;
+    padding: 2vmax 1vmax;
+    min-width: 100%;
+
+    & > h2 {
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    & > p {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 1.5rem;
+    padding: 1.5vmax 1vmax;
+
+    & > h2 {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    & > p {
+      font-size: 0.9rem;
+    }
   }
 `;
 const Stamp = styled.div`
   & > img {
     height: 12rem;
     margin-bottom: 2vmax;
+
+    @media (max-width: 768px) {
+      height: 10rem;
+      margin-bottom: 1.5vmax;
+    }
+
+    @media (max-width: 480px) {
+      height: 8rem;
+      margin-bottom: 1vmax;
+    }
   }
 `;
 
