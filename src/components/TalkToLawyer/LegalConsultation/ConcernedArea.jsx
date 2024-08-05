@@ -12,14 +12,14 @@ const Container = styled.div`
   width: 100%;
   padding: 2vmax 8vmax;
 
-  border: 3px solid red;
+  /* border: 3px solid red; */
   @media (max-width: 768px) {
     flex-direction: column;
     width: 100vw;
+    padding: 1vmax 3vmax;
   }
 `;
 const LeftBox = styled.div`
-  /* background-color: yellow; */
   min-width: 65%;
   display: flex;
   flex-direction: column;
@@ -31,13 +31,34 @@ const LeftBox = styled.div`
     width: 100%;
     letter-spacing: 2px;
   }
+  @media (max-width: 768px) {
+    border: 2px solid red;
+    & > h2 {
+      font-size: large;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+  }
 `;
 const ConcernedAreaBox = styled.div`
   & > h3 {
     margin-bottom: 1rem;
+    @media (max-width: 768px) {
+      font-size: small;
+      font-weight: 500;
+      letter-spacing: 1px;
+      margin-bottom: 0;
+    }
   }
 `;
-const AreaOptionsBox = styled.div``;
+const AreaOptionsBox = styled.div`
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+`;
 const AreaOption = styled.button`
   display: inline-block;
   width: max-content;
@@ -56,6 +77,12 @@ const AreaOption = styled.button`
   transition: all 0.2s ease-in-out;
   background-color: ${(props) => (props.active == true ? "blue" : "white")};
   color: ${(props) => (props.active == true ? "white" : "black")};
+
+  @media (max-width: 768px) {
+    padding: 0.5rem 1rem;
+    font-size: 1.5vmax;
+    margin: 0.5rem;
+  }
 `;
 const TalkTimeContainer = styled.div`
   width: 100%;
@@ -63,15 +90,22 @@ const TalkTimeContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   margin-top: 2rem;
+  @media (max-width: 768px) {
+    margin-top: 1rem;
+    & > h3 {
+      font-size: smaller;
+    }
+  }
 `;
 
 // FOR THE SLIDER
 const SliderWrapper = styled.div`
   width: 500px;
   margin: 20px;
-  /* text-align: center; */
-  /* background-color: yellow; */
   margin-right: auto;
+  @media (max-width: 768px) {
+    margin: 0;
+  }
 `;
 const SliderInput = styled.input`
   width: 100%;
@@ -83,6 +117,13 @@ const SliderInput = styled.input`
   border-radius: 5px;
   transition: background 0.3s;
 
+  @media (max-width: 768px) {
+    /* max-width: 90%; */
+    height: 7px;
+    border-radius: 3px;
+    margin-right: 3rem;
+  }
+
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -91,7 +132,11 @@ const SliderInput = styled.input`
     background: #007bff;
     cursor: pointer;
     border-radius: 50%;
-    border: none; /* Remove border */
+    border: none;
+    @media (max-width: 768px) {
+      height: 15px;
+      width: 15px;
+    }
   }
 
   &::-moz-range-thumb {
@@ -100,7 +145,11 @@ const SliderInput = styled.input`
     background: #007bff;
     cursor: pointer;
     border-radius: 50%;
-    border: none; /* Remove border */
+    border: none;
+    @media (max-width: 768px) {
+      height: 15px;
+      width: 15px;
+    }
   }
 `;
 
@@ -108,10 +157,16 @@ const LabelsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+  @media (max-width: 768px) {
+    margin: 0;
+  }
 `;
 const Label = styled.div`
   text-align: center;
   font-size: 1.5rem;
+  @media (max-width: 768px) {
+    font-size: 1.5vmax;
+  }
 `;
 
 const ResultWrapper = styled.div`
