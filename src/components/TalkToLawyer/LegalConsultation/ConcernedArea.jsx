@@ -32,11 +32,12 @@ const LeftBox = styled.div`
     letter-spacing: 2px;
   }
   @media (max-width: 768px) {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     & > h2 {
       font-size: large;
       letter-spacing: 1px;
       margin-bottom: 1rem;
+      margin-top: 2rem;
     }
   }
 `;
@@ -118,10 +119,8 @@ const SliderInput = styled.input`
   transition: background 0.3s;
 
   @media (max-width: 768px) {
-    /* max-width: 90%; */
     height: 7px;
     border-radius: 3px;
-    margin-right: 3rem;
   }
 
   &::-webkit-slider-thumb {
@@ -133,6 +132,7 @@ const SliderInput = styled.input`
     cursor: pointer;
     border-radius: 50%;
     border: none;
+
     @media (max-width: 768px) {
       height: 15px;
       width: 15px;
@@ -146,6 +146,7 @@ const SliderInput = styled.input`
     cursor: pointer;
     border-radius: 50%;
     border: none;
+
     @media (max-width: 768px) {
       height: 15px;
       width: 15px;
@@ -157,13 +158,18 @@ const LabelsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+  width: 100%;
+
   @media (max-width: 768px) {
     margin: 0;
+    width: 100%;
   }
 `;
+
 const Label = styled.div`
   text-align: center;
   font-size: 1.5rem;
+
   @media (max-width: 768px) {
     font-size: 1.5vmax;
   }
@@ -177,10 +183,17 @@ const ResultWrapper = styled.div`
   padding: 1rem 3rem;
   display: flex;
   justify-content: space-between;
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0.5rem 1rem;
+  }
 `;
 
 const ResultItem = styled.div`
   margin: 5px 0;
+  @media (max-width: 768px) {
+    font-size: small;
+  }
 `;
 const ratePerMinute = {
   15: 20,
@@ -237,6 +250,14 @@ const BuyTalktime = styled.button`
   margin-right: auto;
   &:hover {
     background-color: #0000c5;
+  }
+  @media (max-width: 768px) {
+    /* transform: scale(0.8); */
+    margin-top: 1rem;
+    padding: 0.5rem 2rem;
+    font-size: small;
+
+    margin-left: auto;
   }
 `;
 
