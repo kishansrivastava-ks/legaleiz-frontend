@@ -2,16 +2,23 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  /* background-color: blue; */
   padding-bottom: 4rem;
   border-bottom: 1px solid lightgray;
-  /* border: 5px solid red; */
   width: 100%;
   padding: 2vmax 8vmax;
-  /* border: 1px solid black; */
   & > h2 {
     margin-bottom: 3rem;
     letter-spacing: 2px;
+  }
+  @media (max-width: 768px) {
+    width: 100vw;
+    /* border: 2px solid red; */
+    padding: 2rem;
+    position: relative;
+    & > h2 {
+      font-size: large;
+      margin-bottom: 2rem;
+    }
   }
 `;
 const Box = styled.div`
@@ -28,6 +35,23 @@ const Box = styled.div`
       transition: all 0.2s ease-in-out;
     }
     transition: all 0.2s ease-in-out;
+  }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1rem;
+    & > div {
+      & > h3 {
+        font-size: large;
+        margin-bottom: 1rem;
+      }
+      & > p {
+        font-size: 1.8vmax;
+        margin-bottom: 1rem;
+      }
+      & > h4 {
+        font-size: 2vmax;
+      }
+    }
   }
 `;
 const Title = styled.h3`
