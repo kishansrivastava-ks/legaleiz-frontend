@@ -283,6 +283,7 @@ const RightBox = styled.div`
     margin-top: 2rem;
     padding: 2vmax 1vmax;
     min-width: 100%;
+    margin-bottom: 2rem;
 
     & > h2 {
       margin-bottom: 1.5rem;
