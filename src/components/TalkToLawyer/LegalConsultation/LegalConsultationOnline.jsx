@@ -12,7 +12,7 @@ const Container = styled.div`
   width: 100vw;
   padding: 2vmax 8vmax;
 
-  border: 3px solid red;
+  /* border: 3px solid red; */
 
   @media (max-width: 768px) {
     padding: 0 1rem;
@@ -105,12 +105,22 @@ const RightContainer = styled.form`
   padding: 3rem 5rem;
   height: max-content;
   min-width: 40%;
-  /* border: 1px solid black; */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    margin-top: 1rem;
+    padding: 1rem 3rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    box-shadow: none;
+  }
+
+  /* border: 1px solid red; */
 `;
 const FormHeading = styled.h2`
   font-weight: 800;
@@ -118,6 +128,12 @@ const FormHeading = styled.h2`
   text-align: center;
   margin-bottom: 1rem;
   letter-spacing: 1px;
+  @media (max-width: 768px) {
+    font-size: large;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
 `;
 const Underline = styled.div`
   background-color: #f43636;
@@ -125,6 +141,10 @@ const Underline = styled.div`
   border-radius: 10px;
   width: 30%;
   margin-bottom: 3rem;
+  @media (max-width: 768px) {
+    height: 0.3rem;
+    margin-bottom: 2rem;
+  }
 `;
 
 const Input = styled.input`
@@ -137,6 +157,15 @@ const Input = styled.input`
   &::placeholder {
     font-size: 1.5rem;
     letter-spacing: 1px;
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+    }
+  }
+  @media (max-width: 768px) {
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 3px;
+    font-size: 2vmax;
   }
 `;
 
@@ -153,6 +182,9 @@ const Select = styled.select`
   flex: 1;
   font-size: 1rem;
   height: max-content;
+  @media (max-width: 768px) {
+    padding: 10px 7px;
+  }
 `;
 
 const CountryCodeSelect = () => (
@@ -216,6 +248,8 @@ const Location = styled.div`
   & > * {
     width: 40%;
   }
+  @media (max-width: 768px) {
+  }
 `;
 const Submit = styled.button`
   font-size: 1.5rem;
@@ -228,6 +262,12 @@ const Submit = styled.button`
   letter-spacing: 2px;
   border-radius: 3px;
   margin-top: 3rem;
+  @media (max-width: 768px) {
+    margin-top: 1rem;
+    padding: 0.5rem 1.5rem;
+    font-size: 2vmax;
+    max-width: 50%;
+  }
 `;
 
 const GoogleReviews = styled.div`
@@ -299,6 +339,7 @@ const Features = styled.div`
     @media (max-width: 768px) {
       min-width: 30%;
       margin-right: 1vmax;
+      margin-top: 1rem;
     }
     & > img {
       height: 4rem;
