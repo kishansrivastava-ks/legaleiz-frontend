@@ -296,14 +296,33 @@ const Features = styled.div`
     margin-right: 3rem;
     align-items: center;
     line-height: 1;
+    @media (max-width: 768px) {
+      min-width: 30%;
+      margin-right: 1vmax;
+    }
     & > img {
       height: 4rem;
       margin-right: 10px;
+      @media (max-width: 768px) {
+        margin-right: 0.5vmax;
+        height: 3rem;
+      }
     }
     & > p {
       width: 20rem;
       font-size: 1.3vmax;
+      @media (max-width: 768px) {
+        text-align: left;
+        font-weight: bold;
+        line-height: 1.4;
+      }
     }
+  }
+  /* border: 2px solid red; */
+  @media (max-width: 768px) {
+    width: 100%;
+
+    padding: 1vmax;
   }
 `;
 
