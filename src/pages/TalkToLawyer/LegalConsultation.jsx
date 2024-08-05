@@ -70,6 +70,10 @@ const QuestionContainer = styled.div`
   border-bottom: 1px solid lightgray;
   width: 100%;
   padding: 2vmax 8vmax;
+  @media (max-width: 768px) {
+    width: 100vw;
+    padding: 2rem;
+  }
 `;
 const intro = [
   "Getting the right legal advice is important because it helps you know your rights and gives you a better chance for a positive outcome.",

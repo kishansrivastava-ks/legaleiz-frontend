@@ -4,11 +4,20 @@ const Container = styled.div`
   /* background-color: blue; */
   padding-bottom: 4rem;
   border-bottom: 1px solid lightgray;
-  /* border: 5px solid red; */
   width: 100%;
   padding: 2vmax 8vmax;
   & > h2 {
     margin-bottom: 3rem;
+  }
+
+  @media (max-width: 768px) {
+    /* border: 2px solid red; */
+    width: 100vw;
+    padding: 2rem;
+    & > h2 {
+      font-size: large;
+      text-align: center;
+    }
   }
 `;
 const Box = styled.div`
@@ -16,6 +25,25 @@ const Box = styled.div`
   gap: 6rem;
   & > div {
     min-width: 30%;
+  }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1rem;
+    & > div {
+      display: flex;
+      align-items: center;
+      line-height: 1.1;
+      font-size: 2vmax;
+      width: 100%;
+      gap: 1rem;
+      /* border: 2px solid green; */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+
+      & > img {
+        height: 4rem;
+      }
+    }
   }
 `;
 
