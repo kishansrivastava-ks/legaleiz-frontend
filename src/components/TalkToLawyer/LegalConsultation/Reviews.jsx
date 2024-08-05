@@ -2,12 +2,16 @@ import styled from "styled-components";
 import ReactStars from "react-rating-stars-component";
 
 const Container = styled.div`
-  /* background-color: blue; */
   padding-bottom: 4rem;
   border-bottom: 1px solid lightgray;
-  /* border: 5px solid red; */
   width: 100%;
   padding: 2vmax 8vmax;
+  @media (max-width: 768px) {
+    width: 100vw;
+    /* border: 2px solid red; */
+    padding: 2rem;
+    position: relative;
+  }
 `;
 const Header = styled.div`
   width: 100%;
@@ -23,12 +27,27 @@ const Header = styled.div`
   & > h2 {
     letter-spacing: 2px;
   }
+  @media (max-width: 768px) {
+    & > h2 {
+      font-size: large;
+    }
+    & > div {
+      font-size: small;
+      flex-direction: column;
+    }
+  }
 `;
 const Rating = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-right: 3rem;
+  @media (max-width: 768px) {
+    flex-direction: row;
+    gap: 1rem;
+    margin: 0;
+    font-size: smaller;
+  }
 `;
 const WriteReview = styled.button`
   background: none;
@@ -42,6 +61,13 @@ const WriteReview = styled.button`
   &:hover {
     background-color: #0505b3;
   }
+  @media (max-width: 768px) {
+    position: absolute;
+    top: 95%;
+    right: 50%;
+    transform: translateX(50%);
+    height: 3rem;
+  }
 `;
 const starsOptions = {
   edit: false,
@@ -52,11 +78,29 @@ const starsOptions = {
 
 const Body = styled.ul`
   list-style: none;
+  @media (max-width: 768px) {
+    /* border: 2px solid green; */
+    margin-bottom: 4rem;
+  }
 `;
 const Review = styled.li`
   width: 100%;
   padding: 1rem 0;
   margin-bottom: 2rem;
+  @media (max-width: 768px) {
+    margin: 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-bottom: 1rem;
+    & > h4 {
+      font-size: 2.2vmax;
+    }
+    & > p {
+      font-size: 1.5vmax;
+      line-height: 1.2;
+      margin-top: 0.5rem;
+    }
+  }
 `;
 const Name = styled.h4``;
 const Text = styled.p`
