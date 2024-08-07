@@ -15,6 +15,11 @@ const NewsSection = styled.section`
   @media (width <= 1200px) {
     flex-direction: column;
     margin-top: 1rem;
+
+    /* border: 0.5rem solid green; */
+  }
+  @media (max-width: 768px) {
+    padding: 2vmax;
   }
 `;
 
@@ -90,6 +95,28 @@ const GridCell = styled.div`
   @media (width <= 400px) {
     width: 30rem;
     padding: 1rem;
+  }
+  @media (max-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    /* border: 2px solid green; */
+    padding: 0.5rem;
+    border-radius: 5px;
+    gap: 1rem;
+    & > img {
+      height: 5rem;
+      border-radius: 3px;
+    }
+    & > h3 {
+      font-size: small;
+      text-align: left;
+    }
+    & > p {
+      font-size: small;
+      text-align: left;
+    }
   }
 `;
 

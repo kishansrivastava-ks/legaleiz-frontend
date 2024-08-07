@@ -17,6 +17,8 @@ const Container = styled.div`
     flex-direction: column;
     width: 100vw;
     padding: 1vmax 3vmax;
+    padding: 1rem;
+    margin-top: 3rem;
   }
 `;
 const LeftBox = styled.div`

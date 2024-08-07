@@ -14,6 +14,10 @@ const Container = styled.div`
   /* border: 2px solid red; */
   background-color: #fff;
   animation: ${slideInFromBottom} 0.5s ease-out forwards;
+  @media (max-width: 768px) {
+    border: 3px solid red;
+    padding: 1rem;
+  }
 `;
 
 const BackBtn = styled.button`
@@ -29,6 +33,9 @@ const BackBtn = styled.button`
     /* background-color: #f1eeee; */
     background-color: blue;
     color: #fff;
+  }
+  @media (max-width: 768px) {
+    font-size: small;
   }
 `;
 
