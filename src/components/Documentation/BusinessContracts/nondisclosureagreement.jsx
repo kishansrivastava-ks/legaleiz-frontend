@@ -4,21 +4,6 @@ import QuestionsContainer from "../../StartupPages/QuestionsContainer";
 import StyledOverview from "../StyledOverview";
 import Paragraph from "../Paragraph";
 
-// const StyledOverView = styled.div`
-//   /* padding: 5px 10px; */
-//   border-radius: 5px;
-//   text-align: justify;
-//   & > p {
-//     line-height: 1.4;
-//     font-size: 1.8rem;
-//   }
-//   @media (max-width: 768px) {
-//     & > p {
-//       font-size: 2vmax;
-//     }
-//   }
-// `;
-
 const StyledFormat = styled.div``;
 
 // const StyledExamples = styled.div``;
