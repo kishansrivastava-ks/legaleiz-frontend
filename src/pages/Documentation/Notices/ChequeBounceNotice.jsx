@@ -2,19 +2,34 @@
 import styled from "styled-components";
 import ScrollableContainer from "../../../components/Documentation/ScrollableContainer";
 import Info from "../../../components/Documentation/Info";
+import Container from "../../../components/Documentation/Container";
+import {
+  ImportantConsiderations,
+  Overview,
+  WhatItIncludes,
+} from "../../../components/Documentation/Notices/chequebouncenotice";
 
-const Container = styled.div`
-  padding: 2vmax;
-  background-color: #fff;
-  border-bottom: 1px solid lightgray;
-`;
+const sections = [
+  {
+    heading: "Overview",
+    component: <Overview />,
+  },
+  {
+    heading: "What it includes ?",
+    component: <WhatItIncludes />,
+  },
+  {
+    heading: "Important Considerations",
+    component: <ImportantConsiderations />,
+  },
+];
 
 function ChequeBounceNotice() {
   return (
     <>
       <Info info="Cheque Bounce Notice" />
       <Container>
-        <ScrollableContainer sections={[]} />
+        <ScrollableContainer sections={sections} />
       </Container>
     </>
   );

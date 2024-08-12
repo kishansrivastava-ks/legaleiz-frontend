@@ -1,15 +1,7 @@
 /* eslint-disable no-unused-vars */
-import styled from "styled-components";
 import List from "../List";
-import QuestionsContainer from "../../StartupPages/QuestionsContainer";
-import StyledOverview from "../StyledOverview";
 import Paragraph from "../Paragraph";
-
-const StyledFormat = styled.div``;
-
-// const StyledExamples = styled.div``;
-const StyledTemplate = styled.div``;
-const StyledViolate = styled.div``;
+import StyledOverview from "../StyledOverview";
 
 export const Overview = () => (
   <StyledOverview>

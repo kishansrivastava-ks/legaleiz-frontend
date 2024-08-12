@@ -1,20 +1,34 @@
 /* eslint-disable no-unused-vars */
-import styled from "styled-components";
-import ScrollableContainer from "../../../components/Documentation/ScrollableContainer";
+import Container from "../../../components/Documentation/Container";
 import Info from "../../../components/Documentation/Info";
+import {
+  ImportantConsiderations,
+  Overview,
+  WhatItIncludes,
+} from "../../../components/Documentation/Notices/legalnoticeforrecoveryofdues";
+import ScrollableContainer from "../../../components/Documentation/ScrollableContainer";
 
-const Container = styled.div`
-  padding: 2vmax;
-  background-color: #fff;
-  border-bottom: 1px solid lightgray;
-`;
+const sections = [
+  {
+    heading: "Overview",
+    component: <Overview />,
+  },
+  {
+    heading: "What it includes ?",
+    component: <WhatItIncludes />,
+  },
+  {
+    heading: "Important Considerations",
+    component: <ImportantConsiderations />,
+  },
+];
 
 function LegalNoticeForRecoveryOfDues() {
   return (
     <>
       <Info info="Legal Notice For Recovery Of Dues" />
       <Container>
-        <ScrollableContainer sections={[]} />
+        <ScrollableContainer sections={sections} />
       </Container>
     </>
   );
